@@ -9,10 +9,17 @@ include testing.jam ;
 # Make tests run by default.
 DEPENDS all : test ;
 
+rule date_time-run ( files + : requirements * )
 {
-  # look in BOOST_ROOT for sources first, just in this Jamfile
-  local SEARCH_SOURCE = $(BOOST_ROOT) $(SEARCH_SOURCE) ;
+    return [ run $(files) <lib>../build/boost_date_time : : : std::facet-support  $(requirements) ] ;
+}
 
+rule date_time-prun ( files + : requirements * )
+{
+    return [ date_time-run $(files) : $(requirements) <define>BOOST_DATE_TIME_POSIX_TIME_STD_CONFIG ] ;
+}
+
+{
    test-suite date_time_core
      : 
     [ run testint_adapter.cpp ]
@@ -24,51 +31,31 @@ DEPENDS all : test ;
 
    test-suite date_time_gregorian
      : 
-   [ run gregorian/testdate.cpp <lib>../build/boost_date_time ]
-   [ run gregorian/testdate_duration.cpp <lib>../build/boost_date_time ]
-   [ run gregorian/testperiod.cpp <lib>../build/boost_date_time ]
-   [ run gregorian/testdate_iterator.cpp <lib>../build/boost_date_time ]
-   [ run gregorian/testfacet.cpp <lib>../build/boost_date_time ]
-   [ run gregorian/testformatters.cpp <lib>../build/boost_date_time ]
-   [ run gregorian/testgenerators.cpp <lib>../build/boost_date_time ]
-   [ run gregorian/testgreg_cal.cpp <lib>../build/boost_date_time ]
-   [ run gregorian/testgreg_day.cpp <lib>../build/boost_date_time ]          
-   [ run gregorian/testgreg_month.cpp <lib>../build/boost_date_time ]
-   [ run gregorian/testparse_date.cpp <lib>../build/boost_date_time ]
+   [ date_time-run gregorian/testdate.cpp ]
+   [ date_time-run gregorian/testdate_duration.cpp ]
+   [ date_time-run gregorian/testperiod.cpp ]
+   [ date_time-run gregorian/testdate_iterator.cpp ]
+   [ date_time-run gregorian/testfacet.cpp ]
+   [ date_time-run gregorian/testformatters.cpp ]
+   [ date_time-run gregorian/testgenerators.cpp ]
+   [ date_time-run gregorian/testgreg_cal.cpp ]
+   [ date_time-run gregorian/testgreg_day.cpp ]
+   [ date_time-run gregorian/testgreg_month.cpp ]
+   [ date_time-run gregorian/testparse_date.cpp ]
  ;
 
    test-suite date_time_posixtime
      : 
-   [ run posix_time/testlocal_adjustor.cpp
-     <lib>../build/boost_date_time
-    : : :  <define>BOOST_DATE_TIME_POSIX_TIME_STD_CONFIG ]
-   [ run posix_time/testc_local_adjustor.cpp
-     <lib>../build/boost_date_time
-    : : :  <define>BOOST_DATE_TIME_POSIX_TIME_STD_CONFIG ]
-   [ run posix_time/testclock.cpp
-     <lib>../build/boost_date_time
-    : : :  <define>BOOST_DATE_TIME_POSIX_TIME_STD_CONFIG ]
-   [ run posix_time/testdst_rules.cpp
-     <lib>../build/boost_date_time
-    : : :  <define>BOOST_DATE_TIME_POSIX_TIME_STD_CONFIG ]
-   [ run posix_time/testduration.cpp
-     <lib>../build/boost_date_time
-    : : :  <define>BOOST_DATE_TIME_POSIX_TIME_STD_CONFIG ]
-   [ run posix_time/testiterator.cpp
-     <lib>../build/boost_date_time
-    : : :  <define>BOOST_DATE_TIME_POSIX_TIME_STD_CONFIG ]
-   [ run posix_time/testparse_time.cpp
-     <lib>../build/boost_date_time 
-    : : :  <define>BOOST_DATE_TIME_POSIX_TIME_STD_CONFIG ]
-   [ run posix_time/testperiod.cpp
-     <lib>../build/boost_date_time
-    : : :  <define>BOOST_DATE_TIME_POSIX_TIME_STD_CONFIG ]
-   [ run posix_time/testtime.cpp
-     <lib>../build/boost_date_time
-    : : :  <define>BOOST_DATE_TIME_POSIX_TIME_STD_CONFIG ]
-   [ run posix_time/testmicrosec_time_clock.cpp
-     <lib>../build/boost_date_time
-    : : : <define>BOOST_DATE_TIME_POSIX_TIME_STD_CONFIG ]
+   [ date_time-prun posix_time/testlocal_adjustor.cpp ]
+   [ date_time-prun posix_time/testc_local_adjustor.cpp ]
+   [ date_time-prun posix_time/testclock.cpp ]
+   [ date_time-prun posix_time/testdst_rules.cpp ]
+   [ date_time-prun posix_time/testduration.cpp ]
+   [ date_time-prun posix_time/testiterator.cpp ]
+   [ date_time-prun posix_time/testparse_time.cpp ]
+   [ date_time-prun posix_time/testperiod.cpp ]
+   [ date_time-prun posix_time/testtime.cpp ]
+   [ date_time-prun posix_time/testmicrosec_time_clock.cpp ]
  ;
 
 }
