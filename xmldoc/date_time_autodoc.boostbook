@@ -3857,35 +3857,6 @@ The logic is as follows. Starting with UTC time use the offset to create a label
       </namespace>
     </namespace>
   </header>
-  <header name="boost/date_time/local_time_base.hpp">
-    <namespace name="boost">
-      <namespace name="date_time">
-        <class name="local_time_base">
-          <template>
-      <template-type-parameter name="utc_time_type"/>
-      <template-type-parameter name="tz_type"/>
-    </template>
-          <method-group name="public member functions">
-            <method name="zone" cv="const">
-              <type>boost::shared_ptr&lt; tz_type &gt;</type>
-            </method>
-          </method-group>
-          <constructor>
-            <parameter name="t">
-              <paramtype>utc_time_type</paramtype>
-            </parameter>
-            <parameter name="tz">
-              <paramtype>boost::shared_ptr&lt; tz_type &gt;</paramtype>
-            </parameter>
-            <parameter name="dst_flag">
-              <paramtype>bool</paramtype>
-            </parameter>
-          </constructor>
-          <destructor/>
-        </class>
-      </namespace>
-    </namespace>
-  </header>
   <header name="boost/date_time/local_timezone_defs.hpp">
     <namespace name="boost">
       <namespace name="date_time">
