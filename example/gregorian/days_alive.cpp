@@ -1,6 +1,6 @@
 
-#include "boost/gdtl/gregorian/gregorian.hpp"
-#include "boost/gdtl/date_parsing.hpp"
+#include "boost/date_time/gregorian/gregorian.hpp"
+#include "boost/date_time/date_parsing.hpp"
 #include <iostream>
 
 int
@@ -12,7 +12,7 @@ main()
   std::cout << "Enter birth day YYYY-MM-DD (eg: 2002-02-01): ";
   std::cin >> s;
   try {
-    date birthday(boost::gdtl::parse_date<date>(s));
+    date birthday(boost::date_time::parse_date<date>(s));
     //date birthday(2002,Jan,1);
     date today = day_clock::local_day();
     date_duration days_alive = today - birthday;

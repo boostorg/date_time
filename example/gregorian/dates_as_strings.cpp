@@ -11,8 +11,8 @@ An expected exception is next:
 
 */
 
-#include "boost/gdtl/gregorian/gregorian.hpp"
-#include "boost/gdtl/date_parsing.hpp"
+#include "boost/date_time/gregorian/gregorian.hpp"
+#include "boost/date_time/date_parsing.hpp"
 #include <iostream>
 #include <string>
  

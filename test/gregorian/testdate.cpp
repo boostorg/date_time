@@ -1,7 +1,7 @@
 
 #include <iostream>
-#include "boost/gdtl/gregorian/gregorian.hpp"
-#include "boost/gdtl/testfrmwk.hpp"
+#include "boost/date_time/gregorian/gregorian.hpp"
+#include "boost/date_time/testfrmwk.hpp"
 
 int
 main() 

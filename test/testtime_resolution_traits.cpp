@@ -1,13 +1,13 @@
 
 
-#include "boost/gdtl/time_resolution_traits.hpp"
-#include "boost/gdtl/testfrmwk.hpp"
+#include "boost/date_time/time_resolution_traits.hpp"
+#include "boost/date_time/testfrmwk.hpp"
 
 
 int
 main() 
 {
-  using namespace boost::gdtl;
+  using namespace boost::date_time;
   check("milli traits num digits",  milli_res::num_fractional_digits() == 3);
   check("milli traits resolution adjust",  
 	milli_res::res_adjust() == 1000);

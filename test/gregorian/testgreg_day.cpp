@@ -1,8 +1,8 @@
 
-#include "boost/gdtl/gregorian/greg_day.hpp"
-#include "boost/gdtl/gregorian/greg_weekday.hpp"
-#include "boost/gdtl/gregorian/greg_day_of_year.hpp"
-#include "boost/gdtl/testfrmwk.hpp"
+#include "boost/date_time/gregorian/greg_day.hpp"
+#include "boost/date_time/gregorian/greg_weekday.hpp"
+#include "boost/date_time/gregorian/greg_day_of_year.hpp"
+#include "boost/date_time/testfrmwk.hpp"
 #include <iostream>
 
 

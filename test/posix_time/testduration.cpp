@@ -1,8 +1,8 @@
 
 
-#include "boost/gdtl/posix_time/posix_time_duration.hpp"
-#include "boost/gdtl/posix_time/time_formatters.hpp"
-#include "boost/gdtl/testfrmwk.hpp"
+#include "boost/date_time/posix_time/posix_time_duration.hpp"
+#include "boost/date_time/posix_time/time_formatters.hpp"
+#include "boost/date_time/testfrmwk.hpp"
 
 
 int
@@ -53,7 +53,7 @@ main()
   time_duration t8 = tenhours + time_duration(1,2,3) +  fivemin;
   check("short hand durations add", t8 == time_duration(11,7,3));
 
-  if (time_duration::resolution() >= boost::gdtl::micro) {
+  if (time_duration::resolution() >= boost::date_time::micro) {
     time_duration t_9(5,4,3,9876); //05:04:03.09876
     check("h-m-s 5-4-3.21 hours",  t_9.hours() == 5);
     check("h-m-s 5-4-3.21 min  ",  t_9.minutes() == 4);
@@ -64,7 +64,7 @@ main()
     std::cout << to_simple_string(t_9) << std::endl;
   }
 
-  if (time_duration::resolution() >= boost::gdtl::tenth) {
+  if (time_duration::resolution() >= boost::date_time::tenth) {
     time_duration t_10(5,4,3,9); //05:04:03.00001
     check("h-m-s 5-4-3.9 hours",  t_10.hours() == 5);
     check("h-m-s 5-4-3.9 min  ",  t_10.minutes() == 4);
@@ -73,12 +73,12 @@ main()
     std::cout << to_simple_string(t_10) << std::endl;
   }
 
-  if (time_duration::resolution() >= boost::gdtl::milli) {
+  if (time_duration::resolution() >= boost::date_time::milli) {
     millisec ms(9);
     //  time_duration t_10(0,0,0,); //00:00:00.009
     std::cout << "time_resolution: " << time_duration::resolution() << std::endl;
     std::cout << "res_adjust " << time_res_traits::res_adjust() << std::endl;
-    if (time_duration::resolution() == boost::gdtl::nano) {
+    if (time_duration::resolution() == boost::date_time::nano) {
       check("millisec",  ms.fractional_seconds() == 9000000);
     }
     else {
@@ -87,7 +87,7 @@ main()
   }
 
 #ifdef BOOST_GDTL_HAS_NANOSECONDS
-  if (time_duration::resolution() >= boost::gdtl::nano) {
+  if (time_duration::resolution() >= boost::date_time::nano) {
     nanosec ns(9);
     //  time_duration t_10(0,0,0,); //00:00:00.00009
     check("nanosec",  ns.fractional_seconds() == 9);

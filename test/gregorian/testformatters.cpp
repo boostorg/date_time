@@ -1,6 +1,6 @@
 
-#include "boost/gdtl/gregorian/gregorian.hpp"
-#include "boost/gdtl/testfrmwk.hpp"
+#include "boost/date_time/gregorian/gregorian.hpp"
+#include "boost/date_time/testfrmwk.hpp"
 
 int
 main() 
@@ -27,15 +27,15 @@ main()
   //  std::stringstream os;
   // typedef boost::gregorian::date::ymd_type ymd_type;
   
-//   typedef boost::gdtl::ymd_formatter<ymd_type, boost::gdtl::simple_format> ymdf;
+//   typedef boost::date_time::ymd_formatter<ymd_type, boost::date_time::simple_format> ymdf;
 //   ymd_type ymd = d1.year_month_day();
 //   ymdf::ymd_put(ymd, os);
 //   check("ostream low level check string", 
 // 	os.str() == std::string("2002-Jan-02"));
 
 
-//   typedef boost::gdtl::date_formatter<boost::gregorian::date, 
-//                                       boost::gdtl::simple_format> datef;
+//   typedef boost::date_time::date_formatter<boost::gregorian::date, 
+//                                       boost::date_time::simple_format> datef;
 //   os.str("");
 //   datef::date_to_ostream(d1, os);
 //   check("ostream low level check string", 

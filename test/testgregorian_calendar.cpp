@@ -1,18 +1,18 @@
 
-#include "boost/gdtl/gregorian_calendar.hpp"
-#include "boost/gdtl/year_month_day.hpp"
-#include "boost/gdtl/testfrmwk.hpp"
+#include "boost/date_time/gregorian_calendar.hpp"
+#include "boost/date_time/year_month_day.hpp"
+#include "boost/date_time/testfrmwk.hpp"
 #include <iostream>
 
 
 int
 main() 
 {
-  typedef boost::gdtl::year_month_day_base<unsigned long, 
+  typedef boost::date_time::year_month_day_base<unsigned long, 
                                            unsigned short, 
 				           unsigned short > simple_ymd_type;
 
-  typedef boost::gdtl::gregorian_calendar_base<simple_ymd_type, unsigned long> 
+  typedef boost::date_time::gregorian_calendar_base<simple_ymd_type, unsigned long> 
     gregorian_calendar;
 
   //  using namespace boost::gregorian;

@@ -16,9 +16,9 @@ UTC <--> Arizona (7 hours)
 
 
 
-#include "boost/gdtl/posix_time/posix_time.hpp"
-#include "boost/gdtl/local_time_adjustor.hpp"
-#include "boost/gdtl/c_local_time_adjustor.hpp"
+#include "boost/date_time/posix_time/posix_time.hpp"
+#include "boost/date_time/local_time_adjustor.hpp"
+#include "boost/date_time/c_local_time_adjustor.hpp"
 #include <iostream>
 
 int
@@ -28,7 +28,7 @@ main()
   using namespace boost::gregorian;
 
   //This local adjustor depends on the machine TZ settings-- highly dangerous!
-  typedef boost::gdtl::c_local_adjustor<ptime> local_adj;
+  typedef boost::date_time::c_local_adjustor<ptime> local_adj;
   ptime t10(date(2002,Jan,1), hours(7)); 
   ptime t11 = local_adj::utc_to_local(t10);
   std::cout << "UTC <--> Zone base on TZ setting" << std::endl;
@@ -41,7 +41,7 @@ main()
 
 
   //eastern timezone is utc-5
-  typedef boost::gdtl::local_adjustor<ptime, -5, us_dst> us_eastern;
+  typedef boost::date_time::local_adjustor<ptime, -5, us_dst> us_eastern;
 
   ptime t1(date(2001,Dec,31), hours(19)); //5 hours b/f midnight NY time
 
@@ -71,7 +71,7 @@ main()
 
     
   //Arizona timezone is utc-7 with no dst
-  typedef boost::gdtl::local_adjustor<ptime, -7, no_dst> us_arizona;
+  typedef boost::date_time::local_adjustor<ptime, -7, no_dst> us_arizona;
 
   ptime t7(date(2002,May,31), hours(17)); 
   std::cout << "UTC <--> Arizona (7 hours)" << std::endl;

@@ -14,7 +14,7 @@ Enter Month(1..12): 2
 2002-Feb-07 [Thu]
 */
 
-#include "boost/gdtl/gregorian/gregorian.hpp"
+#include "boost/date_time/gregorian/gregorian.hpp"
 #include <iostream>
 
 int

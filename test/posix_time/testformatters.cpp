@@ -1,7 +1,7 @@
 
 
-#include "boost/gdtl/posix_time/posix_time.hpp"
-#include "boost/gdtl/testfrmwk.hpp"
+#include "boost/date_time/posix_time/posix_time.hpp"
+#include "boost/date_time/testfrmwk.hpp"
 
 int
 main() 
@@ -25,7 +25,7 @@ main()
 
 #ifdef BOOST_GDTL_HAS_MILLISECONDS
 
-  if (time_duration::resolution() == boost::gdtl::milli) {
+  if (time_duration::resolution() == boost::date_time::milli) {
     ptime t4(d1,hours(1)+minutes(2)+seconds(3)+millisec(4));
     std::string r3 = to_simple_string(t4);
     check("simple subsecond: "+r3 , 
@@ -36,7 +36,7 @@ main()
 
 #ifdef BOOST_GDTL_HAS_MICROSECONDS
 
-  if (time_duration::resolution() == boost::gdtl::micro) {
+  if (time_duration::resolution() == boost::date_time::micro) {
     ptime t3(d1,hours(1)+minutes(2)+seconds(3)+microsec(4));
     std::string result = to_simple_string(t3);
     check("simple subsecond: "+result , 
@@ -52,7 +52,7 @@ main()
 
 #ifdef BOOST_GDTL_HAS_NANOSECONDS
 
-  if (time_duration::resolution() == boost::gdtl::nano) {
+  if (time_duration::resolution() == boost::date_time::nano) {
     ptime t2(d1,hours(12) + minutes(5) + seconds(1));
     time_period p1(t1,t2); //last value in period is 12:05:00 1/10000 sec less than t2
     std::string period_result("["+t1_result + "/" + d1_string + " " + "12:05:00.999999999]" );

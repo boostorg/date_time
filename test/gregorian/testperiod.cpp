@@ -1,5 +1,5 @@
-#include "boost/gdtl/gregorian/gregorian.hpp"
-#include "boost/gdtl/testfrmwk.hpp"
+#include "boost/date_time/gregorian/gregorian.hpp"
+#include "boost/date_time/testfrmwk.hpp"
 #include <iostream>
 
 int main() 

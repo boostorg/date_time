@@ -1,13 +1,19 @@
 
 
-//#include "gdtl/testfrmwk.hpp"
+//#include "date_time/testfrmwk.hpp"
 #include <iostream>
-#include "boost/gdtl/gregorian/gregorian.hpp"
+#include "boost/date_time/gregorian/gregorian.hpp"
 #include "boost/cstdint.hpp"
 
 int
 main()
 {
+#if (defined(BOOST_MSVC) && (_MSC_VER <= 1200))  // 1200 == VC++ 6.0
+  //skipping tests here due to lack of operator<< support in msvc6
+  std::cout << "Skipping tests on MSVC6" << std::endl;
+
+#else
+
   std::cout << "int64_t  max:  "
 	    << std::numeric_limits<boost::int64_t>::max() 
 	    << std::endl;
@@ -68,7 +74,8 @@ main()
   std::cout << "remaining usec count 3M: " 
 	    << remaining_usec_count3M
 	    << std::endl;
-  
+
+#endif  
 
 //   std::cout << "Days from: "
 // 	    << to_simple_string(d1) << " to "

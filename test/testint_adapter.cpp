@@ -1,7 +1,7 @@
 
 
-#include "boost/gdtl/int_adapter.hpp"
-#include "boost/gdtl/testfrmwk.hpp"
+#include "boost/date_time/int_adapter.hpp"
+#include "boost/date_time/testfrmwk.hpp"
 #include "boost/cstdint.hpp"
 #include <iostream>
 
@@ -31,11 +31,11 @@ void test_int()
   int_type i = int_type::neg_infinity();
 
   check("is infinity", i.is_infinity());
-  check("as_special convert", boost::gdtl::neg_infin == i.as_special() );
-  check("as_special convert", boost::gdtl::neg_infin == int_type::to_special(i.as_number()) );
+  check("as_special convert", boost::date_time::neg_infin == i.as_special() );
+  check("as_special convert", boost::date_time::neg_infin == int_type::to_special(i.as_number()) );
   i = int_type::pos_infinity();
   check("is infinity", i.is_infinity());
-  check("as_special convert", boost::gdtl::pos_infin == i.as_special() );
+  check("as_special convert", boost::date_time::pos_infin == i.as_special() );
   i = 1;
   check("is infinity", !i.is_infinity());
   int_type j = int_type::neg_infinity();
@@ -46,7 +46,7 @@ void test_int()
   check("infinity equal",    j == j);
 
   int_type k = 1;
-  check("as_special convert", boost::gdtl::not_special == k.as_special() );
+  check("as_special convert", boost::date_time::not_special == k.as_special() );
   check("equal",             i == k);
   check("infinity not equal",    i != int_type::neg_infinity());
   check("infinity not equal",    i != int_type::pos_infinity());
@@ -54,7 +54,7 @@ void test_int()
   check("add infinity" ,         l == int_type::pos_infinity());
   check("add 2",                 (i + 2) == 3);
   i = int_type::not_a_number();
-  check("as_special convert", boost::gdtl::not_a_date_time == i.as_special() );
+  check("as_special convert", boost::date_time::not_a_date_time == i.as_special() );
   check("add not a number",      (i + 2) == int_type::not_a_number());
   check("sub not a number",      (i - 2) == int_type::not_a_number());
   check("sub from infin",        (l - 2) == int_type::pos_infinity());
@@ -63,21 +63,21 @@ void test_int()
   check("sub from 5-2 ",         (5 - 2) == 3);
   //  std::cout << i.as_number() << std::endl;
   check("from special ", 
-	int_type::from_special(boost::gdtl::pos_infin) == int_type::pos_infinity());
+	int_type::from_special(boost::date_time::pos_infin) == int_type::pos_infinity());
   check("from special ", 
-	int_type::from_special(boost::gdtl::neg_infin) == int_type::neg_infinity());
+	int_type::from_special(boost::date_time::neg_infin) == int_type::neg_infinity());
   check("from special ", 
-	int_type::from_special(boost::gdtl::not_a_date_time) == int_type::not_a_number());
+	int_type::from_special(boost::date_time::not_a_date_time) == int_type::not_a_number());
   check("from special ", 
-	int_type::from_special(boost::gdtl::min_date_time) == int_type::min());
+	int_type::from_special(boost::date_time::min_date_time) == int_type::min());
   check("from special ", 
-	int_type::from_special(boost::gdtl::max_date_time) == int_type::max());
+	int_type::from_special(boost::date_time::max_date_time) == int_type::max());
 }
 
 int
 main() 
 {
-  using namespace boost::gdtl;
+  using namespace boost::date_time;
 
   print< int_adapter<unsigned long> >();
   test_int< int_adapter<unsigned long> >();

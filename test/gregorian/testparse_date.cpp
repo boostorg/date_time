@@ -1,6 +1,6 @@
 
-#include "boost/gdtl/gregorian/gregorian.hpp"
-#include "boost/gdtl/testfrmwk.hpp"
+#include "boost/date_time/gregorian/gregorian.hpp"
+#include "boost/date_time/testfrmwk.hpp"
 #include <iostream>
 #include <string>
  
@@ -50,7 +50,7 @@ main()
 
   try {
     std::string s2("2001-14-1"); //oops should be <= 12
-    boost::gregorian::date bad_month(boost::gdtl::parse_date<boost::gregorian::date>(s2));
+    boost::gregorian::date bad_month(boost::date_time::parse_date<boost::gregorian::date>(s2));
     check("check bad month", false); //fail the test
     //The line below won't execute, but make the compiler think
     //we are using bad day....
@@ -79,7 +79,7 @@ main()
     
   
     std::string ad("2001/10/09");
-    date d2(boost::gdtl::parse_date<date>(ad));
+    date d2(boost::date_time::parse_date<date>(ad));
     check("check american date",  d2  == date(2001,Oct,9));
   }
   catch(std::exception& e) {

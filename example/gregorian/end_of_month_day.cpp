@@ -1,7 +1,7 @@
 // Simple program that uses the gregorian calendar to find the last
 // day of the month.
 
-#include "boost/gdtl/gregorian/gregorian.hpp"
+#include "boost/date_time/gregorian/gregorian.hpp"
 #include <iostream>
 
 

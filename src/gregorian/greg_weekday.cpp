@@ -5,7 +5,7 @@
  * Author: Jeff Garland 
  */
 
-#include "boost/gdtl/gregorian/greg_weekday.hpp"
+#include "boost/date_time/gregorian/greg_weekday.hpp"
 
 namespace boost {
 namespace gregorian {

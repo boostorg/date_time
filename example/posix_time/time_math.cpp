@@ -2,7 +2,7 @@
 //Output:
 //2002-Feb-01 00:00:00 - 2002-Feb-01 05:04:02.001000000 = -5:04:02.001000000
 
-#include "boost/gdtl/posix_time/posix_time.hpp"
+#include "boost/date_time/posix_time/posix_time.hpp"
 #include <iostream>
 
 int

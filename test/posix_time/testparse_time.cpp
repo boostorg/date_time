@@ -1,6 +1,6 @@
 
-#include "boost/gdtl/posix_time/posix_time.hpp"
-#include "boost/gdtl/testfrmwk.hpp"
+#include "boost/date_time/posix_time/posix_time.hpp"
+#include "boost/date_time/testfrmwk.hpp"
 
 
 int 
@@ -16,19 +16,19 @@ main()
   check("parse time duration: " + s1, 
 	td1 == time_duration(12,11,10,123456789));
   std::string s2("12:11:10,123456789");
-  time_duration td2= boost::gdtl::parse_delimited_time_duration<time_duration>(s2);
+  time_duration td2= boost::date_time::parse_delimited_time_duration<time_duration>(s2);
   check("parse time duration: " + s2, 
 	td2 == time_duration(12,11,10,123456789));
   std::string s3("12:11:10");
-  time_duration td3= boost::gdtl::parse_delimited_time_duration<time_duration>(s3);
+  time_duration td3= boost::date_time::parse_delimited_time_duration<time_duration>(s3);
   check("parse time duration: " + s3, 
 	td3 == time_duration(12,11,10,0));
   std::string s4("23:59:59.000000001");
-  time_duration td4= boost::gdtl::parse_delimited_time_duration<time_duration>(s4);
+  time_duration td4= boost::date_time::parse_delimited_time_duration<time_duration>(s4);
   check("parse time duration: " + s4, 
 	td4 == time_duration(23,59,59)+nanosec(1));
   std::string s5("23:59:59.999999999");
-  time_duration td5= boost::gdtl::parse_delimited_time_duration<time_duration>(s5);
+  time_duration td5= boost::date_time::parse_delimited_time_duration<time_duration>(s5);
   check("parse time duration: " + s5, 
 	td5 == time_duration(23,59,59)+nanosec(999999999));
 #endif
@@ -40,19 +40,19 @@ main()
     check("parse time duration: " + s1, 
 	  td1 == time_duration(12,11,10,123456));
     std::string s2("12:11:10,123456");
-    time_duration td2= boost::gdtl::parse_delimited_time_duration<time_duration>(s2);
+    time_duration td2= boost::date_time::parse_delimited_time_duration<time_duration>(s2);
     check("parse time duration: " + s2, 
 	  td2 == time_duration(12,11,10,123456));
     std::string s3("12:11:10");
-    time_duration td3= boost::gdtl::parse_delimited_time_duration<time_duration>(s3);
+    time_duration td3= boost::date_time::parse_delimited_time_duration<time_duration>(s3);
     check("parse time duration: " + s3, 
 	  td3 == time_duration(12,11,10,0));
     std::string s4("23:59:59.000001");
-    time_duration td4= boost::gdtl::parse_delimited_time_duration<time_duration>(s4);
+    time_duration td4= boost::date_time::parse_delimited_time_duration<time_duration>(s4);
     check("parse time duration: " + s4, 
 	  td4 == time_duration(23,59,59)+microsec(1));
     std::string s5("23:59:59.999999");
-    time_duration td5= boost::gdtl::parse_delimited_time_duration<time_duration>(s5);
+    time_duration td5= boost::date_time::parse_delimited_time_duration<time_duration>(s5);
     check("parse time duration: " + s5, 
 	  td5 == time_duration(23,59,59)+microsec(999999));
   }
@@ -60,7 +60,7 @@ main()
 
   std::string date_1, tod_1;
   std::string ts1("2002-01-20 23:59:59.000");
-  boost::gdtl::split(ts1, ' ', date_1, tod_1);
+  boost::date_time::split(ts1, ' ', date_1, tod_1);
   check("split function date part of " + ts1, 
 	date_1 == std::string("2002-01-20"));
   check("time part of " + ts1, 

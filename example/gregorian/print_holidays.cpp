@@ -12,7 +12,7 @@ Number Holidays: 7
 */
 
 
-#include "boost/gdtl/gregorian/gregorian.hpp"
+#include "boost/date_time/gregorian/gregorian.hpp"
 #include <algorithm>
 #include <functional>
 #include <vector>
@@ -55,7 +55,7 @@ main() {
 
 
   //define a shorthand for the nkday function object
-  typedef boost::gdtl::nth_kday_of_month<date> nkday;
+  typedef boost::date_time::nth_kday_of_month<date> nkday;
   //define a collection of nth kday holidays
   std::vector<nkday> more_holidays;
   more_holidays.push_back(nkday(nkday::first,  Monday,   Sep)); //US labor day

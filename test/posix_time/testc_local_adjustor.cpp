@@ -1,7 +1,7 @@
 
-#include "boost/gdtl/posix_time/posix_time.hpp"
-#include "boost/gdtl/c_local_time_adjustor.hpp"
-#include "boost/gdtl/testfrmwk.hpp"
+#include "boost/date_time/posix_time/posix_time.hpp"
+#include "boost/date_time/c_local_time_adjustor.hpp"
+#include "boost/date_time/testfrmwk.hpp"
 
 int
 main() 
@@ -12,7 +12,7 @@ main()
   //These are a compile check / test.  They have to be hand inspected
   //b/c they depend on the TZ settings of the machine and hence it is
   //unclear what the results will be
-  typedef boost::gdtl::c_local_adjustor<ptime> local_adj;
+  typedef boost::date_time::c_local_adjustor<ptime> local_adj;
 
   ptime t1(date(2002,Jan,1), hours(7)+millisec(5)); 
   std::cout << "UTC <--> TZ Setting of Machine -- No DST" << std::endl;

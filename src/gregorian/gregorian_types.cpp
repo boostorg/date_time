@@ -35,7 +35,7 @@
   Calculate the number of days till new years
 */
 /*! @example print_month.cpp 
-  Simple utility to print out days of the month with the days of a month.  Demontstrates date iteration (gdtl::date_itr). 
+  Simple utility to print out days of the month with the days of a month.  Demontstrates date iteration (date_time::date_itr). 
 */
 /*! @example dates_as_strings.cpp 
   Various parsing and output of strings.

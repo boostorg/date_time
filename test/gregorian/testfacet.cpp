@@ -2,11 +2,11 @@
 #include <iostream>
 #include <fstream>
 
-#include "boost/gdtl/gregorian/greg_month.hpp"
-#include "boost/gdtl/gregorian/greg_facet.hpp"
-#include "boost/gdtl/date_format_simple.hpp"
-#include "boost/gdtl/gregorian/gregorian.hpp"
-#include "boost/gdtl/testfrmwk.hpp"
+#include "boost/date_time/gregorian/greg_month.hpp"
+#include "boost/date_time/gregorian/greg_facet.hpp"
+#include "boost/date_time/date_format_simple.hpp"
+#include "boost/date_time/gregorian/gregorian.hpp"
+#include "boost/date_time/testfrmwk.hpp"
 
 
     const char* const de_short_month_names[]={"Jan","Feb","Mar","Apr","Mai","Jun","Jul","Aug","Sep","Okt","Nov","Dez", "NAM"};
@@ -33,9 +33,9 @@ main()
   using namespace boost::gregorian;
 
   typedef greg_facet_config facet_config;
-  typedef boost::gdtl::all_date_names_put<facet_config> date_facet;
-  typedef boost::gdtl::date_names_put<facet_config> date_facet_base;
-  typedef boost::gdtl::ostream_month_formatter<date_facet_base> month_formatter;
+  typedef boost::date_time::all_date_names_put<facet_config> date_facet;
+  typedef boost::date_time::date_names_put<facet_config> date_facet_base;
+  typedef boost::date_time::ostream_month_formatter<date_facet_base> month_formatter;
 
   date_facet gdnp(de_short_month_names, de_long_month_names, 
 		  de_special_value_names, de_long_weekday_names,
@@ -49,24 +49,24 @@ main()
 
   ss.str(""); //reset string stream 
   greg_month m(Oct);
-  month_formatter::format_month(m, ss, gdnp, boost::gdtl::month_as_short_string);
+  month_formatter::format_month(m, ss, gdnp, boost::date_time::month_as_short_string);
   check("check german short month: " + ss.str(), 
  	ss.str() == std::string("Okt"));
   ss.str(""); //reset string stream 
-  month_formatter::format_month(m, ss, gdnp, boost::gdtl::month_as_long_string);
+  month_formatter::format_month(m, ss, gdnp, boost::date_time::month_as_long_string);
   check("check german long month: " + ss.str(), 
  	ss.str() == std::string("Oktober"));
 
 
   greg_year_month_day ymd(2002,Oct,1);
-  typedef boost::gdtl::ostream_ymd_formatter<greg_year_month_day, date_facet_base> ymd_formatter;
+  typedef boost::date_time::ostream_ymd_formatter<greg_year_month_day, date_facet_base> ymd_formatter;
   ss.str(""); //reset string stream 
   ymd_formatter::ymd_put(ymd, ss, gdnp);
   check("check ymd: " + ss.str(), 
   	ss.str() == std::string("2002-Okt-01"));
 
 
-  typedef boost::gdtl::ostream_date_formatter<date, date_facet_base> datef;
+  typedef boost::date_time::ostream_date_formatter<date, date_facet_base> datef;
 
   std::stringstream os;
   date d1(2002, Oct, 1);
@@ -91,7 +91,7 @@ main()
 				     de_long_weekday_names));
 
   check("facet registered here",
-	std::has_facet<boost::gdtl::date_names_put<facet_config> >(global2));
+	std::has_facet<boost::date_time::date_names_put<facet_config> >(global2));
 
   std::stringstream os2;
   os2.imbue(global2); 

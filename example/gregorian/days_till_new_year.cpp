@@ -1,6 +1,6 @@
 // This example displays the amount of time until new year's in days
 
-#include "boost/gdtl/gregorian/gregorian.hpp"
+#include "boost/date_time/gregorian/gregorian.hpp"
 #include <iostream>
 
 int

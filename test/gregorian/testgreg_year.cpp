@@ -1,6 +1,6 @@
 
-#include "boost/gdtl/gregorian/greg_year.hpp"
-#include "boost/gdtl/testfrmwk.hpp"
+#include "boost/date_time/gregorian/greg_year.hpp"
+#include "boost/date_time/testfrmwk.hpp"
 #include <iostream>
 
 

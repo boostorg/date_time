@@ -5,13 +5,13 @@
  * Author: Jeff Garland 
  */
 
-#include "boost/gdtl/gregorian/greg_month.hpp"
-#include "boost/gdtl/gregorian/greg_facet.hpp"
-#include "boost/gdtl/date_format_simple.hpp"
-#include "boost/gdtl/gregorian/formatters.hpp"
+#include "boost/date_time/gregorian/greg_month.hpp"
+#include "boost/date_time/gregorian/greg_facet.hpp"
+#include "boost/date_time/date_format_simple.hpp"
+#include "boost/date_time/gregorian/formatters.hpp"
 
 namespace boost {
-namespace gdtl {
+namespace date_time {
 #ifndef BOOST_NO_STD_LOCALE
 
 

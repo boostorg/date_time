@@ -1,7 +1,7 @@
 
 
-#include "boost/gdtl/wrapping_int.hpp"
-#include "boost/gdtl/testfrmwk.hpp"
+#include "boost/date_time/wrapping_int.hpp"
+#include "boost/date_time/testfrmwk.hpp"
 #include "boost/cstdint.hpp"
 #include <iostream>
 
@@ -9,7 +9,7 @@
 int
 main() 
 {
-  using namespace boost::gdtl;
+  using namespace boost::date_time;
   
   wrapping_int<unsigned int, 3600> wi(3599);
   check("construction/conversion", wi == 3599);

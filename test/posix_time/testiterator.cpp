@@ -1,9 +1,9 @@
 
 
 #include <iostream>
-#include "boost/gdtl/posix_time/posix_time.hpp"
-#include "boost/gdtl/testfrmwk.hpp"
-#include "boost/gdtl/gregorian/formatters.hpp"
+#include "boost/date_time/posix_time/posix_time.hpp"
+#include "boost/date_time/testfrmwk.hpp"
+#include "boost/date_time/gregorian/formatters.hpp"
 
 
 int

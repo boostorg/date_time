@@ -1,7 +1,7 @@
 
-#include "boost/gdtl/posix_time/posix_time.hpp"
-#include "boost/gdtl/local_time_adjustor.hpp"
-#include "boost/gdtl/testfrmwk.hpp"
+#include "boost/date_time/posix_time/posix_time.hpp"
+#include "boost/date_time/local_time_adjustor.hpp"
+#include "boost/date_time/testfrmwk.hpp"
 
 int
 main() 
@@ -12,9 +12,9 @@ main()
   date dst_start(2002,Apr, 7);
   date dst_end_day(2002,Oct, 27);  
 
-  typedef boost::gdtl::utc_adjustment<time_duration,-5> us_eastern_offset_adj;
+  typedef boost::date_time::utc_adjustment<time_duration,-5> us_eastern_offset_adj;
   //Type that embeds rules for UTC-5 plus DST offset
-  typedef boost::gdtl::static_local_time_adjustor<ptime, 
+  typedef boost::date_time::static_local_time_adjustor<ptime, 
                                                   us_dst, 
                                                   us_eastern_offset_adj> us_eastern;
   
@@ -45,9 +45,9 @@ main()
   check("check local calculation", t11_local == t11_check);
   //should get same offset with DST flag set
   check("check local offset-dst flag on",   
-	us_eastern::local_to_utc_offset(t11, boost::gdtl::is_dst) == hours(4));
+	us_eastern::local_to_utc_offset(t11, boost::date_time::is_dst) == hours(4));
   check("check local offset-dst flag override",   
-	us_eastern::local_to_utc_offset(t11, boost::gdtl::not_dst) == hours(5));
+	us_eastern::local_to_utc_offset(t11, boost::date_time::not_dst) == hours(5));
  
 
   //Check the start of dst boundary
@@ -59,7 +59,7 @@ main()
 	us_eastern::utc_to_local_offset(u_not_dst) == hours(-5));
   ptime l_in_dst(dst_start, hours(3)); //2002-Apr-07 03:00:00 1st sec of dst
   check("check local dst start boundary case",   
-	us_eastern::local_to_utc_offset(l_in_dst, boost::gdtl::is_dst) == hours(4));
+	us_eastern::local_to_utc_offset(l_in_dst, boost::date_time::is_dst) == hours(4));
   ptime u_in_dst(dst_start, hours(7));
   check("check utc dst start boundary case",   
 	us_eastern::utc_to_local_offset(u_in_dst) == hours(-4));
@@ -68,9 +68,9 @@ main()
   //Check the end of dst boundary
   ptime dst_end(dst_end_day, time_duration(1,59,59)); //2002-Oct-27 01:00:00 DST
   check("check local dst end boundary case - still dst",   
-	us_eastern::local_to_utc_offset(dst_end, boost::gdtl::is_dst) == hours(4));
+	us_eastern::local_to_utc_offset(dst_end, boost::date_time::is_dst) == hours(4));
   check("check local dst end boundary case - still dst",   
-	us_eastern::local_to_utc_offset(dst_end, boost::gdtl::not_dst) == hours(5));
+	us_eastern::local_to_utc_offset(dst_end, boost::date_time::not_dst) == hours(5));
   ptime u_dst_end1(dst_end_day, time_duration(5,59,59));
   check("check utc dst end boundary case",   
 	us_eastern::utc_to_local_offset(u_dst_end1) == hours(-4));
@@ -86,10 +86,10 @@ main()
   
 
   //Now try a local adjustments without dst
-  typedef boost::gdtl::utc_adjustment<time_duration,-7> us_az_offset_adj;
-  typedef boost::gdtl::null_dst_rules<date, time_duration> us_az_dst_adj;
+  typedef boost::date_time::utc_adjustment<time_duration,-7> us_az_offset_adj;
+  typedef boost::date_time::null_dst_rules<date, time_duration> us_az_dst_adj;
   //Type that embeds rules for UTC-7 with no dst
-  typedef boost::gdtl::static_local_time_adjustor<ptime, 
+  typedef boost::date_time::static_local_time_adjustor<ptime, 
                                                   us_az_dst_adj, 
                                                   us_az_offset_adj> us_az;
 
@@ -104,7 +104,7 @@ main()
 
 
   //Arizona timezone is utc-7 with no dst
-  typedef boost::gdtl::local_adjustor<ptime, -7, no_dst> us_arizona;
+  typedef boost::date_time::local_adjustor<ptime, -7, no_dst> us_arizona;
 
   ptime t7(date(2002,May,31), hours(17)); 
   ptime t8 = us_arizona::local_to_utc(t7);
@@ -112,7 +112,7 @@ main()
   //converted to local then back ot utc
   check("check us_local_adjustor", t9 == t7);
 
-  typedef boost::gdtl::local_adjustor<ptime, -5, us_dst> us_eastern2;
+  typedef boost::date_time::local_adjustor<ptime, -5, us_dst> us_eastern2;
 
   ptime t7a(date(2002,May,31), hours(17)); 
   ptime t7b = us_eastern2::local_to_utc(t7a);
@@ -127,7 +127,7 @@ main()
 
 
   //still experimental
-  typedef boost::gdtl::dynamic_local_time_adjustor<ptime, us_dst> lta;
+  typedef boost::date_time::dynamic_local_time_adjustor<ptime, us_dst> lta;
 //  lta adjustor(hours(-7));
   check("dst start", lta::local_dst_start_day(2002) == dst_start);
   check("dst end",   lta::local_dst_end_day(2002) == dst_end_day);
