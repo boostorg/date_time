@@ -2862,7 +2862,7 @@
       </namespace>
     </namespace>
   </header>
-  <header name="boost/date_time/dst_transition_day_generators.hpp">
+  <header name="boost/date_time/dst_transition_generators.hpp">
     <namespace name="boost">
       <namespace name="date_time">
         <class name="dst_day_calc_rule">
