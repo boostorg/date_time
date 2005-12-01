@@ -112,7 +112,7 @@
       <listitem><ulink url="../../libs/utility/operators.htm">boost.operators</ulink> </listitem>
       <listitem><ulink url="../../libs/conversion/lexical_cast.htm">boost::lexical_cast </ulink> </listitem>
       <listitem><ulink url="../../libs/smart_ptr/smart_ptr.htm">boost::smart_ptr </ulink> </listitem>
-      <listitem><ulink url="../../libs/algorithm/string/">boost::string_algorithms </ulink> </listitem>
+      <listitem><ulink url="../../libs/algorithm/string/index.html">boost::string_algorithms </ulink> </listitem>
     </itemizedlist>
     so at least these libraries need to be installed. 
   </para>
