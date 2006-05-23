@@ -1,5 +1,5 @@
 #ifndef DATE_TIME_LOCALE_CONFIG_HPP___
-#define DATE_TIME_LOCALE_CONFIG_HPP____
+#define DATE_TIME_LOCALE_CONFIG_HPP___
 
 /* Copyright (c) 2002,2003 CrystalClear Software, Inc.
  * Use, modification and distribution is subject to the
