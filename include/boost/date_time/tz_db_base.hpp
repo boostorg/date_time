@@ -261,8 +261,12 @@ namespace boost {
         e_wn = get_week_num(e_nth);
         
         
-        return new rule_type(start_rule(s_wn, s_d, s_m),
-                             end_rule(e_wn, e_d, e_m));
+        return new rule_type(start_rule(s_wn,
+                                        static_cast<unsigned short>(s_d),
+                                        static_cast<unsigned short>(s_m)),
+                             end_rule(e_wn,
+                                      static_cast<unsigned short>(e_d),
+                                      static_cast<unsigned short>(e_m)));
       }
       //! helper function for parse_rules()
       week_num get_week_num(int nth) const
