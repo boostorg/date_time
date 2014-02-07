@@ -42,7 +42,10 @@ namespace date_time {
       }
       date_duration_type dd = t.date() - time_t_start_day;
       time_duration_type td = t.time_of_day();
-      std::time_t t2 = dd.days()*86400 + td.hours()*3600 + td.minutes()*60 + td.seconds();
+      std::time_t t2 = static_cast<std::time_t>(dd.days())*86400 +
+                       static_cast<std::time_t>(td.hours())*3600 +
+                       static_cast<std::time_t>(td.minutes())*60 +
+                       td.seconds();
       std::tm tms, *tms_ptr;
       tms_ptr = c_time::localtime(&t2, &tms);
       date_type d(static_cast<unsigned short>(tms_ptr->tm_year + 1900),
