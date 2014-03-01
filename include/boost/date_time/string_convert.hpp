@@ -21,7 +21,6 @@ namespace date_time {
   inline
   std::basic_string<OutputT> convert_string_type(const std::basic_string<InputT>& inp_str)
   {
-    typedef std::basic_string<InputT> input_type;
     typedef std::basic_string<OutputT> output_type;
     output_type result;
     result.insert(result.begin(), inp_str.begin(), inp_str.end());

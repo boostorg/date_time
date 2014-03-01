@@ -214,8 +214,6 @@ namespace gregorian {
   std::basic_istream<charT>& operator>>(std::basic_istream<charT>& is, date& d)
   {
     std::istream_iterator<std::basic_string<charT>, charT> beg(is), eos;
-    
-    typedef boost::date_time::all_date_names_put<greg_facet_config, charT> facet_def;
     d = from_stream(beg, eos);
     return is;
   }

@@ -47,7 +47,6 @@ namespace posix_time {
              const ptime& p) {
     boost::io::ios_flags_saver iflags(os);
     typedef boost::date_time::time_facet<ptime, CharT> custom_ptime_facet;
-    typedef std::time_put<CharT>                  std_ptime_facet;
     std::ostreambuf_iterator<CharT> oitr(os);
     if (std::has_facet<custom_ptime_facet>(os.getloc()))
       std::use_facet<custom_ptime_facet>(os.getloc()).put(oitr, os, os.fill(), p);
@@ -114,7 +113,6 @@ namespace posix_time {
              const boost::posix_time::time_period& p) {
     boost::io::ios_flags_saver iflags(os);
     typedef boost::date_time::time_facet<ptime, CharT> custom_ptime_facet;
-    typedef std::time_put<CharT>                  std_time_facet;
     std::ostreambuf_iterator<CharT> oitr(os);
     if (std::has_facet<custom_ptime_facet>(os.getloc())) {
       std::use_facet<custom_ptime_facet>(os.getloc()).put(oitr, os, os.fill(), p);
@@ -180,7 +178,6 @@ namespace posix_time {
   {
     boost::io::ios_flags_saver iflags(os);
     typedef boost::date_time::time_facet<ptime, CharT> custom_ptime_facet;
-    typedef std::time_put<CharT>                  std_ptime_facet;
     std::ostreambuf_iterator<CharT> oitr(os);
     if (std::has_facet<custom_ptime_facet>(os.getloc()))
       std::use_facet<custom_ptime_facet>(os.getloc()).put(oitr, os, os.fill(), td);
