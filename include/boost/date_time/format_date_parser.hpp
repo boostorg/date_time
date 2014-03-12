@@ -63,7 +63,7 @@ fixed_string_to_int(std::istreambuf_iterator<charT>& itr,
     itr++;
     j++;
   }
-  int_type i = -1;
+  int_type i = static_cast<int_type>(-1);
   // mr.cache will hold leading zeros. size() tells us when input is too short.
   if(mr.cache.size() < length) {
     return i;
@@ -111,7 +111,7 @@ var_string_to_int(std::istreambuf_iterator<charT>& itr,
     ++itr;
     ++j;
   }
-  int_type i = -1;
+  int_type i = static_cast<int_type>(-1);
   if(!s.empty()) {
     i = boost::lexical_cast<int_type>(s);
   }
