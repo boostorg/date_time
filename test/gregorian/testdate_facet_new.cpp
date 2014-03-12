@@ -222,6 +222,13 @@ int main() {
                     std::string("2004-Oct-13 %13"), 
                     std::locale(std::locale::classic(), datefacet));
     }
+    {
+      date d1(2004,Oct, 13);
+      date_facet* datefacet = new date_facet("%d%m%y");
+      teststreaming("Single digit year and %y", d1,
+                    std::string("131004"), 
+                    std::locale(std::locale::classic(), datefacet));
+    }
     {//month
       date_facet* datefacet = new date_facet();
       datefacet->month_format("%b %%b");
