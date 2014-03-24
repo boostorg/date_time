@@ -430,9 +430,9 @@ namespace local_time{
       dst_calc_rules_ = shared_ptr<dst_calc_rule>(
         new partial_date_dst_rule(
           partial_date_dst_rule::start_rule(
-            sd, static_cast<date_time::months_of_year>(sm)),
+            static_cast<unsigned short>(sd), static_cast<date_time::months_of_year>(sm)),
           partial_date_dst_rule::end_rule(
-            ed, static_cast<date_time::months_of_year>(em))
+            static_cast<unsigned short>(ed), static_cast<date_time::months_of_year>(em))
           )
       );
     }
