@@ -88,7 +88,7 @@ namespace date_time {
           boost::throw_exception(std::runtime_error("could not convert calendar time to UTC time"));
         return result;
       }
-#else // BOOST_HAS_THREADS
+#else // BOOST_DATE_TIME_HAS_REENTRANT_STD_FUNCTIONS
 
 #if (defined(_MSC_VER) && (_MSC_VER >= 1400))
 #pragma warning(push) // preserve warning settings
@@ -116,7 +116,7 @@ namespace date_time {
 #pragma warning(pop) // restore warnings to previous state
 #endif // _MSC_VER >= 1400
 
-#endif // BOOST_HAS_THREADS
+#endif // BOOST_DATE_TIME_HAS_REENTRANT_STD_FUNCTIONS
   };
 }} // namespaces
 
