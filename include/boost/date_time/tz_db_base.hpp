@@ -180,7 +180,6 @@ namespace boost {
       /*! May throw data_not_accessible, or bad_field_count exceptions */
       void load_from_file(const std::string& pathspec)
       {
-        string_type in_str;
         std::string  buff;
         
         std::ifstream ifs(pathspec.c_str());
