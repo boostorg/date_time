@@ -97,7 +97,7 @@ namespace gregorian {
     std::locale locale = os.getloc();
     if (std::has_facet<facet_def>(locale)) {
       const facet_def& f = std::use_facet<facet_def>(locale);
-      greg_weekday_formatter::format_weekday(wd.as_enum(), os, f, true);
+      greg_weekday_formatter::format_weekday(wd, os, f, true);
     }
     else { //default to short English string eg: Sun, Mon, Tue, Wed...
       os  << wd.as_short_string();
@@ -214,8 +214,6 @@ namespace gregorian {
   std::basic_istream<charT>& operator>>(std::basic_istream<charT>& is, date& d)
   {
     std::istream_iterator<std::basic_string<charT>, charT> beg(is), eos;
-    
-    typedef boost::date_time::all_date_names_put<greg_facet_config, charT> facet_def;
     d = from_stream(beg, eos);
     return is;
   }

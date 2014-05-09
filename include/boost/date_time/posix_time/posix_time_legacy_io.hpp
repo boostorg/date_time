@@ -80,7 +80,7 @@ namespace posix_time {
     // any marker (such as '\0').
     typename std::basic_string<charT>::iterator e = inp_s.end();
     while(b != e){
-      out_ss << out_ss.narrow(*b, 0);
+      out_ss << is.narrow(*b, 0);
       ++b;
     }
 

@@ -36,7 +36,6 @@ namespace local_time {
     boost::io::ios_flags_saver iflags(os);
     typedef local_date_time time_type;//::utc_time_type typename 
     typedef date_time::time_facet<time_type, CharT> custom_time_facet;
-    typedef std::time_put<CharT> std_time_facet;
     std::ostreambuf_iterator<CharT> oitr(os);
 
     if(std::has_facet<custom_time_facet>(os.getloc())) {
@@ -123,7 +122,6 @@ namespace local_time {
              const boost::local_time::local_time_period& p) {
     boost::io::ios_flags_saver iflags(os);
     typedef boost::date_time::time_facet<local_date_time, CharT> custom_facet;
-    typedef std::time_put<CharT> std_time_facet;
     std::ostreambuf_iterator<CharT> oitr(os);
     if (std::has_facet<custom_facet>(os.getloc())) {
       std::use_facet<custom_facet>(os.getloc()).put(oitr, os, os.fill(), p);
