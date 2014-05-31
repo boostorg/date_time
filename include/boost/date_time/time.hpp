@@ -49,6 +49,7 @@ namespace date_time {
       > >
   {
   public:
+    typedef void _is_boost_date_time_time_point;
     typedef T time_type;
     typedef typename time_system::time_rep_type time_rep_type;
     typedef typename time_system::date_type date_type;
