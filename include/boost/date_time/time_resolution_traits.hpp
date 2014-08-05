@@ -68,6 +68,10 @@ namespace date_time {
            typename frac_sec_type::int_type resolution_adjust,
 #endif
            unsigned short frac_digits,
+#ifdef _AIX
+           // In AIX, v_type conflicts with the definiton of a system variable.
+           #undef v_type
+#endif
            typename v_type = boost::int32_t >
   class time_resolution_traits {
   public:
