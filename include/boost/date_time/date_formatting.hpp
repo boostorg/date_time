@@ -51,7 +51,11 @@ namespace date_time {
         }
         case month_as_integer: 
         { 
-          os << std::setw(2) << std::setfill(os.widen('0')) << month.as_number();
+          std::streamsize old_width = os.width();
+          ostream_type::char_type old_fill = os.fill();
+
+          os << std::setw(2) << std::setfill(os.widen('0')) << month.as_number()
+             << std::setw(old_width) << std::setfill(old_fill);
           break;
         }
         default:
