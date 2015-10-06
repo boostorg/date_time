@@ -22,7 +22,7 @@
     The library supports 4 main extensions for the management of local times. This includes 
     <simplelist>
       <member>local_date_time -- locally adjusted time point</member>
-      <member>posix_time_zone -- time zone defined by posix string (eg: "EST10EDT,M10.5.0,M3.5.0/03")</member>
+      <member>posix_time_zone -- time zone defined by posix string (eg: "EST-10EDT,M10.5.0,M3.5.0/03")</member>
       <member>time_zone_database -- get time zones by region from .csv file (eg: America/New York)</member>
       <member>time_zone -- abstract time zone interface</member>
     </simplelist>
