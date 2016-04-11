@@ -10,8 +10,8 @@
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 
-#include <boost/date_time/gregorian/gregorian.hpp>
 #include <boost/date_time/gregorian/greg_serialize.hpp>
+#include <boost/date_time/gregorian/gregorian.hpp>
 #include "../testfrmwk.hpp"
 #include <sstream>
 
