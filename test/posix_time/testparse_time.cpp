@@ -184,6 +184,26 @@ main()
     ptime t23 = from_iso_string(ts6);
     check("parse iso time w/ frac sec (dec only): " + ts6, 
           t23 == ptime(date(1900,12,31),time_duration(23,0,0,0)));
+
+    std::string ts7("2002-01-20T23:58:59.123456789");
+    ptime t24 = from_iso_extended_string(ts7);
+    check("parse iso extended time w/ frac sec: " + ts7,
+          t24 == ptime(date(2002,1,20),time_duration(23,58,59,123456789)));
+
+    std::string ts8("1900-12-31T00:00:00.123");
+    ptime t25 = from_iso_extended_string(ts8);
+    check("parse iso extended time w/ frac sec (too short): " + ts8,
+          t25 == ptime(date(1900,12,31),time_duration(0,0,0,123000000)));
+
+    std::string ts9("1900-12-31T23:00:00.123456789876");
+    ptime t26 = from_iso_extended_string(ts9);
+    check("parse iso extended time w/ frac sec (too long): " + ts9,
+          t26 == ptime(date(1900,12,31),time_duration(23,0,0,123456789)));
+
+    std::string ts10("1900-12-31T23:00:00.");
+    ptime t27 = from_iso_extended_string(ts10);
+    check("parse iso extended time w/ frac sec (dec only): " + ts10,
+          t27 == ptime(date(1900,12,31),time_duration(23,0,0,0)));
 #else
     std::string ts3("20020120T235859.123456");
     ptime t20 = from_iso_string(ts3);
@@ -204,6 +224,26 @@ main()
     ptime t23 = from_iso_string(ts6);
     check("parse iso time w/ frac sec (dec only): " + ts6, 
           t23 == ptime(date(1900,12,31),time_duration(23,0,0,0)));
+
+    std::string ts7("2002-01-20T23:58:59.123456");
+    ptime t24 = from_iso_extended_string(ts7);
+    check("parse iso extended time w/ frac sec: " + ts7,
+          t24 == ptime(date(2002,1,20),time_duration(23,58,59,123456)));
+
+    std::string ts8("1900-12-31T00:00:00.123");
+    ptime t25 = from_iso_extended_string(ts8);
+    check("parse iso extended time w/ frac sec (too short): " + ts8,
+          t25 == ptime(date(1900,12,31),time_duration(0,0,0,123000)));
+
+    std::string ts9("1900-12-31T23:00:00.123456789876");
+    ptime t26 = from_iso_extended_string(ts9);
+    check("parse iso extended time w/ frac sec (too long): " + ts9,
+          t26 == ptime(date(1900,12,31),time_duration(23,0,0,123456)));
+
+    std::string ts10("1900-12-31T23:00:00.");
+    ptime t27 = from_iso_extended_string(ts10);
+    check("parse iso extended time w/ frac sec (dec only): " + ts10,
+          t27 == ptime(date(1900,12,31),time_duration(23,0,0,0)));
 #endif // BOOST_DATE_TIME_POSIX_TIME_STD_CONFIG
   }
 
