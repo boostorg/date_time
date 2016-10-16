@@ -4,14 +4,14 @@
  * file LICENSE_1_0.txt or http://www.boost.org/LICENSE_1_0.txt)
  * Author: Jeff Garland, Bart Garst
  */
- 
+
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 
-#include <boost/date_time/gregorian/gregorian.hpp>
 #include <boost/date_time/gregorian/greg_serialize.hpp>
+#include <boost/date_time/gregorian/gregorian.hpp>
 #include "../testfrmwk.hpp"
 #include <sstream>
 
@@ -26,7 +26,7 @@ void save_to(archive_type& ar, const temporal_type& tt)
 
 int main(){
   std::ostringstream oss;
-  
+
   // NOTE: DATE_TIME_XML_SERIALIZE is only used in testing and is
   // defined in the testing Jamfile
 #if defined(DATE_TIME_XML_SERIALIZE)
@@ -36,7 +36,7 @@ int main(){
   std::cout << "Running text archive tests" << std::endl;
   archive::text_oarchive oa(oss);
 #endif
-  
+
   date d(2002,Feb,12);
   date sv_d1(not_a_date_time);
   date sv_d2(pos_infin);
@@ -103,7 +103,7 @@ int main(){
 #else
   archive::text_iarchive ia(iss);
 #endif
-  
+
   // read from the archive
   date d2(not_a_date_time);
   date sv_d3(min_date_time);
@@ -163,7 +163,7 @@ int main(){
     check("Error reading from archive: " + s + "\nWritten data: \"" + oss.str() + "\"", false);
     return printTestStats();
   }
-  
+
   check("date", d == d2);
   check("special_value date (nadt)", sv_d1 == sv_d3);
   check("special_value date (pos_infin)", sv_d2 == sv_d4);
