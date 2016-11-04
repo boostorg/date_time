@@ -52,7 +52,7 @@ namespace gregorian {
 
   
   //! Wrapper class to represent months in gregorian based calendar
-  class BOOST_DATE_TIME_DECL greg_month : public greg_month_rep {
+  class greg_month : public greg_month_rep {
   public:
     typedef date_time::months_of_year month_enum;
     typedef std::map<std::string, unsigned short> month_map_type;
@@ -67,14 +67,14 @@ namespace gregorian {
     //! Returns month as number from 1 to 12
     unsigned short as_number() const {return value_;}
     month_enum as_enum() const {return static_cast<month_enum>(value_);}
-    const char* as_short_string() const;
-    const char* as_long_string()  const;
+    const char* as_short_string() const { return as_short_string_impl(value_); }
+    const char* as_long_string()  const { return as_long_string_impl(value_); }
 #ifndef BOOST_NO_STD_WSTRING
-    const wchar_t* as_short_wstring() const;
-    const wchar_t* as_long_wstring()  const;
+    const wchar_t* as_short_wstring() const { return as_short_wstring_impl(value_); }
+    const wchar_t* as_long_wstring()  const { return as_long_wstring_impl(value_); }
 #endif // BOOST_NO_STD_WSTRING
     //! Shared pointer to a map of Month strings (Names & Abbrev) & numbers
-    static month_map_ptr_type get_month_map_ptr();
+    static BOOST_DATE_TIME_DECL month_map_ptr_type get_month_map_ptr();
 
     /* parameterized as_*_string functions are intended to be called
      * from a template function: "... as_short_string(charT c='\0');" */
@@ -95,6 +95,13 @@ namespace gregorian {
     {
       return as_long_wstring();
     }
+#endif // BOOST_NO_STD_WSTRING
+  protected:
+    static BOOST_DATE_TIME_DECL const char* as_short_string_impl(greg_month_rep value);
+    static BOOST_DATE_TIME_DECL const char* as_long_string_impl(greg_month_rep value);
+#ifndef BOOST_NO_STD_WSTRING
+    static BOOST_DATE_TIME_DECL const wchar_t* as_short_wstring_impl(greg_month_rep value);
+    static BOOST_DATE_TIME_DECL const wchar_t* as_long_wstring_impl(greg_month_rep value);
 #endif // BOOST_NO_STD_WSTRING
   };
 

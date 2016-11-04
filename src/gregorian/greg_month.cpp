@@ -54,16 +54,16 @@ namespace gregorian {
 
   //! Returns 3 char english string for the month ex: Jan, Feb, Mar, Apr
   const char*
-  greg_month::as_short_string() const 
+  greg_month::as_short_string_impl(greg_month_rep value)
   {
-    return short_month_names[value_-1];
+    return short_month_names[value-1];
   }
   
   //! Returns full name of month as string in english ex: January, February
   const char*
-  greg_month::as_long_string()  const 
+  greg_month::as_long_string_impl(greg_month_rep value)
   {
-    return long_month_names[value_-1];
+    return long_month_names[value-1];
   }
  
   //! Return special_value from string argument
@@ -87,16 +87,16 @@ namespace gregorian {
 #ifndef BOOST_NO_STD_WSTRING
   //! Returns 3 wchar_t english string for the month ex: Jan, Feb, Mar, Apr
   const wchar_t*
-  greg_month::as_short_wstring() const 
+  greg_month::as_short_wstring_impl(greg_month_rep value)
   {
-    return w_short_month_names[value_-1];
+    return w_short_month_names[value-1];
   }
   
   //! Returns full name of month as wchar_t string in english ex: January, February
   const wchar_t*
-  greg_month::as_long_wstring()  const 
+  greg_month::as_long_wstring_impl(greg_month_rep value)
   {
-    return w_long_month_names[value_-1];
+    return w_long_month_names[value-1];
   }
 #endif // BOOST_NO_STD_WSTRING
   
