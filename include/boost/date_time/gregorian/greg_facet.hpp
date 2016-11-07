@@ -291,7 +291,7 @@ namespace gregorian {
     catch(std::bad_cast&){
       charT a = '\0';
       
-#if BOOST_NO_CXX11_SMART_PTR 
+#if defined(BOOST_NO_CXX11_SMART_PTR)
       
       std::auto_ptr< const facet_def > f(create_facet_def(a));
       
@@ -343,7 +343,7 @@ namespace gregorian {
     catch(std::bad_cast&){
       charT a = '\0';
       
-#if BOOST_NO_CXX11_SMART_PTR 
+#if defined(BOOST_NO_CXX11_SMART_PTR)
 
       std::auto_ptr< const facet_def > f(create_facet_def(a));
       
