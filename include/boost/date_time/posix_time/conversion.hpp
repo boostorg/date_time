@@ -10,6 +10,7 @@
  */
 
 #include <cstring>
+#include <boost/cstdint.hpp>
 #include <boost/date_time/posix_time/ptime.hpp>
 #include <boost/date_time/posix_time/posix_time_duration.hpp>
 #include <boost/date_time/filetime_functions.hpp>
@@ -21,21 +22,18 @@ namespace boost {
 
 namespace posix_time {
 
-
   //! Function that converts a time_t into a ptime.
   inline
   ptime from_time_t(std::time_t t)
   {
-    ptime start(gregorian::date(1970,1,1));
-    return start + seconds(static_cast<long>(t));
+    return ptime(gregorian::date(1970,1,1)) + seconds(t);
   }
 
   //! Function that converts a ptime into a time_t
   inline
   std::time_t to_time_t(ptime pt)
   {
-    time_duration dur = pt - ptime(gregorian::date(1970,1,1));
-    return std::time_t(dur.total_seconds());
+    return (pt - ptime(gregorian::date(1970,1,1))).total_seconds();
   }
 
   //! Convert a time to a tm structure truncating any fractional seconds
