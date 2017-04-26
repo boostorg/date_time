@@ -120,14 +120,14 @@ namespace date_time {
         minutes = absolute_value(minutes);
         seconds = absolute_value(seconds);
         fs = absolute_value(fs);
-        return (((((fractional_seconds_type(hours)*3600)
-                   + (fractional_seconds_type(minutes)*60)
-                   + seconds)*res_adjust()) + fs) * -1);
+        return static_cast<tick_type>(((((fractional_seconds_type(hours)*3600)
+                                       + (fractional_seconds_type(minutes)*60)
+                                       + seconds)*res_adjust()) + fs) * -1);
       }
 
-      return (((fractional_seconds_type(hours)*3600)
-               + (fractional_seconds_type(minutes)*60)
-               + seconds)*res_adjust()) + fs;
+      return static_cast<tick_type>((((fractional_seconds_type(hours)*3600)
+                                    + (fractional_seconds_type(minutes)*60)
+                                    + seconds)*res_adjust()) + fs);
     }
 
   };
