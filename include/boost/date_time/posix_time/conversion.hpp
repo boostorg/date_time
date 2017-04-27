@@ -26,7 +26,7 @@ namespace posix_time {
   inline
   ptime from_time_t(std::time_t t)
   {
-    return ptime(gregorian::date(1970,1,1)) + seconds(t);
+    return ptime(gregorian::date(1970,1,1)) + seconds(static_cast<long>(t));
   }
 
   //! Function that converts a ptime into a time_t
@@ -41,9 +41,9 @@ namespace posix_time {
   std::tm to_tm(const boost::posix_time::ptime& t) {
     std::tm timetm = boost::gregorian::to_tm(t.date());
     boost::posix_time::time_duration td = t.time_of_day();
-    timetm.tm_hour = td.hours();
-    timetm.tm_min = td.minutes();
-    timetm.tm_sec = td.seconds();
+    timetm.tm_hour = static_cast<int>(td.hours());
+    timetm.tm_min = static_cast<int>(td.minutes());
+    timetm.tm_sec = static_cast<int>(td.seconds());
     timetm.tm_isdst = -1; // -1 used when dst info is unknown
     return timetm;
   }
@@ -52,9 +52,9 @@ namespace posix_time {
   std::tm to_tm(const boost::posix_time::time_duration& td) {
     std::tm timetm;
     std::memset(&timetm, 0, sizeof(timetm));
-    timetm.tm_hour = date_time::absolute_value(td.hours());
-    timetm.tm_min = date_time::absolute_value(td.minutes());
-    timetm.tm_sec = date_time::absolute_value(td.seconds());
+    timetm.tm_hour = static_cast<int>(date_time::absolute_value(td.hours()));
+    timetm.tm_min = static_cast<int>(date_time::absolute_value(td.minutes()));
+    timetm.tm_sec = static_cast<int>(date_time::absolute_value(td.seconds()));
     timetm.tm_isdst = -1; // -1 used when dst info is unknown
     return timetm;
   }
