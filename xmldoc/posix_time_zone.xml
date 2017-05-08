@@ -51,17 +51,17 @@
   <para>
     Some examples are:
     <literallayout>
-      "PST-8PDT01:00:00,M4.1.0/02:00:00,M10.1.0/02:00:00"
-      "PST-8PDT,M4.1.0,M10.1.0"</literallayout>These two are actually the same specification (defaults were used in the second string). This zone lies eight hours west of GMT and makes a one hour shift forward during daylight savings time. Daylight savings for this zone starts on the first Sunday of April at 2am, and ends on the first Sunday of October at 2am.
+      "PST+8PDT01:00:00,M4.1.0/02:00:00,M10.1.0/02:00:00"
+      "PST+8PDT,M4.1.0,M10.1.0"</literallayout>These two are actually the same specification (defaults were used in the second string). This zone lies eight hours west of GMT and makes a one hour shift forward during daylight savings time. Daylight savings for this zone starts on the first Sunday of April at 2am, and ends on the first Sunday of October at 2am.
     <literallayout>
-      "MST-7"</literallayout>This zone is as simple as it gets. This zone lies seven hours west of GMT and has no daylight savings.
+      "MST+7"</literallayout>This zone is as simple as it gets. This zone lies seven hours west of GMT and has no daylight savings.
     <literallayout>
-      "EST10EDT,M10.5.0,M3.5.0/03"</literallayout>This string describes the time zone for Sydney Australia. It lies ten hours east of GMT and makes a one hour shift forward during daylight savings. Being located in the southern hemisphere, daylight savings begins on the last Sunday in October at 2am and ends on the last Sunday in March at 3am.
+      "EST-10EDT,M10.5.0,M3.5.0/03"</literallayout>This string describes the time zone for Sydney Australia. It lies ten hours east of GMT and makes a one hour shift forward during daylight savings. Being located in the southern hemisphere, daylight savings begins on the last Sunday in October at 2am and ends on the last Sunday in March at 3am.
     <literallayout>
-      "FST+3FDT02:00,J60/00,J304/02"</literallayout>This specification describes a fictitious zone that lies three hours east of GMT. It makes a two hour shift forward for daylight savings which begins on March 1st at midnight, and ends on October 31st at 2am. The 'J' designation in the start/end specs signifies that counting starts at one and February 29th is never counted.
+      "FST-3FDT02:00,J60/00,J304/02"</literallayout>This specification describes a fictitious zone that lies three hours east of GMT. It makes a two hour shift forward for daylight savings which begins on March 1st at midnight, and ends on October 31st at 2am. The 'J' designation in the start/end specs signifies that counting starts at one and February 29th is never counted.
     <literallayout>
-      "FST+3FDT,59,304"</literallayout>This specification is significant because of the '59'. The lack of 'J' for the start and end dates, indicates that the Julian day-count begins at zero and ends at 365. If you do the math, you'll see that allows for a total of 366 days. This is fine in leap years, but in non-leap years '59' (Feb-29) does not exist. This will construct a valid posix_time_zone object but an exception will be thrown if the date of '59' is accessed in a non-leap year. Ex:
-    <programlisting>posix_time_zone leap_day(std::string("FST+3FDT,59,304"));
+      "FST-3FDT,59,304"</literallayout>This specification is significant because of the '59'. The lack of 'J' for the start and end dates, indicates that the Julian day-count begins at zero and ends at 365. If you do the math, you'll see that allows for a total of 366 days. This is fine in leap years, but in non-leap years '59' (Feb-29) does not exist. This will construct a valid posix_time_zone object but an exception will be thrown if the date of '59' is accessed in a non-leap year. Ex:
+    <programlisting>posix_time_zone leap_day(std::string("FST-3FDT,59,304"));
 leap_day.dst_local_start_time(2004); // ok
 leap_day.dst_local_start_time(2003); // Exception thrown</programlisting>
   </para>
@@ -102,7 +102,7 @@ leap_day.dst_local_start_time(2003); // Exception thrown</programlisting>
         <tbody>
           <row>
             <entry valign="top"><screen>posix_time_zone(std::string)</screen></entry>
-            <entry><screen>std::string nyc("EST-5EDT,M4.1.0,M10.5.0");
+            <entry><screen>std::string nyc("EST+5EDT,M4.1.0,M10.5.0");
 time_zone_ptr zone(new posix_time_zone(nyc));</screen>
             </entry>
           </row>
@@ -211,9 +211,9 @@ time_duration base_utc_offset()</screen></entry>
           </row>
           <row>
             <entry><screen>nyc_zone_sh_ptr-&gt;to_posix_string();
-// "EST-05EDT+01,M4.1.0/02:00,M10.5.0/02:00"
+// "EST+05EDT+01,M4.1.0/02:00,M10.5.0/02:00"
 phx_zone_sh_ptr-&gt;to_posix_string();
-// "MST-07"
+// "MST+07"
             </screen></entry>
           </row>
         </tbody>
