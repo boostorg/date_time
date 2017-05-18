@@ -44,10 +44,17 @@ namespace gregorian {
 
     std::tm datetm;
     std::memset(&datetm, 0, sizeof(datetm));
+#ifdef BOOST_NO_CXX17_STRUCT_BIND
     boost::gregorian::date::ymd_type ymd = d.year_month_day();
     datetm.tm_year = ymd.year - 1900;
     datetm.tm_mon = ymd.month - 1;
     datetm.tm_mday = ymd.day;
+#else
+    auto [year, month, day] {d.year_month_day() };
+    datetm.tm_year = year - 1900;
+    datetm.tm_mon = month - 1;
+    datetm.tm_mday = day;
+#endif
     datetm.tm_wday = d.day_of_week();
     datetm.tm_yday = d.day_of_year() - 1;
     datetm.tm_isdst = -1; // negative because not enough info to set tm_isdst

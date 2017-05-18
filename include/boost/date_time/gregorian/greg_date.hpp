@@ -119,9 +119,17 @@ namespace gregorian {
     //! Return the last day of the current month
     date end_of_month() const
     {
+#ifdef BOOST_NO_CXX17_STRUCT_BIND   // hack not offical
       ymd_type ymd = year_month_day();
       short eom_day =  gregorian_calendar::end_of_month_day(ymd.year, ymd.month);
       return date(ymd.year, ymd.month, eom_day);
+#else
+      // ideally would like to use something line '_' to ignore
+      auto [year, month, _ignore] {year_month_day () };
+      short eom_day =  gregorian_calendar::end_of_month_day(year, month);
+        
+      return date(year, month, eom_day);
+#endif
     }
 
    private:
