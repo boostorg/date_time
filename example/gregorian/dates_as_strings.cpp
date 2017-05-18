@@ -29,14 +29,24 @@ main()
     std::string ud("20011009"); //2001-Oct-09
     date d1(from_undelimited_string(ud));
     std::cout << to_iso_extended_string(d1) << std::endl;
+
     
     //Output the parts of the date - Tuesday October 9, 2001
-    date::ymd_type ymd = d1.year_month_day();
     greg_weekday wd = d1.day_of_week();
-    std::cout << wd.as_long_string() << " "
-              << ymd.month.as_long_string() << " "
-              << ymd.day << ", " << ymd.year
-              << std::endl;
+    std::cout << wd.as_long_string() << " ";
+
+#ifdef BOOST_NO_CXX17_STRUCT_BIND   // hack not offical
+    date::ymd_type ymd = d1.year_month_day();
+    std::cout << ymd.month.as_long_string() << " "
+      << ymd.day << ", " << ymd.year << std::endl;
+#else
+    // C++17 structured bind
+    auto [yr, mo, dy] = d1.year_month_day();
+    std::cout << mo.as_long_string() << " "
+      << dy << ", " << yr << "\n";
+  
+#endif
+
 
     //Let's send in month 25 by accident and create an exception
     std::string bad_date("20012509"); //2001-??-09
