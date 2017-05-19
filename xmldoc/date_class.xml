@@ -225,7 +225,13 @@ d.day(); // --> 10</screen></entry>
 date::ymd_type ymd = d.year_month_day();
 // ymd.year  --> 2002, 
 // ymd.month --> 1, 
-// ymd.day   --> 10</screen></entry>
+// ymd.day   --> 10
+      <p>
+// Under C++17
+auto [year, month, day] {d.year_month_day () };
+// year  --> 2002,
+// month --> 1,
+// day   --> 10</screen></entry>
         </row>
         
 	<row>
