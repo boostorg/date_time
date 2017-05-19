@@ -11,7 +11,11 @@
 
 #include <boost/date_time/constrained_value.hpp>
 #include <boost/date_time/date_defs.hpp>
+#ifdef BOOST_NO_CXX11_SMART_PTR
 #include <boost/shared_ptr.hpp>
+#else
+#   include <memory>
+#endif
 #include <boost/date_time/compiler_config.hpp>
 #include <stdexcept>
 #include <string>
@@ -56,7 +60,11 @@ namespace gregorian {
   public:
     typedef date_time::months_of_year month_enum;
     typedef std::map<std::string, unsigned short> month_map_type;
+#ifdef BOOST_NO_CXX11_SMART_PTR
     typedef boost::shared_ptr<month_map_type> month_map_ptr_type;
+#else
+    using month_map_ptr_type = std::shared_ptr <month_map_type>;
+#endif
     //! Construct a month from the months_of_year enumeration
     greg_month(month_enum theMonth) : 
       greg_month_rep(static_cast<greg_month_rep::value_type>(theMonth)) {}
