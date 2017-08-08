@@ -157,18 +157,18 @@ int main(){
     }
 
     try {
-      date d1(1500, 6, 1);
-      const date d2 = d1 + years(3000);
-      check("date + many years != overflow", d2 == date(4500, 6, 1));
+      date d1(1400, 6, 1);
+      const date d2 = d1 + years(8600);
+      check("date + many years != overflow", d2 == date(10000, 6, 1));
     }
     catch (...) {
       check("date + many years != overflow", false);
     }
 
     try {
-      date d1(4500, 6, 1);
-      const date d2 = d1 - years(3000);
-      check("date - many years != overflow", d2 == date(1500, 6, 1));
+      date d1(10000, 6, 1);
+      const date d2 = d1 - years(8600);
+      check("date - many years != overflow", d2 == date(1400, 6, 1));
     }
     catch (...) {
       check("date - many years != overflow", false);
