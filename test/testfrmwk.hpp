@@ -57,15 +57,15 @@ inline bool check(const std::string& testname, bool testcond)
 }
 
 // In the comparisons below, it is possible that T and U are signed and unsigned integer types, which generates warnings in some compilers.
-#if defined(_MSC_VER)
+#if defined(BOOST_MSVC)
 # pragma warning(push)
 # pragma warning(disable: 4389)
-#elif defined(__clang__) && defined(__has_warning)
+#elif defined(BOOST_CLANG) && defined(__has_warning)
 # if __has_warning("-Wsign-compare")
 #  pragma clang diagnostic push
 #  pragma clang diagnostic ignored "-Wsign-compare"
 # endif
-#elif defined(__GNUC__) && !(defined(__INTEL_COMPILER) || defined(__ICL) || defined(__ICC) || defined(__ECC)) && (__GNUC__ * 100 + __GNUC_MINOR__) >= 406
+#elif defined(BOOST_GCC) && (BOOST_GCC+0) >= 40600
 # pragma GCC diagnostic push
 # pragma GCC diagnostic ignored "-Wsign-compare"
 #endif
@@ -81,13 +81,13 @@ inline bool check_equal(const std::string& testname, T const& left, U const& rig
   return res;
 }
 
-#if defined(_MSC_VER)
+#if defined(BOOST_MSVC)
 # pragma warning(pop)
-#elif defined(__clang__) && defined(__has_warning)
+#elif defined(BOOST_CLANG) && defined(__has_warning)
 # if __has_warning("-Wsign-compare")
 #  pragma clang diagnostic pop
 # endif
-#elif defined(__GNUC__) && !(defined(__INTEL_COMPILER) || defined(__ICL) || defined(__ICC) || defined(__ECC)) && (__GNUC__ * 100 + __GNUC_MINOR__) >= 406
+#elif defined(BOOST_GCC) && (BOOST_GCC+0) >= 40600
 # pragma GCC diagnostic pop
 #endif
 
