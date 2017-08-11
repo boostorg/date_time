@@ -345,6 +345,7 @@ main()
     std::string ud(""); //empty string error sf bug# 1155556
     date d1(from_simple_string(ud));
     check("empty string",  false); //should never reach this piont
+    (void)d1;
   }
   catch(std::exception& e) {
     check(std::string("empty string parse (exception expected): ") + e.what(),  true);
