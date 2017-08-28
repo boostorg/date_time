@@ -55,11 +55,11 @@ TimeT time_from_ftime(const FileTimeT& ft)
     // 100-nanos since 1601-Jan-01
     uint64_t ft_as_integer = (static_cast< uint64_t >(ft.dwHighDateTime) << 32) | static_cast< uint64_t >(ft.dwLowDateTime);
     uint64_t sec = ft_as_integer / 10000000UL;
-    uint32_t sub_sec = (ft_as_integer % 10000000UL) // 100-nanoseconds since the last second
+    uint32_t sub_sec = static_cast< uint32_t >(ft_as_integer % 10000000UL) // 100-nanoseconds since the last second
 #if !defined(BOOST_DATE_TIME_POSIX_TIME_STD_CONFIG)
-        / 10; // microseconds since the last second
+        / 10U; // microseconds since the last second
 #else
-        * 100; // nanoseconds since the last second
+        * 100U; // nanoseconds since the last second
 #endif
 
     // split sec into usable chunks: days, hours, minutes, & seconds
