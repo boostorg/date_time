@@ -480,7 +480,7 @@ int main(){
     // create date_generator_parser
     typedef boost::date_time::date_generator_parser<date,char> date_gen_parser;
     date_gen_parser dg_parser("Zuerst","Zweitens","Dritt","Viert",
-                              "Fünft","Letzt","Vor","Nach","Von");
+                              "F\xC3\xBCnft","Letzt","Vor","Nach","Von");
 
     // create the date_input_facet
     date_input_facet* de_facet =

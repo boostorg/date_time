@@ -156,6 +156,24 @@ int main(){
       check("date -= years", date(1994, Feb, 28) == d);
     }
 
+    try {
+      date d1(1400, 6, 1);
+      const date d2 = d1 + years(8600);
+      check("date + many years != overflow", d2 == date(10000, 6, 1));
+    }
+    catch (...) {
+      check("date + many years != overflow", false);
+    }
+
+    try {
+      date d1(10000, 6, 1);
+      const date d2 = d1 - years(8600);
+      check("date - many years != overflow", d2 == date(1400, 6, 1));
+    }
+    catch (...) {
+      check("date - many years != overflow", false);
+    }
+
   }
   
   /*** weeks ***/
