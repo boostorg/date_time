@@ -89,7 +89,7 @@ main()
         check("Expected exception not thrown: from ISO string (bad_day_of_month)", false);
         std::cout << date_from_iso_string(s) << std::endl;
       }
-      catch(bad_day_of_month& e) {
+      catch(bad_day_of_month&) {
         check("Caught expected exception: bad_day_of_month ", true);
       }
       catch(...) {
