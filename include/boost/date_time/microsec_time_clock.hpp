@@ -135,15 +135,15 @@ namespace date_time {
      */
     static boost::uint64_t file_time_to_microseconds(boost::detail::winapi::FILETIME_ const& ft)
     {
-        // shift is difference between 1970-Jan-01 & 1601-Jan-01
-        // in 100-nanosecond units
-        const boost::uint64_t shift = 116444736000000000ULL; // (27111902 << 32) + 3577643008
+      // shift is difference between 1970-Jan-01 & 1601-Jan-01
+      // in 100-nanosecond units
+      const boost::uint64_t shift = 116444736000000000ULL; // (27111902 << 32) + 3577643008
 
-        // 100-nanos since 1601-Jan-01
-        boost::uint64_t ft_as_integer = (static_cast< boost::uint64_t >(ft.dwHighDateTime) << 32) | static_cast< boost::uint64_t >(ft.dwLowDateTime);
+      // 100-nanos since 1601-Jan-01
+      boost::uint64_t ft_as_integer = (static_cast< boost::uint64_t >(ft.dwHighDateTime) << 32) | static_cast< boost::uint64_t >(ft.dwLowDateTime);
 
-        ft_as_integer -= shift; // filetime is now 100-nanos since 1970-Jan-01
-        return (ft_as_integer / 10U); // truncate to microseconds
+      ft_as_integer -= shift; // filetime is now 100-nanos since 1970-Jan-01
+      return (ft_as_integer / 10U); // truncate to microseconds
     }
 #endif
   };
