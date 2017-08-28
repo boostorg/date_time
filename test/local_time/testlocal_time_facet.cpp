@@ -49,7 +49,7 @@ int main(){
     // first try to find the data file from the test dir
     time_zones.load_from_file("../data/date_time_zonespec.csv");
   }
-  catch(const data_not_accessible& e) {
+  catch(const data_not_accessible&) {
     // couldn't find the data file so assume we are being run from 
     // boost_root/status and try again
     try {
