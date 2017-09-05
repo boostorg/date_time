@@ -309,7 +309,7 @@ main()
     check("Exception not thrown (special_value to_tm)", false);
     //following code does nothing useful but stops compiler from complaining about unused pt_tm
     std::cout << pt_tm.tm_sec << std::endl;
-  }catch(std::out_of_range& e){
+  }catch(std::out_of_range&){
     check("Caught expected exception (special_value to_tm)", true);
   }catch(...){
     check("Caught un-expected exception (special_value to_tm)", false);
@@ -323,7 +323,7 @@ main()
     check("Exception not thrown (special_value to_tm)", false);
     //following code does nothing useful but stops compiler from complaining about unused pt_tm
     std::cout << pt_tm.tm_sec << std::endl;
-  }catch(std::out_of_range& e){
+  }catch(std::out_of_range&){
     check("Caught expected exception (special_value to_tm)", true);
   }catch(...){
     check("Caught un-expected exception (special_value to_tm)", false);
