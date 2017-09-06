@@ -41,7 +41,8 @@ namespace CV {
   template<class value_policies>
   class BOOST_SYMBOL_VISIBLE constrained_value {
   public:
-    typedef typename value_policies::value_type value_type;
+    typedef value_policies value_policy;
+    typedef typename value_policy::value_type value_type;
     //    typedef except_type exception_type;
     constrained_value(value_type value) : value_((min)())
     {
@@ -53,9 +54,9 @@ namespace CV {
       return *this;
     }
     //! Return the max allowed value (traits method)
-    static value_type max BOOST_PREVENT_MACRO_SUBSTITUTION () {return (value_policies::max)();}
+    static value_type max BOOST_PREVENT_MACRO_SUBSTITUTION () {return (value_policy::max)();}
     //! Return the min allowed value (traits method)
-    static value_type min BOOST_PREVENT_MACRO_SUBSTITUTION () {return (value_policies::min)();}
+    static value_type min BOOST_PREVENT_MACRO_SUBSTITUTION () {return (value_policy::min)();}
     //! Coerce into the representation type
     operator value_type() const {return value_;}
   protected:
@@ -66,11 +67,11 @@ namespace CV {
       //adding 1 below gets rid of a compiler warning which occurs when the 
       //min_value is 0 and the type is unsigned....
       if (value+1 < (min)()+1) {
-        value_policies::on_error(value_, value, min_violation);
+        value_policy::on_error(value_, value, min_violation);
         return;
       }
       if (value > (max)()) {
-        value_policies::on_error(value_, value, max_violation);
+        value_policy::on_error(value_, value, max_violation);
         return;
       }
       value_ = value;
