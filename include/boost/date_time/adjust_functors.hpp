@@ -71,11 +71,9 @@ namespace date_time {
         }
       }
       typedef date_time::wrapping_int2<short,1,12> wrap_int2;
-      typedef typename wrap_int2::int_type int_type;
       wrap_int2 wi(ymd.month);
       //calc the year wrap around, add() returns 0 or 1 if wrapped
-      int_type year = static_cast<int_type>(wi.add(f_));
-      year = static_cast<int_type>(year + ymd.year); //calculate resulting year
+      const typename ymd_type::year_type year = ymd.year + wi.add(f_);
 //       std::cout << "trace wi: " << wi.as_int() << std::endl;
 //       std::cout << "trace year: " << year << std::endl;
       //find the last day for the new month
@@ -102,11 +100,9 @@ namespace date_time {
         }
       }
       typedef date_time::wrapping_int2<short,1,12> wrap_int2;
-      typedef typename wrap_int2::int_type int_type;
       wrap_int2 wi(ymd.month);
       //calc the year wrap around, add() returns 0 or 1 if wrapped
-      int_type year = static_cast<int_type>(wi.subtract(f_));
-      year = static_cast<int_type>(year + ymd.year); //calculate resulting year
+      const typename ymd_type::year_type year = ymd.year + wi.subtract(f_);
       //find the last day for the new month
       day_type resultingEndOfMonthDay(cal_type::end_of_month_day(year, wi.as_int()));
       //original was the end of month -- force to last day of month
