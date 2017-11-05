@@ -39,8 +39,8 @@ namespace gregorian {
   */
   class BOOST_SYMBOL_VISIBLE greg_year : public greg_year_rep {
   public:
-    greg_year(unsigned short year) : greg_year_rep(year) {}
-    operator unsigned short()  const {return value_;}
+    greg_year(value_type year) : greg_year_rep(year) {}
+    operator value_type()  const {return value_;}
   };
 
 
