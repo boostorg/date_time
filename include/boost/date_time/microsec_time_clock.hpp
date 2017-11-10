@@ -21,7 +21,7 @@
 #include <boost/date_time/c_time.hpp>
 #include <boost/date_time/time_clock.hpp>
 #if defined(BOOST_HAS_FTIME)
-#include <boost/detail/winapi/time.hpp>
+#include <boost/winapi/time.hpp>
 #endif
 
 #ifdef BOOST_DATE_TIME_HAS_HIGH_PRECISION_CLOCK
@@ -87,13 +87,13 @@ namespace date_time {
       std::time_t t = tv.tv_sec;
       boost::uint32_t sub_sec = tv.tv_usec;
 #elif defined(BOOST_HAS_FTIME)
-      boost::detail::winapi::FILETIME_ ft;
-      boost::detail::winapi::GetSystemTimeAsFileTime(&ft);
+      boost::winapi::FILETIME_ ft;
+      boost::winapi::GetSystemTimeAsFileTime(&ft);
 #if BOOST_WORKAROUND(__MWERKS__, BOOST_TESTED_AT(0x3205))
       // Some runtime library implementations expect local times as the norm for ctime functions.
       {
-        boost::detail::winapi::FILETIME_ local_ft;
-        boost::detail::winapi::FileTimeToLocalFileTime(&ft, &local_ft);
+        boost::winapi::FILETIME_ local_ft;
+        boost::winapi::FileTimeToLocalFileTime(&ft, &local_ft);
         ft = local_ft;
       }
 #endif
@@ -133,7 +133,7 @@ namespace date_time {
      *
      * \note Only dates after 1970-Jan-01 are supported. Dates before will be wrapped.
      */
-    static boost::uint64_t file_time_to_microseconds(boost::detail::winapi::FILETIME_ const& ft)
+    static boost::uint64_t file_time_to_microseconds(boost::winapi::FILETIME_ const& ft)
     {
       // shift is difference between 1970-Jan-01 & 1601-Jan-01
       // in 100-nanosecond units
