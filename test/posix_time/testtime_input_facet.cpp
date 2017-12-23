@@ -43,7 +43,7 @@ bool failure_test(temporal_type component,
 
 // for tests that are expected to fail quietly
 template<class temporal_type>
-bool failure_test(temporal_type component,
+bool failure_test(temporal_type& component,
                   const std::string& input,
                   boost::posix_time::time_input_facet* facet)
 {
@@ -411,8 +411,17 @@ do_all_tests()
     boost::date_time::date_generator_parser<date, char> dgp; // default constructor
     time_input_facet tif("%Y-%m-%d %H:%M:%s", fdp, svp, pp, dgp);
   }
-#endif // USE_DATE_TIME_PRE_1_33_FACET_IO
 
+  // trac 13194 (https://svn.boost.org/trac10/ticket/13194)
+  {
+      const std::string value = "December 07:27:10.435945 5 2017";
+      boost::posix_time::time_input_facet* facet = new boost::posix_time::time_input_facet("%B %H:%M:%s %e %Y");
+      boost::posix_time::ptime pt;
+      check("trac 13194 %e on \"5\" failbit set", !failure_test(pt, value, facet)); // proves failbit was not set
+      check_equal("trac 13194 %e on \" 5\" valid value", "2017-12-05T07:27:10.435945000", to_iso_extended_string(pt));
+  }
+
+#endif // USE_DATE_TIME_PRE_1_33_FACET_IO
 }
 
 

@@ -1088,9 +1088,12 @@ namespace date_time {
                     break;
                   }
                 case 'd':
+                case 'e':
                   {
                     try {
-                      t_day = this->m_parser.parse_day_of_month(sitr, stream_end);
+                      t_day = (*itr == 'd') ?
+                          this->m_parser.parse_day_of_month(sitr, stream_end) :
+                          this->m_parser.parse_var_day_of_month(sitr, stream_end);
                     }
                     catch(std::out_of_range&) { // base class for exception bad_day_of_month
                       match_results mr;
