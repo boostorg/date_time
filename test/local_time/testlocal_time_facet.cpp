@@ -34,7 +34,7 @@ teststreaming(std::string const& testname,
 #endif
 }
 
-int main(int argc, char const* argv[]){
+int main(int /* argc */, char const* argv[]){
   /* use the tz_database for the time zones. 
    * Chicago, Denver, Los_Angeles, New_Tork, and Phoenix 
    * have all had full names added */

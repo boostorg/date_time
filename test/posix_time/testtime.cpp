@@ -193,11 +193,11 @@ main()
   std::cout << to_simple_string(td2) << std::endl;
   check("add 2001-Dec-01 0:0:0 + 01:02:03", t9 == t10);
   {
-    ptime t9(date(2001,Dec,1), time_duration(12,0,0)); //Dec 1 at Noon
+    ptime t9x(date(2001,Dec,1), time_duration(12,0,0)); //Dec 1 at Noon
     time_duration td3(-4,0,0);
     check("add 2001-Dec-01 12:00:00 + (-04:00:00)", 
-    t9+td3 == ptime(date(2001,Dec,1), time_duration(8,0,0)) );
-    std::cout << to_simple_string(t9-td3) << std::endl;
+    t9x+td3 == ptime(date(2001,Dec,1), time_duration(8,0,0)) );
+    std::cout << to_simple_string(t9x-td3) << std::endl;
   }
   time_duration td3(24,0,0); // a day
   check("add 2001-Dec-01 0:0:0 + 24:00:00", t8+td3 == ptime(date(2001,Dec,2)));

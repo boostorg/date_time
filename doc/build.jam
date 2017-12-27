@@ -4,8 +4,6 @@
 # (See accompanying file LICENSE_1_0.txt or copy at
 # http://www.boost.org/LICENSE_1_0.txt)
 
-project libs/date_time/doc ;
-
 ###############################################################################
 alias boostdoc
     : ../xmldoc/date_time.xml
