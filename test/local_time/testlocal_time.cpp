@@ -181,8 +181,8 @@ main()
     try{
       local_date_time blt(d, h, ny_tz, true);
       check("Did not catch expected exception (dst_not_valid)", false);
-    }catch(dst_not_valid& d){
-      check(std::string("Caught expected exception (dst_not_valid) ") + d.what(), true);
+    }catch(dst_not_valid& e){
+      check(std::string("Caught expected exception (dst_not_valid) ") + e.what(), true);
     }catch(std::exception& e){
       check(std::string("Caught unexpected exception ") + e.what(), false);
     }
