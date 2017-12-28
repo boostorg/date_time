@@ -30,7 +30,7 @@ matrix:
 
     - os: linux
       compiler: clang++
-      env: TOOLSET=clang CXXSTD=03,11,14,1z
+      env: TOOLSET=clang CXXSTD=03,11
       addons:
         apt:
           packages:
@@ -38,9 +38,10 @@ matrix:
           sources:
             - ubuntu-toolchain-r-test
 
-    - os: osx
-      compiler: clang++
-      env: TOOLSET=clang CXXSTD=03,11,14,1z
+# the backlog of macos builds is too long to justify waiting a day for this
+#   - os: osx
+#     compiler: clang++
+#     env: TOOLSET=clang CXXSTD=03,11
 
 install:
   - BOOST_BRANCH=develop && [ "$TRAVIS_BRANCH" == "master" ] && BOOST_BRANCH=master || true

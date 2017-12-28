@@ -176,6 +176,18 @@ int main() {
                     std::locale(std::locale::classic(), datefacet));
     }
 
+    // trac-11142: actually test delimiter_strings(...)
+    {
+        date_facet* datefacet = new date_facet();
+        datefacet->set_iso_extended_format();
+        period_formatter pf(period_formatter::AS_OPEN_RANGE, " / ", "[ ", " )", " ]");
+        pf.delimiter_strings(" to ", "from ", " inclusive", " exclusive");
+        datefacet->period_formatter(pf);
+        teststreaming("custom date facet date period - delimiter_strings", dp,
+            std::string("from 2004-10-13 to 2004-10-20 inclusive"),
+            std::locale(std::locale::classic(), datefacet));
+    }
+
     {
       date_facet* datefacet = new date_facet("%A %b %d, %Y");
       datefacet->short_month_names(short_month_names);
