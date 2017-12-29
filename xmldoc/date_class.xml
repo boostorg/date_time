@@ -234,7 +234,7 @@ date::ymd_type ymd = d.year_month_day();
 	</row>
 	<row>
 	  <entry><screen>date d(2002,Jan,10);
-d.day(); // --> Thursday</screen></entry>
+d.day_of_week(); // --> Thursday</screen></entry>
         </row>
 
 	<row>
