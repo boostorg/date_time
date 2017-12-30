@@ -198,6 +198,17 @@ local DATE_TIME_PROPERTIES = <define>BOOST_DATE_TIME_POSIX_TIME_STD_CONFIG <defi
    ../../serialization/build//boost_serialization
    : : : $(DATE_TIME_PROPERTIES)  <define>DATE_TIME_XML_SERIALIZE
    : testtime_serialize_xml ]
+ [ run posix_time/testtime_serialize_versioning.cpp
+   ../build//boost_date_time/<link>static
+   ../../serialization/build//boost_serialization
+   : : : $(DATE_TIME_PROPERTIES)  <define>BOOST_DATE_TIME_POSIX_TIME_DURATION_VERSION=0
+   : testtime_serialize_versioning_prev ]
+ [ run posix_time/testtime_serialize_versioning.cpp
+   ../build//boost_date_time/<link>static
+   ../../serialization/build//boost_serialization
+   : : testtime_serialize_versioning_prev 
+   : $(DATE_TIME_PROPERTIES)
+   : testtime_serialize_versioning_curr ]
 
  # text archive tests
  [ run gregorian/testgreg_serialize.cpp
