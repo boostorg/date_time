@@ -136,9 +136,7 @@ public:
   }
   bool operator==(const int& rhs) const
   {
-    // quiets compiler warnings
-    bool is_signed = std::numeric_limits<int_type>::is_signed;
-    if(!is_signed)
+    if(!std::numeric_limits<int_type>::is_signed)
     {
       if(is_neg_inf(value_) && rhs == 0)
       {
@@ -153,9 +151,7 @@ public:
   }
   bool operator!=(const int& rhs) const
   {
-    // quiets compiler warnings
-    bool is_signed = std::numeric_limits<int_type>::is_signed;
-    if(!is_signed)
+    if(!std::numeric_limits<int_type>::is_signed)
     {
       if(is_neg_inf(value_) && rhs == 0)
       {
@@ -171,8 +167,7 @@ public:
   bool operator<(const int& rhs) const
   {
     // quiets compiler warnings
-    bool is_signed = std::numeric_limits<int_type>::is_signed;
-    if(!is_signed)
+    if(!std::numeric_limits<int_type>::is_signed)
     {
       if(is_neg_inf(value_) && rhs == 0)
       {
