@@ -1,4 +1,4 @@
-
+import testing ;
 
 local DATE_TIME_DYNAMIC_PROPERTIES = <define>BOOST_ALL_DYN_LINK <runtime-link>shared <define>BOOST_DATE_TIME_POSIX_TIME_STD_CONFIG <define>BOOST_ALL_NO_LIB ;
 local DATE_TIME_PROPERTIES = <define>BOOST_DATE_TIME_POSIX_TIME_STD_CONFIG <define>BOOST_DATE_TIME_STATIC_LINK
@@ -74,6 +74,10 @@ test-suite date_time_gregorian_dll
    [ run posix_time/testduration.cpp
      ../build//boost_date_time/<link>static
     : : :  $(DATE_TIME_PROPERTIES) ]
+   [ compile-fail posix_time/compile_fail/hours_special_value.cpp ]
+   [ compile-fail posix_time/compile_fail/minutes_special_value.cpp ]
+   [ compile-fail posix_time/compile_fail/seconds_special_value.cpp ]
+   [ compile-fail posix_time/compile_fail/millisec_special_value.cpp ]
    [ run posix_time/testiterator.cpp
      ../build//boost_date_time/<link>static
     : : :  $(DATE_TIME_PROPERTIES) ]
