@@ -421,6 +421,15 @@ do_all_tests()
       check_equal("trac 13194 %e on \" 5\" valid value", "2017-12-05T07:27:10.435945000", to_iso_extended_string(pt));
   }
 
+  // trac 12910
+  {
+      const std::string value = "263-08:09:10";
+      boost::posix_time::time_input_facet* facet = new boost::posix_time::time_input_facet("%j-%H:%M:%S");
+      boost::posix_time::ptime pt;
+      check("trac 12910 %j without %Y no failbit", !failure_test(pt, value, facet)); // proves failbit was not set
+      check_equal("trac 12910 %j without %Y value", "1400-09-20T08:09:10", to_iso_extended_string(pt));
+  }
+
 #endif // USE_DATE_TIME_PRE_1_33_FACET_IO
 }
 

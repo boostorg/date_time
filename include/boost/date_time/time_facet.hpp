@@ -1230,7 +1230,7 @@ namespace date_time {
 
         date_type d(not_a_date_time);
         if (day_of_year > 0) {
-          d = date_type(static_cast<unsigned short>(t_year-1),12,31) + date_duration_type(day_of_year);
+          d = date_type(static_cast<unsigned short>(t_year),1,1) + date_duration_type(day_of_year-1);
         }
         else {
           d = date_type(t_year, t_month, t_day);
