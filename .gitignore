@@ -1,3 +1,2 @@
-/test/time_duration_serialization.v0
-/test/time_duration_serialization.v1
-/test/test_facet_file.out
+**/time_duration_serialization.*
+**/test_facet_file.out
