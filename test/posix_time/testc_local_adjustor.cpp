@@ -81,6 +81,11 @@ main()
       btd3e = true;
       check(re.what(), false);
       }
+  catch (std::bad_cast&)
+      {
+      btd3e = true;
+      check("32-bit time_t overflow detected", sizeof(std::time_t) < 8);
+      }
 
   // The following tests are unaware of the local time zone, but they
   // should help spot some errors. Manual inspection could still be
