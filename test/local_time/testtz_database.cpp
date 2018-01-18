@@ -17,7 +17,7 @@
 
 bool run_bad_field_count_test(char const* fn);
 
-int main(int argc, char const* argv[]){
+int main(int /* argc */, char const* argv[]){
   using namespace boost::gregorian;
   using namespace boost::posix_time;
   using namespace boost::local_time;

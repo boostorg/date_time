@@ -866,6 +866,7 @@ namespace date_time {
                     break;
                   // %s is the same as %S%f so we drop through into %f
                 }
+                /* Falls through. */
               case 'f':
                 {
                   // check for decimal, check special_values if missing
@@ -1139,6 +1140,7 @@ namespace date_time {
                     // %s is the same as %S%f so we drop through into %f if we are
                     // not at the end of the stream
                   }
+                  /* Falls through. */
                 case 'f':
                   {
                     // check for decimal, check SV if missing

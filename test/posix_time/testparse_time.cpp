@@ -104,10 +104,12 @@ main()
 
 #ifdef BOOST_DATE_TIME_HAS_NANOSECONDS
 
-  std::string ts2("2002-12-31 00:00:00.999999999");
-  ptime t2 = time_from_string(ts2);
-  check("parse time: " + ts2, 
-        t2 == ptime(date(2002,12,31),time_duration(0,0,0)+nanosec(999999999)));
+  {
+    std::string ts2("2002-12-31 00:00:00.999999999");
+    ptime t2 = time_from_string(ts2);
+    check("parse time: " + ts2, 
+          t2 == ptime(date(2002,12,31),time_duration(0,0,0)+nanosec(999999999)));
+  }
   {
     std::string ts2("2002-12-31 00:00:00.");
     ptime t2 = time_from_string(ts2);
@@ -128,13 +130,15 @@ main()
 //   std::cout << tod_1  << "|" << std::endl;
 
 
-  ptime t1 = time_from_string(ts1);
-  check("parse time: " + ts1, 
-        t1 == ptime(date(2002,1,20),time_duration(23,59,59)));
   {
-    std::string ts1("2002-01-20 23:59:59.");
     ptime t1 = time_from_string(ts1);
-    check("parse time (decimal but no digits): " + ts1, 
+    check("parse time: " + ts1, 
+          t1 == ptime(date(2002,1,20),time_duration(23,59,59)));
+  }
+  {
+    std::string ts1x("2002-01-20 23:59:59.");
+    ptime t1 = time_from_string(ts1x);
+    check("parse time (decimal but no digits): " + ts1x, 
           t1 == ptime(date(2002,1,20),time_duration(23,59,59)));
   }
 
@@ -148,21 +152,27 @@ main()
   check("parse negative time duration: " + s6, 
         td6 == time_duration(-23,58,59));
 
-  std::string ts3("20020120T235859");
-  ptime t20 = from_iso_string(ts3);
-  check("parse iso time: " + ts3, 
-        t20 == ptime(date(2002,1,20),time_duration(23,58,59)));
-  
+  {
+    std::string ts3("20020120T235859");
+    ptime t20 = from_iso_string(ts3);
+    check("parse iso time: " + ts3, 
+          t20 == ptime(date(2002,1,20),time_duration(23,58,59)));
+  }  
 
-  std::string ts4("19001231T000000");
-  ptime t21 = from_iso_string(ts4);
-  check("parse iso time: " + ts4, 
-        t21 == ptime(date(1900,12,31),time_duration(0,0,0)));
+  {
+    std::string ts4("19001231T000000");
+    ptime t21 = from_iso_string(ts4);
+    check("parse iso time: " + ts4, 
+          t21 == ptime(date(1900,12,31),time_duration(0,0,0)));
+  }
 
-  std::string ts5("19001231T23");
-  ptime t22 = from_iso_string(ts5);
-  check("parse iso time: " + ts5, 
-        t22 == ptime(date(1900,12,31),time_duration(23,0,0)));
+  {
+    std::string ts5("19001231T23");
+    ptime t22 = from_iso_string(ts5);
+    check("parse iso time: " + ts5, 
+          t22 == ptime(date(1900,12,31),time_duration(23,0,0)));
+  }
+
   {
 #if defined(BOOST_DATE_TIME_POSIX_TIME_STD_CONFIG)
     std::string ts3("20020120T235859.123456789");

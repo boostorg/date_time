@@ -4,8 +4,6 @@
 # file LICENSE_1_0.txt or http://www.boost.org/LICENSE_1_0.txt)
 #
 
-project libs/date_time/xmldoc ;
-
 import set ;
 
 using boostbook ;

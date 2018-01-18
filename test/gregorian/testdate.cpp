@@ -21,9 +21,9 @@ main()
   date def;
   check("Default constructor", def == date(not_a_date_time));
 #endif
-  date d(2000,1,1);
+  
   date d1(1900,1,1);
-  date d2 = d;
+  date d2 = date(2000,1,1);
   date d3(d2);
   check("Copy constructor", d3 == d2);
   date d4(2000,12,31);
@@ -276,7 +276,7 @@ main()
   }
 
   //converts to date and back -- should get same result
-  check_equal("tm conversion functions 2000-1-1", date_from_tm(to_tm(d)), d);
+  check_equal("tm conversion functions 2000-1-1", date_from_tm(to_tm(d2)), d2);
   check_equal("tm conversion functions 1900-1-1", date_from_tm(to_tm(d1)), d1);
   check_equal("tm conversion functions min date 1400-1-1 ", date_from_tm(to_tm(d14)), d14);
   check_equal("tm conversion functions max date 9999-12-31", date_from_tm(to_tm(d13)), d13);
