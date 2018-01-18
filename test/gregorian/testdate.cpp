@@ -5,10 +5,23 @@
  * Author: Jeff Garland, Bart Garst
  */
 
-#include <iostream>
 #include <boost/cstdint.hpp>
 #include "boost/date_time/gregorian/gregorian.hpp"
 #include "../testfrmwk.hpp"
+#include <iostream>
+#include <sstream>
+
+void test_yearlimit(int yr, bool allowed)
+{
+    std::stringstream sdesc;
+    sdesc << "should" << (allowed ? "" : " not") << " be able to make a date in year " << yr;
+
+    try {
+        boost::gregorian::date chkyr(yr, 1, 1);
+        check(sdesc.str(), allowed);
+    }
+    catch (std::out_of_range&) { check(sdesc.str(), !allowed); }
+}
 
 int
 main()
@@ -292,7 +305,15 @@ main()
     check("Caught un-expected exception (special_value to_tm)", false);
   }
 
-  return printTestStats();
+  // trac-13159
+  test_yearlimit(    0, false);
+  test_yearlimit( 1399, false);
+  test_yearlimit( 1400,  true);
+  test_yearlimit( 1401,  true);
+  test_yearlimit( 9999,  true);
+  test_yearlimit(10000, false);
+  test_yearlimit(10001, false);
 
+  return printTestStats();
 }
 
