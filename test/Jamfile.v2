@@ -1,3 +1,4 @@
+import os ;
 import testing ;
 
 local DATE_TIME_DYNAMIC_PROPERTIES = <define>BOOST_ALL_DYN_LINK <runtime-link>shared <define>BOOST_DATE_TIME_POSIX_TIME_STD_CONFIG <define>BOOST_ALL_NO_LIB ;
@@ -177,6 +178,8 @@ local DATE_TIME_PROPERTIES = <define>BOOST_DATE_TIME_POSIX_TIME_STD_CONFIG
     : : : $(DATE_TIME_PROPERTIES) ]
  ;
 
+if ! [ os.environ UBSAN_OPTIONS ]
+{
  local DATE_TIME_PROPERTIES = <define>BOOST_ALL_NO_LIB  <define>USE_DATE_TIME_PRE_1_33_FACET_IO
    # FIXME
    # std::locale-support toolset::require-boost-spirit-support 
@@ -237,7 +240,7 @@ local DATE_TIME_PROPERTIES = <define>BOOST_DATE_TIME_POSIX_TIME_STD_CONFIG
    : : : $(DATE_TIME_PROPERTIES)
    : testtime_serialize ]
  ;
-
+}
 
 # Copyright (c) 2000-2005
 # CrystalClear Software, Inc.
