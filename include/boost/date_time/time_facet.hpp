@@ -761,6 +761,7 @@ namespace date_time {
       void time_duration_format(const char_type* const format) {
         m_time_duration_format = format;
       }
+
       virtual void set_iso_format()
       {
         this->m_format = iso_time_format_specifier;
@@ -903,13 +904,30 @@ namespace date_time {
               }// switch
             }
             else { // itr == '%', second consecutive
+#if !defined(BOOST_DATE_TIME_NO_STRICT_PARSE)
+              if (*sitr != '%') {
+                std::stringstream ss;
+                ss << "parse failed: input '" << *sitr << "' did not match expected '%'";
+                boost::throw_exception(std::ios_base::failure(ss.str()));
+              }
+#endif
               ++sitr;
             }
 
             ++itr; //advance past format specifier
           }
           else {  //skip past chars in format and in buffer
-            ++itr;
+#if !defined(BOOST_DATE_TIME_NO_STRICT_PARSE)
+            if (0x20 != *itr && *sitr != *itr) {
+              // The facet's format string has a filler character that does not
+              // match the input character.  While a space character means skip blind,
+              // a specific character like a colon or vertical bar must match.
+              std::stringstream ss;
+              ss << "parse failed: input '" << *sitr << "' did not match expected '" << *itr << "'";
+              boost::throw_exception(std::ios_base::failure(ss.str()));
+            }
+#endif
+
             // set use_current_char when sitr is already
             // pointing at the next character to process
             if (use_current_char) {
@@ -918,6 +936,8 @@ namespace date_time {
             else {
               ++sitr;
             }
+
+            ++itr;
           }
         }
 
@@ -1197,6 +1217,13 @@ namespace date_time {
                     else {
                       // nothing was parsed so we don't want to advance sitr
                       use_current_char = true;
+
+                      // This could be a %Z or a %ZP sequence...
+                      use_current_format_char = true;
+                      ++itr;              // skip past the Z
+                      if (*itr == 'P') {
+                        ++itr;            // skip past the P
+                      }
                     }
 
                     break;
@@ -1206,6 +1233,13 @@ namespace date_time {
               }// switch
             }
             else { // itr == '%', second consecutive
+#if !defined(BOOST_DATE_TIME_NO_STRICT_PARSE)
+              if (*sitr != '%') {
+                std::stringstream ss;
+                ss << "parse failed: input '" << *sitr << "' did not match expected '%'";
+                boost::throw_exception(std::ios_base::failure(ss.str()));
+              }
+#endif
               ++sitr;
             }
 
@@ -1218,15 +1252,27 @@ namespace date_time {
 
           }
           else {  //skip past chars in format and in buffer
-            ++itr;
+
+#if !defined(BOOST_DATE_TIME_NO_STRICT_PARSE)
+            if (0x20 != *itr && *sitr != *itr) {
+              // The facet's format string has a filler character that does not
+              // match the input character.  While a space character means skip blind,
+              // a specific character like a colon or vertical bar must match.
+              std::stringstream ss;
+              ss << "parse failed: input '" << *sitr << "' did not match expected '" << *itr << "'";
+              boost::throw_exception(std::ios_base::failure(ss.str()));
+            }
+#endif
+
             // set use_current_char when sitr is already
             // pointing at the next character to process
             if (use_current_char) {
               use_current_char = false;
-            }
-            else {
+            } else {
               ++sitr;
             }
+
+            ++itr;
           }
         }
 

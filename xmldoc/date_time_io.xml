@@ -13,19 +13,25 @@
   <using-namespace name="boost"/>
   <using-namespace name="boost::date_time"/>
   <bridgehead renderas="sect2">Date Time IO System</bridgehead>
-  <para>
-    <link linkend="streaming_exceptions">Exception Handling on Streams</link>
-  </para>
   
   <para>As of version 1.33, the date_time library utilizes a new IO streaming system. This new system gives the user great control over how dates and times can be represented. The customization options can be broken down into two groups: format flags and string elements. Format flags provide flexibility in the order of the date elements as well as the type. Customizing the string elements allows the replacement of built in strings from month names, weekday names, and other strings used in the IO.</para>
 
-  <para>The output system is based on a date_facet (derived from std::facet), while the input system is based on a date_input_facet (also derived from std::facet). The time and local_time facets are derived from these base types. The output system utilizes three formatter objects, whereas the input system uses four parser objects. These formatter and parser objetcs are also customizable.</para>
+  <para>The output system is based on a date_facet (derived from std::facet), while the input system is based on a date_input_facet (also derived from std::facet). The time and local_time facets are derived from these base types. The output system utilizes three formatter objects, whereas the input system uses four parser objects. These formatter and parser objects are also customizable.</para>
 
   <para>It is important to note, that while all the examples shown here use narrow streams, there are wide stream facets available as well (see <link linkend="io_objects_table">IO Objects</link> for a complete list).</para>
 
   <para>It should be further noted that not all compilers are capable of using this IO system. For those compilers the IO system used in previous <code>date_time</code> versions is still available. The "legacy IO" is automatically selected for these compilers, however, the legacy IO system can be manually selected by defining <code>USE_DATE_TIME_PRE_1_33_FACET_IO</code>. See the <link linkend="date_time.buildinfo">Build-Compiler Information</link> for more information.</para>
 
-  <anchor id="streaming_exceptions" />
+  <bridgehead renderas="sect5">Strict Parsing</bridgehead>
+  <para>
+    Characters inside format strings that are not part of a format flag will be treated strictly, with the exception of
+    the space character.  A space character will match anything in the input at that location, but other 
+    characters must match the input at that location.
+    
+    This behavior was not present in earlier releases, and can be disabled by defining <tt>BOOST_DATE_TIME_NO_STRICT_PARSE</tt>.
+    For example, permissive parsing of input <tt>11|35|44</tt> with format string <tt>%H:%M:%S</tt> will succeeded.
+  </para>
+
   <bridgehead renderas="sect5">Exception Handling on Streams</bridgehead>
   <para>When an error occurs during the input streaming process, the <code>std::ios_base::failbit</code> will (always) be set on the stream. It is also possible to have exceptions thrown when an error occurs. To "turn on" these exceptions, call the stream's <code>exceptions</code> function with a parameter of <code>std::ios_base::failbit</code>.</para>
   <screen>// "Turning on" exceptions
