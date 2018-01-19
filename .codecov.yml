@@ -1,0 +1,17 @@
+codecov:
+  disable_default_path_fixes: true
+
+fixes:
+  - home/travis/build/boost/::include/boost/
+  - home/travis/build/*/*/::
+      
+coverage:
+  range: "85...100"
+
+parsers:
+  gcov:
+    branch_detection:
+      conditional: yes
+      loop: yes
+      method: no
+      macro: no
