@@ -75,6 +75,39 @@ do_all_tests()
   check("No tests run for this compiler. Incompatible IO", true);
 #else
 
+#if !defined(BOOST_DATE_TIME_NO_STRICT_PARSE)
+  // issue-53 (https://github.com/boostorg/date_time/issues/53)
+  {
+      // what if the separator characters between fields do not match the format string?
+      const std::string value = "December 07:27|10.435945  5 2017";  
+      boost::posix_time::time_input_facet* facet = new boost::posix_time::time_input_facet("%B %H:%M:%s %e %Y");
+      boost::posix_time::ptime pt;
+      check("time_input_facet(ptime) format string is properly honored (colons)",
+          failure_test(pt, value, facet));  // proves failbit was set
+  }
+  {   // check ptime double-percent handling
+      const std::string value = "December 07%27:10.435945  5 2017";
+      boost::posix_time::time_input_facet* facet = new boost::posix_time::time_input_facet("%B %H%%%%M%%%s %e %Y");
+      boost::posix_time::ptime pt;
+      check("time_input_facet(ptime) format string is properly honored (double pct)",
+          failure_test(pt, value, facet));  // proves failbit was set
+  }
+  {   // check time duration
+      const std::string value = "01:04|59";
+      boost::posix_time::time_input_facet* facet = new boost::posix_time::time_input_facet("%H:%M:%S");
+      boost::posix_time::time_duration td;
+      check("time_input_facet(duration) format string is properly honored (colons)",
+          failure_test(td, value, facet));  // proves failbit was set
+  }
+  {   // check time duration double-percent handling
+      const std::string value = "01%04:59";
+      boost::posix_time::time_input_facet* facet = new boost::posix_time::time_input_facet("%H%%%M%%%S");
+      boost::posix_time::time_duration td;
+      check("time_input_facet(duration) format string is properly honored (double pct)",
+          failure_test(td, value, facet));  // proves failbit was set
+  }
+#endif
+
   // set up initial objects
   time_duration td = hours(0);
   ptime pt(not_a_date_time);
@@ -322,7 +355,7 @@ do_all_tests()
   check_equal("Special value: time_duration %f flag", td, time_duration(pos_infin));
 
   // time_period tests - the time_period_parser is thoroughly tested in gregorian tests
-  // default period format is closed range so last ptime is included in peiod
+  // default period format is closed range so last ptime is included in period
   iss.str("[2005-Jan-01 00:00:00/2005-Dec-31 23:59:59]");
   facet->format(time_input_facet::default_time_input_format); // reset format
   iss >> tp;
