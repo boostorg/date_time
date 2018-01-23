@@ -409,18 +409,10 @@ private:
   //! Assumes at least 'this' or 'rhs' is a special value
   int_adapter mult_div_specials(const int_adapter& rhs)const
   {
-    int min_value; 
-    // quiets compiler warnings
-    bool is_signed = std::numeric_limits<int_type>::is_signed;
-    if(is_signed) {
-      min_value = 0;
-    }
-    else {
-      min_value = 1;// there is no zero with unsigned
-    }
     if(this->is_nan() || rhs.is_nan()) {
       return int_adapter<int_type>(not_a_number());
     }
+    BOOST_CONSTEXPR_OR_CONST int min_value = std::numeric_limits<int_type>::is_signed ? 0 : 1; 
     if((*this > 0 && rhs > 0) || (*this < min_value && rhs < min_value)) {
         return int_adapter<int_type>(pos_infinity());
     }
@@ -438,18 +430,10 @@ private:
   //! Assumes 'this' is a special value
   int_adapter mult_div_specials(const int& rhs) const
   {
-    int min_value; 
-    // quiets compiler warnings
-    bool is_signed = std::numeric_limits<int_type>::is_signed;
-    if(is_signed) {
-      min_value = 0;
-    }
-    else {
-      min_value = 1;// there is no zero with unsigned
-    }
     if(this->is_nan()) {
       return int_adapter<int_type>(not_a_number());
     }
+    BOOST_CONSTEXPR_OR_CONST int min_value = std::numeric_limits<int_type>::is_signed ? 0 : 1; 
     if((*this > 0 && rhs > 0) || (*this < min_value && rhs < 0)) {
         return int_adapter<int_type>(pos_infinity());
     }

@@ -1255,7 +1255,7 @@ namespace date_time {
         if((c == '-' || c == '+') && (*sitr != c)) { // was the first character consumed?
           mr.cache += c;
         }
-        this->m_sv_parser.match(sitr, stream_end, mr);
+        (void)this->m_sv_parser.match(sitr, stream_end, mr);
         if(mr.current_match == match_results::PARSE_ERROR) {
           std::string tmp = convert_string_type<char_type, char>(mr.cache);
           boost::throw_exception(std::ios_base::failure("Parse failed. No match found for '" + tmp + "'"));
