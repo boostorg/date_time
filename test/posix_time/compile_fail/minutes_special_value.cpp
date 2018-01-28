@@ -5,15 +5,15 @@
 // file LICENSE_1_0.txt or http://www.boost.org/LICENSE_1_0.txt)
 //
 
-#include "boost/date_time/posix_time/posix_time_duration.hpp"
-#include "boost/date_time/special_defs.hpp"
+#include <boost/core/ignore_unused.hpp>
+#include <boost/date_time/posix_time/posix_time_duration.hpp>
+#include <boost/date_time/special_defs.hpp>
 
 int main()
 {
     using boost::date_time::pos_infin;
     using boost::posix_time::minutes;
-    using boost::posix_time::time_duration;
-    time_duration dur1 = minutes(static_cast<boost::int64_t>(pos_infin));  // compiles: it's an integral
-    time_duration dur2 = minutes(pos_infin);                               // won't compile: not an integral
+    boost::ignore_unused(minutes(static_cast<boost::int64_t>(pos_infin))); // compiles: it's an integral
+    boost::ignore_unused(minutes(pos_infin));                              // won't compile: not an integral
     return 1;                                                              // return an error if we actually run for some reason
 }
