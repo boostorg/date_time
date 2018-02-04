@@ -18,6 +18,12 @@
 #  include <ostream>
 #endif
 
+#if defined(BOOST_MSVC)
+#pragma warning(push)
+// conditional expression is constant
+#pragma warning(disable: 4127)
+#endif
+
 namespace boost {
 namespace date_time {
 
@@ -483,6 +489,8 @@ private:
 
 } } //namespace date_time
 
-
+#if defined(BOOST_MSVC)
+#pragma warning(pop)
+#endif
 
 #endif
