@@ -121,7 +121,7 @@ jobs:
         - B2_VARIANT=variant=debug
         - TOOLSET=gcc-7
         - CXXFLAGS="cxxflags=-fno-omit-frame-pointer cxxflags=-fsanitize=undefined cxxflags=-fno-sanitize-recover=undefined"
-        - LINKFLAGS="linkflags=-fsanitize=undefined linkflags=-fno-sanitize-recover=undefined"
+        - LINKFLAGS="linkflags=-fsanitize=undefined linkflags=-fno-sanitize-recover=undefined linkflags=-fuse-ld=gold"
         - UBSAN_OPTIONS=print_stacktrace=1
       addons:
         apt:
