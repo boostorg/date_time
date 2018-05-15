@@ -99,6 +99,7 @@ jobs:
         - TOOLSET=clang 
         - B2_VARIANT=variant=debug
         - TESTFLAGS=testing.launcher=valgrind
+        - VALGRIND_OPTS=--error-exitcode=1
       addons:
         apt:
           packages:
