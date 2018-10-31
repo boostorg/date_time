@@ -21,7 +21,6 @@ Branch          | Travis | Appveyor | Coverity Scan | codecov.io | Deps | Docs |
 | Name      | Purpose                        |
 | --------- | ------------------------------ |
 | `build`   | build script for link library  |
-| `ci`      | continuous integration scripts |
 | `data`    | timezone database              |
 | `doc`     | documentation                  |
 | `example` | use case examples              |
