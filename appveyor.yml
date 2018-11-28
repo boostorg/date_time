@@ -78,8 +78,9 @@ environment:
       B2_ADDRESS_MODEL: address-model=32
       CXXSTD: 03,11
       # https://github.com/boostorg/test/issues/144
-      DEFINES: define=_POSIX_C_SOURCE=200112L
+      DEFINES: define=_POSIX_C_SOURCE=200112L define=_GLIBCXX_USE_CXX11_ABI=1
       THREADING: threadapi=pthread
+      CYGWIN_UPDATE: true
       TOOLSET: gcc
 
     - FLAVOR: cygwin (64-bit)
@@ -88,8 +89,9 @@ environment:
       B2_ADDRESS_MODEL: address-model=64
       CXXSTD: 11,17
       # https://github.com/boostorg/test/issues/144
-      DEFINES: define=_POSIX_C_SOURCE=200112L define=__USE_ISOC99
+      DEFINES: define=_POSIX_C_SOURCE=200112L define=__USE_ISOC99 define=_GLIBCXX_USE_CXX11_ABI=1
       THREADING: threadapi=pthread
+      CYGWIN_UPDATE: true
       TOOLSET: gcc
 
     - FLAVOR: mingw32
@@ -118,6 +120,7 @@ build: off
 test_script:
   - set SELF=%APPVEYOR_PROJECT_NAME:-=_%
   - PATH=%ADDPATH%%PATH%
+  - IF DEFINED CYGWIN_UPDATE (call libs\%SELF%\ci\appveyor\cygwin-update.bat)
   # The definition of TOOLCXX omits CXXSTD= if it was not defined above
   - IF NOT DEFINED CXXSTD (SET TOOLCXX=toolset=%TOOLSET%) ELSE (SET TOOLCXX=toolset=%TOOLSET% cxxstd=%CXXSTD%)
   # Echo the complete build command to the build log
