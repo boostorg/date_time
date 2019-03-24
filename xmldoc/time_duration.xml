@@ -38,7 +38,7 @@ time_duration td(1,2,3,4); //01:02:03.000004 when resolution is micro seconds</p
     As an example: 
     <programlisting>using namespace boost::posix_time;
       
-time_duration td = hours(1) + seconds(10); //01:00:01
+time_duration td = hours(1) + seconds(10); //01:00:10
 td = hours(1) + nanoseconds(5); //01:00:00.000000005</programlisting>
     Note that the existence of the higher resolution classes (eg: nanoseconds) depends on the installation of the library. See <link linkend="date_time.buildinfo">Build-Compiler Information</link> for more information. 
   </para>
