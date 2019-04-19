@@ -77,8 +77,8 @@ int main(){
     std::stringstream ss("Mar.");
     std::istreambuf_iterator<char> sitr(ss), str_end;
 
-    date_input_facet* f = new date_input_facet();
-    f->get(sitr, str_end, ss, m);
+    date_input_facet f;
+    f.get(sitr, str_end, ss, m);
     check("No extra characters consumed", m == greg_month(Mar) && *sitr == '.');
   }
  
