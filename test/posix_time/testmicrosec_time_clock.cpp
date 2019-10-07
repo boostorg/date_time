@@ -45,12 +45,11 @@ main()
 
   using namespace boost::posix_time;
 
-  //  ptime last = boost::date_time::microsec_resolution_clock<ptime>::local_time();
-  ptime last = microsec_clock::local_time();
+  std::cout << "Check local time of microsec_clock against second_clock" << std::endl;
 
+  ptime last = microsec_clock::local_time();
   int max = 30;
-  int i = 0;
-  for (i = 0; i<max; i++)
+  for (int i=0; i<max; i++)
   {
     // Some systems loop too fast so "last is less" tests fail due to
     // 'last' & 't2' being equal. These calls slow it down enough to
@@ -65,26 +64,36 @@ main()
     ptime t2 = microsec_clock::local_time();
     std::cout << to_simple_string(t2) << std::endl;
 
-    check("hours match", t1.time_of_day().hours() == t2.time_of_day().hours());
-    check("minutes match",
+    check("check equality of hours "
+          "between second_clock and microsec_clock timestamps",
+          t1.time_of_day().hours() == t2.time_of_day().hours());
+
+    check("check equality of minutes "
+          "between second_clock and microsec_clock timestamps",
           t1.time_of_day().minutes() == t2.time_of_day().minutes());
-    check("seconds match",
+
+    check("check equality of seconds "
+          "between second_clock and microsec_clock timestamps",
           t1.time_of_day().seconds() == t2.time_of_day().seconds());
-    check("hours date", t1.date() == t2.date());
-    if( !check("last is less", last <= t2) ) {
+
+    check("check equality of date"
+          "between second_clock and microsec_clock timestamps",
+          t1.date() == t2.date());
+
+    if( !check("check that previous microsec_clock timestamp "
+               "is less than the current", last < t2) ) {
       std::cout << to_simple_string(last) << " < "
-        << to_simple_string(t2) << std::endl;
+                << to_simple_string(t2) << std::endl;
     }
+
     last = t2;
-
-
   }
 
 
-  std::cout << "Now do the same test for universal time -- a few less iterations" << std::endl;
+  std::cout << "Check universal time of microsec_clock against second_clock" << std::endl;
   max = 10;
   last = microsec_clock::universal_time();
-  for (i = 0; i<max; i++)
+  for (int i=0; i<max; i++)
   {
     // Some systems loop too fast so "last is less" tests fail due to
     // 'last' & 't2' being equal. These calls slow it down enough to
@@ -99,20 +108,29 @@ main()
     ptime t2 = microsec_clock::universal_time();
     std::cout << to_simple_string(t2) << std::endl;
 
-    check("hours match", t1.time_of_day().hours() == t2.time_of_day().hours());
-    check("minutes match",
+    check("check equality of hours "
+          "between second_clock and microsec_clock timestamps",
+          t1.time_of_day().hours() == t2.time_of_day().hours());
+
+    check("check equality of minutes "
+          "between second_clock and microsec_clock timestamps",
           t1.time_of_day().minutes() == t2.time_of_day().minutes());
-    check("seconds match",
+
+    check("check equality of seconds "
+          "between second_clock and microsec_clock timestamps",
           t1.time_of_day().seconds() == t2.time_of_day().seconds());
-    check("hours date", t1.date() == t2.date());
-    //following check might be equal on a really fast machine
-    if( !check("last is less", last <= t2) ) {
+
+    check("check equality of date"
+          "between second_clock and microsec_clock timestamps",
+          t1.date() == t2.date());
+
+    if( !check("check that previous microsec_clock timestamp "
+               "is less than the current", last < t2) ) {
       std::cout << to_simple_string(last) << " < "
-        << to_simple_string(t2) << std::endl;
+                << to_simple_string(t2) << std::endl;
     }
+
     last = t2;
-
-
   }
 
 #else
