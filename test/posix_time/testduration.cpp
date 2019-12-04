@@ -35,8 +35,18 @@ main()
   time_duration td3(td1.hours(),td1.minutes(),td1.seconds());
   check("total up elements", td1 == td3);
   td1 = -td1; // td1 == "-1:25:00"
+  check("invert_sign",td3 == td1.invert_sign());
+  check("invert_sign",td1 == td3.invert_sign());
+  check("abs",td3 == td1.abs());
+  check("abs",td3 == td3.abs());
+  check("is_positive",td3.is_positive());
+  check("is_positive",!td1.is_positive());
+  check("is_negative",td1.is_negative());
+  check("is_negative",!td3.is_negative());
+  check("is_zero",!td1.is_zero());
+  check("is_zero",(td1 - td1).is_zero());
   td3 = time_duration(td1.hours(),td1.minutes(),td1.seconds());
-  check("total up elements-invered sign", td1 == td3);
+  check("total up elements-inverted sign", td1 == td3);
   
   
   time_duration t_1(0,1,40);
