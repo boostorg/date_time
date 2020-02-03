@@ -73,7 +73,7 @@ namespace gregorian {
       date_time::date<date,gregorian_calendar, date_duration>(rhs)
     {}
     //! Constructor for infinities, not a date, max and min date
-    explicit date(special_values sv):
+    BOOST_FORCEINLINE explicit date(special_values sv):
       date_time::date<date, gregorian_calendar, date_duration>(date_rep_type::from_special(sv))
     {
       if (sv == min_date_time)
