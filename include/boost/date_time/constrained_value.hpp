@@ -53,9 +53,13 @@ namespace CV {
       return *this;
     }
     //! Return the max allowed value (traits method)
-    static value_type max BOOST_PREVENT_MACRO_SUBSTITUTION () {return (value_policies::max)();}
+    static BOOST_CONSTEXPR_OR_CONST value_type
+    max BOOST_PREVENT_MACRO_SUBSTITUTION () {return (value_policies::max)();}
+
     //! Return the min allowed value (traits method)
-    static value_type min BOOST_PREVENT_MACRO_SUBSTITUTION () {return (value_policies::min)();}
+    static BOOST_CONSTEXPR_OR_CONST value_type
+    min BOOST_PREVENT_MACRO_SUBSTITUTION () {return (value_policies::min)();}
+
     //! Coerce into the representation type
     operator value_type() const {return value_;}
   protected:
@@ -103,8 +107,12 @@ namespace CV {
 
   public:
     typedef rep_type value_type;
-    static rep_type min BOOST_PREVENT_MACRO_SUBSTITUTION () { return min_value; }
-    static rep_type max BOOST_PREVENT_MACRO_SUBSTITUTION () { return max_value; }
+    static BOOST_CONSTEXPR_OR_CONST rep_type
+    min BOOST_PREVENT_MACRO_SUBSTITUTION () { return min_value; }
+
+    static BOOST_CONSTEXPR_OR_CONST rep_type
+    max BOOST_PREVENT_MACRO_SUBSTITUTION () { return max_value; }
+
     static void on_error(rep_type, rep_type, violation_enum)
     {
       boost::throw_exception(actual_exception_type());
