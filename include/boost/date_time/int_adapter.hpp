@@ -102,7 +102,7 @@ public:
     return (v == not_a_number().as_number());
   }
   //! Returns either special value type or is_not_special
-  static BOOST_CONSTEXPR_OR_CONST special_values to_special(int_type v)
+  static BOOST_CXX14_CONSTEXPR special_values to_special(int_type v)
   {
     if (is_not_a_number(v)) return not_a_date_time;
     if (is_neg_inf(v)) return neg_infin;
