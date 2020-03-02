@@ -42,7 +42,6 @@ namespace date_time {
 
     static unsigned short day_of_week(const ymd_type& ymd);
     static int week_number(const ymd_type&ymd);
-    //static unsigned short day_of_year(date_int_type);
     static date_int_type day_number(const ymd_type& ymd);
     static date_int_type julian_day_number(const ymd_type& ymd);
     static date_int_type modjulian_day_number(const ymd_type& ymd);
@@ -60,9 +59,8 @@ namespace date_time {
 
 } } //namespace
 
-#ifndef NO_BOOST_DATE_TIME_INLINE
 #include "boost/date_time/gregorian_calendar.ipp"
-#endif
+
 
 
 
