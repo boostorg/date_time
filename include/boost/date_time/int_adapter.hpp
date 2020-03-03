@@ -73,7 +73,7 @@ public:
   {
     return (::std::numeric_limits<int_type>::min)()+1;
   }
-  static BOOST_CONSTEXPR_OR_CONST int_adapter from_special(special_values sv)
+  static BOOST_CXX14_CONSTEXPR int_adapter from_special(special_values sv)
   {
     switch (sv) {
     case not_a_date_time: return not_a_number();
@@ -140,7 +140,7 @@ public:
   {
     return (compare(rhs) == 0);
   }
-  BOOST_CONSTEXPR bool operator==(const int& rhs) const
+  BOOST_CXX14_CONSTEXPR bool operator==(const int& rhs) const
   {
     if(!std::numeric_limits<int_type>::is_signed)
     {
@@ -170,7 +170,7 @@ public:
   {
     return (compare(rhs) == -1);
   }
-  BOOST_CONSTEXPR bool operator<(const int& rhs) const
+  BOOST_CXX14_CONSTEXPR bool operator<(const int& rhs) const
   {
     // quiets compiler warnings
     if(!std::numeric_limits<int_type>::is_signed)
@@ -204,7 +204,7 @@ public:
   /*! Operator allows for adding dissimilar int_adapter types.
    * The return type will match that of the the calling object's type */
   template<class rhs_type>
-  BOOST_CONSTEXPR
+  BOOST_CXX14_CONSTEXPR
   int_adapter operator+(const int_adapter<rhs_type>& rhs) const
   {
     if(is_special() || rhs.is_special())
@@ -234,7 +234,7 @@ public:
     return int_adapter<int_type>(value_ + static_cast<int_type>(rhs.as_number()));
   }
 
-  BOOST_CONSTEXPR
+  BOOST_CXX14_CONSTEXPR
   int_adapter operator+(const int_type rhs) const
   {
     if(is_special())
@@ -254,7 +254,7 @@ public:
   /*! Operator allows for subtracting dissimilar int_adapter types.
    * The return type will match that of the the calling object's type */
   template<class rhs_type>
-  BOOST_CONSTEXPR
+  BOOST_CXX14_CONSTEXPR
   int_adapter operator-(const int_adapter<rhs_type>& rhs)const
   {
     if(is_special() || rhs.is_special())
@@ -284,7 +284,7 @@ public:
     return int_adapter<int_type>(value_ - static_cast<int_type>(rhs.as_number()));
   }
 
-  BOOST_CONSTEXPR
+  BOOST_CXX14_CONSTEXPR
   int_adapter operator-(const int_type rhs) const
   {
     if(is_special())
@@ -314,7 +314,7 @@ public:
 
   /*! Provided for cases when automatic conversion from 
    * 'int' to 'int_adapter' causes incorrect results. */
-  BOOST_CONSTEXPR
+  BOOST_CXX14_CONSTEXPR
   int_adapter operator*(const int rhs) const
   {
     if(is_special())
@@ -325,7 +325,8 @@ public:
   }
 
   // should templatize this to be consistant with op +-
-  BOOST_CONSTEXPR int_adapter operator/(const int_adapter& rhs)const
+  BOOST_CXX14_CONSTEXPR
+  int_adapter operator/(const int_adapter& rhs)const
   {
     if(this->is_special() || rhs.is_special())
     {
@@ -338,7 +339,7 @@ public:
         return mult_div_specials(rhs);
       }
       else { // let divide by zero blow itself up
-        return int_adapter<int_type>(value_ / rhs.value_);
+        return int_adapter<int_type>(value_ / rhs.value_); //NOLINT
       }
     }
     return int_adapter<int_type>(value_ / rhs.value_);
@@ -346,17 +347,20 @@ public:
 
   /*! Provided for cases when automatic conversion from 
    * 'int' to 'int_adapter' causes incorrect results. */
-  BOOST_CONSTEXPR int_adapter operator/(const int rhs) const
+  BOOST_CXX14_CONSTEXPR
+  int_adapter operator/(const int rhs) const
   {
     if(is_special() && rhs != 0)
     {
       return mult_div_specials(rhs);
     }
-    return int_adapter<int_type>(value_ / rhs);
+    // let divide by zero blow itself up like int
+    return int_adapter<int_type>(value_ / rhs); //NOLINT
   }
 
   // should templatize this to be consistant with op +-
-  BOOST_CONSTEXPR int_adapter operator%(const int_adapter& rhs)const
+  BOOST_CXX14_CONSTEXPR
+  int_adapter operator%(const int_adapter& rhs)const
   {
     if(this->is_special() || rhs.is_special())
     {
@@ -369,7 +373,7 @@ public:
         return mult_div_specials(rhs);
       }
       else { // let divide by zero blow itself up
-        return int_adapter<int_type>(value_ % rhs.value_);
+        return int_adapter<int_type>(value_ % rhs.value_); //NOLINT
       }
     }
     return int_adapter<int_type>(value_ % rhs.value_);
@@ -377,20 +381,23 @@ public:
 
   /*! Provided for cases when automatic conversion from 
    * 'int' to 'int_adapter' causes incorrect results. */
-  BOOST_CONSTEXPR int_adapter operator%(const int rhs) const
+  BOOST_CXX14_CONSTEXPR
+  int_adapter operator%(const int rhs) const
   {
     if(is_special() && rhs != 0)
     {
       return mult_div_specials(rhs);
     }
-    return int_adapter<int_type>(value_ % rhs);
+    // let divide by zero blow itself up
+    return int_adapter<int_type>(value_ % rhs); //NOLINT
   }
 
 private:
   int_type value_;
   
   //! returns -1, 0, 1, or 2 if 'this' is <, ==, >, or 'nan comparison' rhs
-  BOOST_CONSTEXPR int compare( const int_adapter& rhs ) const
+  BOOST_CXX14_CONSTEXPR
+  int compare( const int_adapter& rhs ) const
   {
     if(this->is_special() || rhs.is_special())
     {
@@ -423,7 +430,8 @@ private:
    * are different, they are handled in the respective operator 
    * function. */
   //! Assumes at least 'this' or 'rhs' is a special value
-  BOOST_CONSTEXPR int_adapter mult_div_specials(const int_adapter& rhs) const
+  BOOST_CXX14_CONSTEXPR
+  int_adapter mult_div_specials(const int_adapter& rhs) const
   {
     if(this->is_nan() || rhs.is_nan()) {
       return int_adapter<int_type>(not_a_number());
@@ -445,7 +453,8 @@ private:
    * It would produce incorrect results since 'unsigned'
    * wraps around when initialized with a negative value */
   //! Assumes 'this' is a special value
-  BOOST_CONSTEXPR int_adapter mult_div_specials(const int& rhs) const
+  BOOST_CXX14_CONSTEXPR
+  int_adapter mult_div_specials(const int& rhs) const
   {
     if(this->is_nan()) {
       return int_adapter<int_type>(not_a_number());
