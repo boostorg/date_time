@@ -13,6 +13,7 @@ namespace date_time {
   /*! Converts a year-month-day into a day of the week number
    */
   template<typename ymd_type_, typename date_int_type_>
+  BOOST_CXX14_CONSTEXPR
   inline
   unsigned short
   gregorian_calendar_base<ymd_type_,date_int_type_>::day_of_week(const ymd_type& ymd) {
@@ -31,6 +32,7 @@ namespace date_time {
     Reference for this algorithm is the Calendar FAQ by Claus Tondering, April 2000.
   */
   template<typename ymd_type_, typename date_int_type_>
+  BOOST_CXX14_CONSTEXPR
   inline
   int
   gregorian_calendar_base<ymd_type_,date_int_type_>::week_number(const ymd_type& ymd) {
@@ -67,6 +69,7 @@ namespace date_time {
   /*! The day number is an absolute number of days since the start of count
    */
   template<typename ymd_type_, typename date_int_type_>
+  BOOST_CXX14_CONSTEXPR
   inline
   date_int_type_
   gregorian_calendar_base<ymd_type_,date_int_type_>::day_number(const ymd_type& ymd)
@@ -82,6 +85,7 @@ namespace date_time {
   /*! Since this implementation uses julian day internally, this is the same as the day_number.
    */
   template<typename ymd_type_, typename date_int_type_>
+  BOOST_CXX14_CONSTEXPR
   inline
   date_int_type_
   gregorian_calendar_base<ymd_type_,date_int_type_>::julian_day_number(const ymd_type& ymd)
@@ -94,6 +98,7 @@ namespace date_time {
    *  MJD 0 thus started on 17 Nov 1858(Gregorian) at 00:00:00 UTC
    */
   template<typename ymd_type_, typename date_int_type_>
+  BOOST_CXX14_CONSTEXPR
   inline
   date_int_type_
   gregorian_calendar_base<ymd_type_,date_int_type_>::modjulian_day_number(const ymd_type& ymd)
@@ -103,6 +108,7 @@ namespace date_time {
 
   //! Change a day number into a year-month-day
   template<typename ymd_type_, typename date_int_type_>
+  BOOST_CXX14_CONSTEXPR
   inline
   ymd_type_
   gregorian_calendar_base<ymd_type_,date_int_type_>::from_day_number(date_int_type dayNumber)
@@ -123,6 +129,7 @@ namespace date_time {
 
   //! Change a day number into a year-month-day
   template<typename ymd_type_, typename date_int_type_>
+  BOOST_CXX14_CONSTEXPR
   inline
   ymd_type_
   gregorian_calendar_base<ymd_type_,date_int_type_>::from_julian_day_number(date_int_type dayNumber)
@@ -143,6 +150,7 @@ namespace date_time {
 
   //! Change a modified julian day number into a year-month-day
   template<typename ymd_type_, typename date_int_type_>
+  BOOST_CXX14_CONSTEXPR
   inline
   ymd_type_
   gregorian_calendar_base<ymd_type_,date_int_type_>::from_modjulian_day_number(date_int_type dayNumber) {
@@ -155,6 +163,7 @@ namespace date_time {
    *@return true if year is a leap year, false otherwise
    */
   template<typename ymd_type_, typename date_int_type_>
+  BOOST_CXX14_CONSTEXPR
   inline
   bool
   gregorian_calendar_base<ymd_type_,date_int_type_>::is_leap_year(year_type year)
@@ -168,6 +177,7 @@ namespace date_time {
    *  No error checking is performed.
    */
   template<typename ymd_type_, typename date_int_type_>
+  BOOST_CXX14_CONSTEXPR
   inline
   unsigned short
   gregorian_calendar_base<ymd_type_,date_int_type_>::end_of_month_day(year_type year,
@@ -193,6 +203,7 @@ namespace date_time {
 
   //! Provide the ymd_type specification for the calandar start
   template<typename ymd_type_, typename date_int_type_>
+  BOOST_CXX14_CONSTEXPR
   inline
   ymd_type_
   gregorian_calendar_base<ymd_type_,date_int_type_>::epoch()
@@ -202,6 +213,7 @@ namespace date_time {
 
   //! Defines length of a week for week calculations
   template<typename ymd_type_, typename date_int_type_>
+  BOOST_CXX14_CONSTEXPR
   inline
   unsigned short
   gregorian_calendar_base<ymd_type_,date_int_type_>::days_in_week()
