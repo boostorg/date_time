@@ -56,8 +56,8 @@ namespace date_time {
     typedef typename rep_type::tick_type tick_type;
     typedef typename rep_type::impl_type impl_type;
 
-    BOOST_CONSTEXPR time_duration() : ticks_(0) {}
-    BOOST_CONSTEXPR time_duration(hour_type hours_in,
+    BOOST_CXX14_CONSTEXPR time_duration() : ticks_(0) {}
+    BOOST_CXX14_CONSTEXPR time_duration(hour_type hours_in,
                   min_type minutes_in,
                   sec_type seconds_in=0,
                   fractional_seconds_type frac_sec_in = 0) :
@@ -65,11 +65,11 @@ namespace date_time {
     {}
     // copy constructor required for dividable<>
     //! Construct from another time_duration (Copy constructor)
-    BOOST_CONSTEXPR time_duration(const time_duration<T, rep_type>& other)
+    BOOST_CXX14_CONSTEXPR time_duration(const time_duration<T, rep_type>& other)
       : ticks_(other.ticks_)
     {}
     //! Construct from special_values
-    BOOST_CONSTEXPR time_duration(special_values sv) : ticks_(impl_type::from_special(sv))
+    BOOST_CXX14_CONSTEXPR time_duration(special_values sv) : ticks_(impl_type::from_special(sv))
     {}
     //! Returns smallest representable duration
     static BOOST_CONSTEXPR_OR_CONST duration_type unit()
@@ -87,22 +87,22 @@ namespace date_time {
       return rep_type::resolution();
     }
     //! Returns number of hours in the duration
-    BOOST_CONSTEXPR hour_type hours()   const
+    BOOST_CXX14_CONSTEXPR hour_type hours()   const
     {
       return static_cast<hour_type>(ticks() / (3600*ticks_per_second()));
     }
     //! Returns normalized number of minutes
-    BOOST_CONSTEXPR min_type minutes() const
+    BOOST_CXX14_CONSTEXPR min_type minutes() const
     {
       return static_cast<min_type>((ticks() / (60*ticks_per_second())) % 60);
     }
     //! Returns normalized number of seconds (0..60)
-    BOOST_CONSTEXPR sec_type seconds() const
+    BOOST_CXX14_CONSTEXPR sec_type seconds() const
     {
       return static_cast<sec_type>((ticks()/ticks_per_second()) % 60);
     }
     //! Returns total number of seconds truncating any fractional seconds
-    BOOST_CONSTEXPR sec_type total_seconds() const
+    BOOST_CXX14_CONSTEXPR sec_type total_seconds() const
     {
       return static_cast<sec_type>(ticks() / ticks_per_second());
     }
@@ -131,7 +131,7 @@ namespace date_time {
       return ticks() / (ticks_per_second() / static_cast<tick_type>(1000000)) ;
     }
     //! Returns count of fractional seconds at given resolution
-    BOOST_CONSTEXPR fractional_seconds_type fractional_seconds() const
+    BOOST_CXX14_CONSTEXPR fractional_seconds_type fractional_seconds() const
     {
       return (ticks() % ticks_per_second());
     }
@@ -140,7 +140,7 @@ namespace date_time {
     {
       return rep_type::num_fractional_digits();
     }
-    BOOST_CONSTEXPR duration_type invert_sign() const
+    BOOST_CXX14_CONSTEXPR duration_type invert_sign() const
     {
       return duration_type(ticks_ * (-1));
     }
@@ -206,7 +206,7 @@ namespace date_time {
       return duration_type(ticks_);
     }
     //! Multiplication operations an a duration with an integer
-    BOOST_CONSTEXPR duration_type operator*(int rhs) const
+    BOOST_CXX14_CONSTEXPR duration_type operator*(int rhs) const
     {
       return duration_type(ticks_ * rhs);
     }
@@ -215,7 +215,7 @@ namespace date_time {
       ticks_ = ticks_ * divisor;
       return duration_type(ticks_);
     }
-    BOOST_CONSTEXPR tick_type ticks() const
+    BOOST_CXX14_CONSTEXPR tick_type ticks() const
     {
       return traits_type::as_number(ticks_);
     }
@@ -272,7 +272,7 @@ namespace date_time {
     }
 
   protected:
-    explicit time_duration(impl_type in) : ticks_(in) {}
+    BOOST_CXX14_CONSTEXPR explicit time_duration(impl_type in) : ticks_(in) {}
     impl_type ticks_;
   };
 
@@ -298,8 +298,9 @@ namespace date_time {
   public:
     // The argument (ss) must be an integral type
     template <typename T>
-    BOOST_CONSTEXPR explicit subsecond_duration(T const& ss,
-                                typename boost::enable_if<boost::is_integral<T>, void>::type* = BOOST_DATE_TIME_NULLPTR) :
+    BOOST_CXX14_CONSTEXPR explicit subsecond_duration(T const& ss,
+						      typename boost::enable_if<boost::is_integral<T>,
+						      void>::type* = BOOST_DATE_TIME_NULLPTR) :
       base_duration(impl_type(traits_type::ticks_per_second >= frac_of_second ? ss * adjustment_ratio : ss / adjustment_ratio))
     {
     }
