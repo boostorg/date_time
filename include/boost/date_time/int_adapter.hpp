@@ -302,7 +302,7 @@ public:
   }
 
   // should templatize this to be consistant with op +-
-  BOOST_CONSTEXPR
+  BOOST_CXX14_CONSTEXPR
   int_adapter operator*(const int_adapter& rhs)const
   {
     if(this->is_special() || rhs.is_special())
