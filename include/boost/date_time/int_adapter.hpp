@@ -46,7 +46,7 @@ template<typename int_type_>
 class int_adapter {
 public:
   typedef int_type_ int_type;
-  int_adapter(int_type v) :
+  BOOST_CXX14_CONSTEXPR int_adapter(int_type v) :
     value_(v)
   {}
   static BOOST_CONSTEXPR_OR_CONST bool has_infinity()

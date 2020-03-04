@@ -133,7 +133,7 @@ namespace date_time {
     typedef typename time_rep_type::date_duration_type date_duration_type;
 
 
-    template<class T> static void unused_var(const T&) {}
+    template<class T> static BOOST_CXX14_CONSTEXPR void unused_var(const T&) {}
 
     static BOOST_CXX14_CONSTEXPR
     time_rep_type get_time_rep(const date_type& day,

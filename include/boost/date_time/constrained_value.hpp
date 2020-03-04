@@ -43,11 +43,11 @@ namespace CV {
   public:
     typedef typename value_policies::value_type value_type;
     //    typedef except_type exception_type;
-    constrained_value(value_type value) : value_((min)())
+    BOOST_CXX14_CONSTEXPR constrained_value(value_type value) : value_((min)())
     {
       assign(value);
     }
-    constrained_value& operator=(value_type v)
+    BOOST_CXX14_CONSTEXPR constrained_value& operator=(value_type v)
     {
       assign(v); 
       return *this;
@@ -61,7 +61,7 @@ namespace CV {
     min BOOST_PREVENT_MACRO_SUBSTITUTION () {return (value_policies::min)();}
 
     //! Coerce into the representation type
-    operator value_type() const {return value_;}
+    BOOST_CXX14_CONSTEXPR operator value_type() const {return value_;}
   protected:
     value_type value_;
   private:

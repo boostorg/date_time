@@ -1,7 +1,7 @@
 #ifndef GREG_MONTH_HPP___
 #define GREG_MONTH_HPP___
 
-/* Copyright (c) 2002,2003 CrystalClear Software, Inc.
+/* Copyright (c) 2002,2003, 2020 CrystalClear Software, Inc.
  * Use, modification and distribution is subject to the 
  * Boost Software License, Version 1.0. (See accompanying
  * file LICENSE_1_0.txt or http://www.boost.org/LICENSE_1_0.txt)
@@ -58,15 +58,15 @@ namespace gregorian {
     typedef std::map<std::string, unsigned short> month_map_type;
     typedef boost::shared_ptr<month_map_type> month_map_ptr_type;
     //! Construct a month from the months_of_year enumeration
-    greg_month(month_enum theMonth) : 
+    BOOST_CXX14_CONSTEXPR greg_month(month_enum theMonth) : 
       greg_month_rep(static_cast<greg_month_rep::value_type>(theMonth)) {}
     //! Construct from a short value
-    greg_month(value_type theMonth) : greg_month_rep(theMonth) {}
+    BOOST_CXX14_CONSTEXPR greg_month(value_type theMonth) : greg_month_rep(theMonth) {}
     //! Convert the value back to a short
-    operator value_type()  const {return value_;}
+    BOOST_CONSTEXPR  operator value_type()  const {return value_;}
     //! Returns month as number from 1 to 12
-    value_type as_number() const {return value_;}
-    month_enum as_enum() const {return static_cast<month_enum>(value_);}
+    BOOST_CONSTEXPR value_type as_number() const {return value_;}
+    BOOST_CONSTEXPR month_enum as_enum() const {return static_cast<month_enum>(value_);}
     const char* as_short_string() const;
     const char* as_long_string()  const;
 #ifndef BOOST_NO_STD_WSTRING
