@@ -26,7 +26,7 @@ namespace posix_time {
   {
   public:
       template <typename T>
-      explicit hours(T const& h,
+      BOOST_CONSTEXPR explicit hours(T const& h,
           typename boost::enable_if<boost::is_integral<T>, void>::type* = BOOST_DATE_TIME_NULLPTR) :
       time_duration(numeric_cast<hour_type>(h), 0, 0)
     {}
@@ -40,7 +40,7 @@ namespace posix_time {
   {
   public:
       template <typename T>
-      explicit minutes(T const& m,
+      BOOST_CONSTEXPR explicit minutes(T const& m,
           typename boost::enable_if<boost::is_integral<T>, void>::type* = BOOST_DATE_TIME_NULLPTR) :
       time_duration(0, numeric_cast<min_type>(m),0)
     {}
@@ -54,7 +54,7 @@ namespace posix_time {
   {
   public:
       template <typename T>
-      explicit seconds(T const& s,
+      BOOST_CONSTEXPR explicit seconds(T const& s,
           typename boost::enable_if<boost::is_integral<T>, void>::type* = BOOST_DATE_TIME_NULLPTR) :
       time_duration(0,0, numeric_cast<sec_type>(s))
     {}
