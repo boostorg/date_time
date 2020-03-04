@@ -155,7 +155,7 @@ public:
   {
     return (compare(rhs) != 0);
   }
-  BOOST_CONSTEXPR bool operator!=(const int& rhs) const
+  BOOST_CXX14_CONSTEXPR bool operator!=(const int& rhs) const
   {
     if(!std::numeric_limits<int_type>::is_signed)
     {
