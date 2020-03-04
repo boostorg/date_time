@@ -63,10 +63,10 @@ namespace gregorian {
     //! Construct from a short value
     BOOST_CXX14_CONSTEXPR greg_month(value_type theMonth) : greg_month_rep(theMonth) {}
     //! Convert the value back to a short
-    BOOST_CONSTEXPR  operator value_type()  const {return value_;}
+    BOOST_CXX14_CONSTEXPR operator value_type()  const {return value_;}
     //! Returns month as number from 1 to 12
-    BOOST_CONSTEXPR value_type as_number() const {return value_;}
-    BOOST_CONSTEXPR month_enum as_enum() const {return static_cast<month_enum>(value_);}
+    BOOST_CXX14_CONSTEXPR value_type as_number() const {return value_;}
+    BOOST_CXX14_CONSTEXPR month_enum as_enum() const {return static_cast<month_enum>(value_);}
     const char* as_short_string() const;
     const char* as_long_string()  const;
 #ifndef BOOST_NO_STD_WSTRING

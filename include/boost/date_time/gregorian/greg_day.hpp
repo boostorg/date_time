@@ -43,8 +43,8 @@ namespace gregorian {
   class BOOST_SYMBOL_VISIBLE greg_day : public greg_day_rep {
   public:
     BOOST_CXX14_CONSTEXPR greg_day(value_type day_of_month) : greg_day_rep(day_of_month) {}
-    BOOST_CONSTEXPR value_type as_number() const {return value_;}
-    BOOST_CONSTEXPR operator value_type()  const {return value_;}
+    BOOST_CXX14_CONSTEXPR value_type as_number() const {return value_;}
+    BOOST_CXX14_CONSTEXPR operator value_type()  const {return value_;}
   private:
     
   };
