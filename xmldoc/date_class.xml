@@ -500,7 +500,7 @@ tm d_tm = to_tm(d);
    tm_hour => 0
    tm_min  => 0
    tm_sec  => 0
-   tm_isddst => -1 */</screen>
+   tm_isdst => -1 */</screen>
 	  </entry>
         </row>
 

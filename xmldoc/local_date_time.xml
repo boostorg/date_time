@@ -453,7 +453,7 @@ tm ldt_tm = to_tm(ldt);
    tm_hour => 6
    tm_min  => 0
    tm_sec  => 0
-   tm_isddst => 1 */</screen>
+   tm_isdst => 1 */</screen>
 	  </entry>
         </row>
 

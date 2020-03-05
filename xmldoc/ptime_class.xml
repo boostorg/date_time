@@ -494,7 +494,7 @@ tm pt_tm = to_tm(pt);
    tm_hour => 1
    tm_min  => 2
    tm_sec  => 3
-   tm_isddst => -1 */</screen>
+   tm_isdst => -1 */</screen>
 	  </entry>
         </row>
 
@@ -530,7 +530,7 @@ tm td_tm = to_tm(td);
    tm_hour => 1
    tm_min  => 2
    tm_sec  => 3
-   tm_isddst => -1 */</screen>
+   tm_isdst => -1 */</screen>
 	  </entry>
         </row>
 
