@@ -172,7 +172,7 @@ ptime t(from_iso_string(ts))</screen></entry>
           
           <row>
 	    <entry valign="top" morerows="1"><screen>ptime microsec_clock::local_time()</screen></entry>
-	    <entry>Get the local time using a sub second resolution clock.  On Unix systems this is implemented using GetTimeOfDay.  On most Win32 platforms it is implemented using ftime.  Win32 systems often do not achieve microsecond resolution via this API.  If higher resolution is critical to your application test your platform to see the achieved resolution.</entry>
+	    <entry>Get the local time using a sub second resolution clock.  On Unix systems this is implemented using gettimeofday.  On most Win32 platforms it is implemented using ftime.  Win32 systems often do not achieve microsecond resolution via this API.  If higher resolution is critical to your application test your platform to see the achieved resolution.</entry>
 	  </row>
 	  <row>
 	    <entry><screen>ptime t(microsec_clock::local_time());</screen></entry>
@@ -180,7 +180,7 @@ ptime t(from_iso_string(ts))</screen></entry>
           
           <row>
 	    <entry valign="top" morerows="1"><screen>ptime microsec_clock::universal_time()</screen></entry>
-	    <entry>Get the UTC time using a sub second resolution clock.  On Unix systems this is implemented using GetTimeOfDay.  On most Win32 platforms it is implemented using ftime.  Win32 systems often do not achieve microsecond resolution via this API.  If higher resolution is critical to your application test your platform to see the achieved resolution.</entry>
+	    <entry>Get the UTC time using a sub second resolution clock.  On Unix systems this is implemented using gettimeofday.  On most Win32 platforms it is implemented using ftime.  Win32 systems often do not achieve microsecond resolution via this API.  If higher resolution is critical to your application test your platform to see the achieved resolution.</entry>
 	  </row>
 	  <row>
 	    <entry><screen>ptime t(microsec_clock::universal_time());</screen></entry>
