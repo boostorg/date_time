@@ -49,27 +49,27 @@ public:
   BOOST_CXX14_CONSTEXPR int_adapter(int_type v) :
     value_(v)
   {}
-  static BOOST_CONSTEXPR_OR_CONST bool has_infinity()
+  static BOOST_CONSTEXPR bool has_infinity()
   {
     return  true;
   }
-  static BOOST_CONSTEXPR_OR_CONST int_adapter  pos_infinity()
+  static BOOST_CONSTEXPR int_adapter  pos_infinity()
   {
     return (::std::numeric_limits<int_type>::max)();
   }
-  static BOOST_CONSTEXPR_OR_CONST int_adapter  neg_infinity()
+  static BOOST_CONSTEXPR int_adapter  neg_infinity()
   {
     return (::std::numeric_limits<int_type>::min)();
   }
-  static BOOST_CONSTEXPR_OR_CONST int_adapter  not_a_number()
+  static BOOST_CONSTEXPR int_adapter  not_a_number()
   {
     return (::std::numeric_limits<int_type>::max)()-1;
   }
-  static BOOST_CONSTEXPR_OR_CONST int_adapter max BOOST_PREVENT_MACRO_SUBSTITUTION ()
+  static BOOST_CONSTEXPR int_adapter max BOOST_PREVENT_MACRO_SUBSTITUTION ()
   {
     return (::std::numeric_limits<int_type>::max)()-2;
   }
-  static BOOST_CONSTEXPR_OR_CONST int_adapter min BOOST_PREVENT_MACRO_SUBSTITUTION ()
+  static BOOST_CONSTEXPR int_adapter min BOOST_PREVENT_MACRO_SUBSTITUTION ()
   {
     return (::std::numeric_limits<int_type>::min)()+1;
   }
@@ -84,20 +84,20 @@ public:
     default:              return not_a_number();
     }
   }
-  static BOOST_CONSTEXPR_OR_CONST bool is_inf(int_type v)
+  static BOOST_CONSTEXPR bool is_inf(int_type v)
   {
     return (v == neg_infinity().as_number() ||
             v == pos_infinity().as_number());
   }
-  static BOOST_CONSTEXPR_OR_CONST bool is_neg_inf(int_type v)
+  static BOOST_CXX14_CONSTEXPR bool is_neg_inf(int_type v)
   {
     return (v == neg_infinity().as_number());
   }
-  static BOOST_CONSTEXPR_OR_CONST bool is_pos_inf(int_type v)
+  static BOOST_CXX14_CONSTEXPR bool is_pos_inf(int_type v)
   {
     return (v == pos_infinity().as_number());
   }
-  static BOOST_CONSTEXPR_OR_CONST bool is_not_a_number(int_type v)
+  static BOOST_CXX14_CONSTEXPR bool is_not_a_number(int_type v)
   {
     return (v == not_a_number().as_number());
   }
@@ -111,7 +111,7 @@ public:
   }
 
   //-3 leaves room for representations of infinity and not a date
-  static BOOST_CONSTEXPR_OR_CONST int_type maxcount()
+  static BOOST_CONSTEXPR int_type maxcount()
   {
     return (::std::numeric_limits<int_type>::max)()-3;
   }
