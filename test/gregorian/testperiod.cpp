@@ -61,7 +61,7 @@ int main()
   date_period i2(date(2000,Jan,1), date(2000,Jan,7));
   date_period r1(date(2000,Jan,5), date(2000,Jan,7));
   //case 1    [5 -10) intersect [1-7) ->  [5-7)
-  std::cout << to_simple_string(i1.intersection(i2)) << std::endl;
+  std::cout << i1.intersection(i2) << std::endl;
   check("intersect case1", i1.intersection(i2) == r1);
   check("intersect case1", i2.intersection(i1) == r1);
   //case 2    [5 -10) intersect [1-15) -> [5-10)

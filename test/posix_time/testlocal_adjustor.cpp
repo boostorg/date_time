@@ -32,8 +32,7 @@ main()
   time_duration td = us_eastern::local_to_utc_offset(t10);//dst flag is defaulted
   check("check local calculation",   td == hours(5));
   ptime t10_local = t10 + td;
-  std::cout << to_simple_string(t10_local)
-            << std::endl;
+  std::cout << t10_local << std::endl;
   check("check local calculation",   t10_local == t10_check);
   check("check utc is dst",          
         us_eastern::utc_to_local_offset(t10) == hours(-5));
@@ -43,12 +42,10 @@ main()
   date d4(2002,May,1);
   ptime t11(d4, hours(3));
   check("check local offset",us_eastern::local_to_utc_offset(t11) == hours(4));
-  std::cout << to_simple_string(us_eastern::local_to_utc_offset(t11)) << std::endl;
+  std::cout << us_eastern::local_to_utc_offset(t11) << std::endl;
   ptime t11_check(d4, hours(7));//now utc offset is only 4 hours
   ptime t11_local = t11 + us_eastern::local_to_utc_offset(t11);
-  std::cout << to_simple_string(t11_local) << " "
-            << to_simple_string(t11_check)
-            << std::endl;
+  std::cout << t11_local << " " << t11_check << std::endl;
   check("check local calculation", t11_local == t11_check);
   //should get same offset with DST flag set
   check("check local offset-dst flag on",   
