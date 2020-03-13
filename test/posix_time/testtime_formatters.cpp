@@ -30,8 +30,6 @@ main()
 
   CHECK_ROUNDTRIP(t1);
 
-#ifdef BOOST_DATE_TIME_HAS_MILLISECONDS
-
   if (time_duration::resolution() == boost::date_time::milli) {
     ptime t4(d1,hours(1)+minutes(2)+seconds(3)+millisec(4));
     std::string r3 = to_simple_string(t4);
@@ -40,9 +38,6 @@ main()
     CHECK_ROUNDTRIP(t4);
   }
 
-#endif
-
-#ifdef BOOST_DATE_TIME_HAS_MICROSECONDS
 
   if (time_duration::resolution() == boost::date_time::micro) {
     ptime t3(d1,hours(1)+minutes(2)+seconds(3)+microsec(4));
@@ -66,9 +61,8 @@ main()
 
     CHECK_ROUNDTRIP(t3);
   }
-#endif
 
-#ifdef BOOST_DATE_TIME_HAS_NANOSECONDS
+
 
   if (time_duration::resolution() == boost::date_time::nano) {
     ptime t2(d1,hours(12) + minutes(5) + seconds(1));
@@ -102,7 +96,7 @@ main()
 
     CHECK_ROUNDTRIP(t3);
 }
-#endif
+
 
   // Boost Trac 1078 (https://svn.boost.org/trac10/ticket/1078)
   // from_iso_string should be able to parse output of to_iso_string

@@ -1,7 +1,7 @@
 #ifndef POSIX_TIME_CONFIG_HPP___
 #define POSIX_TIME_CONFIG_HPP___
 
-/* Copyright (c) 2002,2003,2005 CrystalClear Software, Inc.
+/* Copyright (c) 2002,2003,2005,2020 CrystalClear Software, Inc.
  * Use, modification and distribution is subject to the
  * Boost Software License, Version 1.0. (See accompanying
  * file LICENSE_1_0.txt or http://www.boost.org/LICENSE_1_0.txt)
@@ -22,31 +22,18 @@
 namespace boost {
 namespace posix_time {
 
-//Remove the following line if you want 64 bit millisecond resolution time
-//#define BOOST_GDTL_POSIX_TIME_STD_CONFIG
 
 #ifdef BOOST_DATE_TIME_POSIX_TIME_STD_CONFIG
   // set up conditional test compilations
-#define BOOST_DATE_TIME_HAS_MILLISECONDS
-#define BOOST_DATE_TIME_HAS_MICROSECONDS
 #define BOOST_DATE_TIME_HAS_NANOSECONDS
   typedef date_time::time_resolution_traits<boost::date_time::time_resolution_traits_adapted64_impl, boost::date_time::nano,
     1000000000, 9 > time_res_traits;
 #else
   // set up conditional test compilations
-#define BOOST_DATE_TIME_HAS_MILLISECONDS
-#define BOOST_DATE_TIME_HAS_MICROSECONDS
 #undef  BOOST_DATE_TIME_HAS_NANOSECONDS
   typedef date_time::time_resolution_traits<
     boost::date_time::time_resolution_traits_adapted64_impl, boost::date_time::micro,
                                             1000000, 6 > time_res_traits;
-
-
-// #undef BOOST_DATE_TIME_HAS_MILLISECONDS
-// #undef BOOST_DATE_TIME_HAS_MICROSECONDS
-// #undef BOOST_DATE_TIME_HAS_NANOSECONDS
-//   typedef date_time::time_resolution_traits<boost::int64_t, boost::date_time::tenth,
-//                                              10, 0 > time_res_traits;
 
 #endif
 
