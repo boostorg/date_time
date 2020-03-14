@@ -22,10 +22,10 @@ int main()
   tz_database tz_db;
   try {
     tz_db.load_from_file("../../data/date_time_zonespec.csv");
-  }catch(data_not_accessible dna) {
+  }catch(const data_not_accessible& dna) {
     std::cerr << "Error with time zone data file: " << dna.what() << std::endl;
     exit(EXIT_FAILURE);
-  }catch(bad_field_count bfc) {
+  }catch(const bad_field_count& bfc) {
     std::cerr << "Error with time zone data file: " << bfc.what() << std::endl;
     exit(EXIT_FAILURE);
   }
