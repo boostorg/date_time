@@ -47,8 +47,7 @@ int main()
     std::cout << "Not Reachable: " << cv3 << " ";
     check("got range exception max", false);
   }
-  catch(range_error& e) {
-    e = e; // removes compiler warning
+  catch(range_error&) {
     check("got range exception max", true);
   }
 
@@ -57,8 +56,7 @@ int main()
     std::cout << "Not Reachable: " << cv3 << " ";
     check("got range exception min", false);
   }
-  catch(range_error& e) {
-    e = e; // removes compiler warning
+  catch(range_error&) {
     check("got range exception min", true);
   }
 
@@ -67,8 +65,7 @@ int main()
     cv4 = 12;
     check("range exception on assign", false);
   }
-  catch(range_error& e) {
-    e = e; // removes compiler warning
+  catch(range_error&) {
     check("range exception on assign", true);
   }
 
