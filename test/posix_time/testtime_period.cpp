@@ -24,15 +24,15 @@ int main()
   check("assignment", p3 == p2);
   time_period p4(t1,hours(1));
   check("length", p4.length() == hours(1));
-  std::cout << to_simple_string(t1) << std::endl;
-  std::cout << to_simple_string(p4) << std::endl;
-  std::cout << to_simple_string(p1) << std::endl;
+  std::cout << t1 << std::endl;
+  std::cout << p4 << std::endl;
+  std::cout << p1 << std::endl;
   check("construction and ==", p1 == p4);
   check("begin", p1.begin() == t1);
   check("last",  p1.end()   == t2);
   check("end",   p1.last()  == t2-time_duration::unit());
   
-  std::cout << to_simple_string(p1) << std::endl;
+  std::cout << p1 << std::endl;
   //  check("last",  p1.()  == t2);
   check("contains begin", p1.contains(t1));
   check("contains end-not", !p1.contains(t2));
@@ -51,21 +51,21 @@ int main()
 
   time_period p6(p5);
   p6.shift(minutes(30));
-  std::cout << to_simple_string(p5) << std::endl;
-  std::cout << to_simple_string(p6) << std::endl;
+  std::cout << p5 << std::endl;
+  std::cout << p6 << std::endl;
   check("shifted intersects",    p5.intersects(p6));
   check("shifted intersects",    p6.intersects(p5));
   check("contains begin",        p5.contains(p6.begin()));
   p6.shift(minutes(30));
-  std::cout << to_simple_string(p5) << std::endl;
-  std::cout << to_simple_string(p6) << std::endl;
+  std::cout << p5 << std::endl;
+  std::cout << p6 << std::endl;
   check("shifted !intersects",    !p5.intersects(p6));
   check("shifted !intersects",    !p6.intersects(p5));
   p6.shift(minutes(-30));
-  std::cout << to_simple_string(p5) << std::endl;
-  std::cout << to_simple_string(p6) << std::endl;
+  std::cout << p5 << std::endl;
+  std::cout << p6 << std::endl;
   time_period p7 = p5.intersection(p6);
-  std::cout << to_simple_string(p7) << std::endl;
+  std::cout << p7 << std::endl;
   check("shifted intersection",    
         p7 == time_period(ptime(d1,time_duration(3,30,0)),
                           ptime(d1,time_duration(4,0,0))));

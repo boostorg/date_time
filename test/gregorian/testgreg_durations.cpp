@@ -61,7 +61,7 @@ int main(){
           d4 - months(-14) == date(2007,Jan,1));
     }
     {
-      months m1x(5), m2x(3), m3x(10);
+      months m1x(5), m3x(10);
       check("months & int multipliable", months(15) == m1x * 3);
       m1x *= 3;
       check("months & int multipliable", months(15) == m1x);
@@ -116,7 +116,7 @@ int main(){
     y3 -= y2;
     check("years & years subtractable", years(-1) == y3);
     {
-      years y1x(5), y2x(3), y3x(10);
+      years y1x(5), y3x(10);
       check("years & int multipliable", years(15) == y1x * 3);
       y1x *= 3;
       check("years & int multipliable", years(15) == y1x);

@@ -59,10 +59,10 @@ main()
     sync_to_next_second();
 
     ptime t1 = second_clock::local_time();
-    std::cout << to_simple_string(t1) << std::endl;
+    std::cout << t1 << std::endl;
 
     ptime t2 = microsec_clock::local_time();
-    std::cout << to_simple_string(t2) << std::endl;
+    std::cout << t2 << std::endl;
 
     check("check equality of hours "
           "between second_clock and microsec_clock timestamps",
@@ -82,8 +82,7 @@ main()
 
     if( !check("check that previous microsec_clock timestamp "
                "is less than the current", last < t2) ) {
-      std::cout << to_simple_string(last) << " < "
-                << to_simple_string(t2) << std::endl;
+      std::cout << last << " < " << t2 << std::endl;
     }
 
     last = t2;
@@ -103,10 +102,10 @@ main()
     sync_to_next_second();
 
     ptime t1 = second_clock::universal_time();
-    std::cout << to_simple_string(t1) << std::endl;
+    std::cout << t1 << std::endl;
 
     ptime t2 = microsec_clock::universal_time();
-    std::cout << to_simple_string(t2) << std::endl;
+    std::cout << t2 << std::endl;
 
     check("check equality of hours "
           "between second_clock and microsec_clock timestamps",
@@ -126,8 +125,7 @@ main()
 
     if( !check("check that previous microsec_clock timestamp "
                "is less than the current", last < t2) ) {
-      std::cout << to_simple_string(last) << " < "
-                << to_simple_string(t2) << std::endl;
+      std::cout << last << " < " << t2 << std::endl;
     }
 
     last = t2;

@@ -36,7 +36,7 @@ main()
 
   //Find last Sunday in Feb
   lastkday lsif(Sunday, Feb);
-  std::cout << to_simple_string(lsif.get_date(2002)) << std::endl; //24th
+  std::cout << lsif.get_date(2002) << std::endl; //24th
   check("Last kday",     date(2002,Feb,24) == lsif.get_date(2002));
   check("Last kday to_string()", lsif.to_string() == std::string("M2.5.0"));
   lastkday ltif(Thursday, Feb);
@@ -49,7 +49,7 @@ main()
   typedef first_day_of_the_week_in_month firstkday;
 
   firstkday fsif(Sunday, Feb);
-  std::cout << to_simple_string(fsif.get_date(2002)) << std::endl; //24th
+  std::cout << fsif.get_date(2002) << std::endl; //24th
   check("First kday",     date(2002,Feb,3) == fsif.get_date(2002));
   check("First kday to_string()", fsif.to_string() == std::string("M2.1.0"));
   firstkday ftif(Thursday, Feb);
@@ -61,8 +61,7 @@ main()
   
   typedef first_day_of_the_week_after firstkdayafter;
   firstkdayafter fkaf(Monday);
-  std::cout << to_simple_string(fkaf.get_date(date(2002,Feb,1)))
-            << std::endl; //feb 4
+  std::cout << fkaf.get_date(date(2002,Feb,1)) << std::endl; //feb 4
   check("kday after",date(2002,Feb,4) == fkaf.get_date(date(2002,Feb,1)));
   firstkdayafter fkaf2(Thursday);
   check("kday after",date(2002,Feb,7) == fkaf2.get_date(date(2002,Feb,1)));
@@ -70,7 +69,7 @@ main()
 
   typedef first_day_of_the_week_before firstkdaybefore;
   firstkdaybefore fkbf(Monday);
-  std::cout << to_simple_string(fkaf.get_date(date(2002,Feb,10)))
+  std::cout << fkaf.get_date(date(2002,Feb,10))
             << std::endl; //feb 4
   check("kday before",date(2002,Feb,4) == fkbf.get_date(date(2002,Feb,10)));
   firstkdaybefore fkbf2(Thursday);

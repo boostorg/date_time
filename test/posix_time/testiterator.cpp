@@ -27,7 +27,7 @@ void iterate_backward(const boost::posix_time::ptime *answers, int ary_len,
   
   std::cout << "counting down by previous duration..." << std::endl;
   for (; titr >= answers[0]; --titr) {
-    std::cout << to_simple_string(*titr) << std::endl;
+    std::cout << *titr << std::endl;
     check("iterating backward", answers[i] == *titr);
     --i;
   }
@@ -48,7 +48,7 @@ main()
   int i=0;
   time_iterator titr(start,seconds(1)); 
   for (; titr < ptime(d,seconds(4)); ++titr) {
-    std::cout << to_simple_string(*titr) << std::endl;
+    std::cout << *titr << std::endl;
     check("iterator -- 1 sec", answer1[i] == *titr);
     i++;
   }
@@ -62,7 +62,7 @@ main()
   i=0;
   time_iterator titr2(start,hours(1)); 
   for (; titr2 < ptime(d,hours(4)); ++titr2) {
-    std::cout << to_simple_string(*titr2) << std::endl;
+    std::cout << *titr2 << std::endl;
     check("iterator -- 1 hour", answer2[i] == *titr2);
     i++;
   }
@@ -78,7 +78,7 @@ main()
   i=0;
   time_iterator titr3(start,minutes(15)); 
   for (; titr3 < ptime(d,time_duration(1,20,0)); ++titr3) {
-    std::cout << to_simple_string(*titr3) << std::endl;
+    std::cout << *titr3 << std::endl;
     check("iterator -- 15 min", answer3[i] == *titr3);
     i++;
   }
@@ -93,7 +93,7 @@ main()
   i=0;
   time_iterator titr4(start,time_duration(0,0,0,1000)); 
   for (; titr4 < ptime(d,time_duration(0,0,0,4000)); ++titr4) {
-    std::cout << to_simple_string(*titr4) << std::endl;
+    std::cout << *titr4 << std::endl;
     check("iterator -- tenth sec", answer4[i] == *titr4);
     i++;
   }
@@ -109,7 +109,7 @@ main()
   i=0;
   time_iterator titr5(start,crzyd); 
   for (; titr5 < ptime(d,crzyd * 4); ++titr5) {
-    std::cout << to_simple_string(*titr5) << std::endl;
+    std::cout << *titr5 << std::endl;
     check("iterator -- crazy duration", answer5[i] == *titr5);
     i++;
   }

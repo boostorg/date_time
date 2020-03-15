@@ -11,8 +11,9 @@
 
 #include <boost/date_time/constrained_value.hpp>
 #include <boost/date_time/date_defs.hpp>
-#include <boost/shared_ptr.hpp>
+#include "boost/date_time/special_defs.hpp"
 #include <boost/date_time/compiler_config.hpp>
+#include <boost/date_time/find_match.hpp>
 #include <stdexcept>
 #include <string>
 #include <map>
@@ -55,8 +56,7 @@ namespace gregorian {
   class BOOST_DATE_TIME_DECL greg_month : public greg_month_rep {
   public:
     typedef date_time::months_of_year month_enum;
-    typedef std::map<std::string, unsigned short> month_map_type;
-    typedef boost::shared_ptr<month_map_type> month_map_ptr_type;
+
     //! Construct a month from the months_of_year enumeration
     BOOST_CXX14_CONSTEXPR greg_month(month_enum theMonth) : 
       greg_month_rep(static_cast<greg_month_rep::value_type>(theMonth)) {}
@@ -67,14 +67,49 @@ namespace gregorian {
     //! Returns month as number from 1 to 12
     BOOST_CXX14_CONSTEXPR value_type as_number() const {return value_;}
     BOOST_CXX14_CONSTEXPR month_enum as_enum() const {return static_cast<month_enum>(value_);}
-    const char* as_short_string() const;
-    const char* as_long_string()  const;
+
+    //! Returns 3 char english string for the month ex: Jan, Feb, Mar, Apr
+    const char*
+    as_short_string() const
+    {
+      static const char* const short_month_names[NumMonths]
+	= {"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec", "NAM"};
+      return short_month_names[value_-1];
+    }
+
+    //! Returns full name of month as string in english ex: January, February
+    const char*
+    as_long_string() const
+    {
+      static const char* const long_month_names[NumMonths]
+	= {"January","February","March","April","May","June","July","August",
+	   "September","October","November","December","NotAMonth"};
+      return long_month_names[value_-1];
+    }
+
 #ifndef BOOST_NO_STD_WSTRING
-    const wchar_t* as_short_wstring() const;
-    const wchar_t* as_long_wstring()  const;
+
+    //! Returns 3 wchar_t english string for the month ex: Jan, Feb, Mar, Apr
+    const wchar_t*
+    as_short_wstring() const
+    {
+      static const wchar_t* const w_short_month_names[NumMonths]
+	= {L"Jan",L"Feb",L"Mar",L"Apr",L"May",L"Jun",L"Jul",L"Aug",L"Sep",L"Oct",
+	   L"Nov",L"Dec",L"NAM"};
+      return w_short_month_names[value_-1];
+    }
+
+    //! Returns full name of month as wchar_t string in english ex: January, February
+    const wchar_t*
+    as_long_wstring() const
+    {
+      static const wchar_t* const w_long_month_names[NumMonths]
+	= {L"January",L"February",L"March",L"April",L"May",L"June",L"July",L"August",
+	   L"September",L"October",L"November",L"December",L"NotAMonth"};
+      return w_long_month_names[value_-1];
+    }
+
 #endif // BOOST_NO_STD_WSTRING
-    //! Shared pointer to a map of Month strings (Names & Abbrev) & numbers
-    static month_map_ptr_type get_month_map_ptr();
 
     /* parameterized as_*_string functions are intended to be called
      * from a template function: "... as_short_string(charT c='\0');" */
@@ -97,6 +132,31 @@ namespace gregorian {
     }
 #endif // BOOST_NO_STD_WSTRING
   };
+
+  //! Return special_value from string argument
+  /*! Return special_value from string argument. If argument is
+   * not one of the special value names (defined in names.hpp),
+   * return 'not_special' */
+  inline
+  date_time::special_values
+  special_value_from_string(const std::string& s) {
+    using namespace date_time;
+    static const char* const special_value_names[date_time::NumSpecialValues]
+      = {"not-a-date-time","-infinity","+infinity","min_date_time",
+	 "max_date_time","not_special"};
+
+    short i = date_time::find_match(special_value_names,
+                                    special_value_names,
+                                    date_time::NumSpecialValues,
+                                    s);
+    if(i >= date_time::NumSpecialValues) { // match not found
+      return not_special;
+    }
+    else {
+      return static_cast<special_values>(i);
+    }
+  }
+
 
 } } //namespace gregorian
 
