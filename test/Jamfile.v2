@@ -9,8 +9,11 @@ run testwrapping_int.cpp ;
 run testconstrained_value.cpp ;
 run testgregorian_calendar.cpp ;
 run testgeneric_period.cpp ;
-#run testmisc.cpp ;
+# the library dependence below is just to test that the
+# stub library will build, it's completely uneeded not that
+# date-time is all inline
 run testmisc.cpp
+    ../build//boost_date_time/<link>static
     : : : <define>BOOST_DATE_TIME_POSIX_TIME_STD_CONFIG
     : testmisc_std_cfg ;
 
