@@ -48,7 +48,7 @@ namespace gregorian {
     BOOST_CXX14_CONSTEXPR value_type as_number() const {return value_;}
     BOOST_CXX14_CONSTEXPR weekday_enum as_enum() const {return static_cast<weekday_enum>(value_);}
 
-      //! Return a 3 digit english string of the day of week (eg: Sun)
+    //! Return a 3 digit english string of the day of week (eg: Sun)
     const char* as_short_string() const
     {
       static const char* const short_weekday_names[]=
