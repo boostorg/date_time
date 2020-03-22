@@ -124,10 +124,18 @@ namespace gregorian {
       return date(ymd.year, ymd.month, eom_day);
     }
 
+    friend BOOST_CXX14_CONSTEXPR
+    bool operator==(const date& lhs, const date& rhs);
+
    private:
 
   };
 
+  inline BOOST_CXX14_CONSTEXPR
+  bool operator==(const date& lhs, const date& rhs)
+  {
+    return lhs.days_ == rhs.days_;
+  }
 
 
 } } //namespace gregorian
