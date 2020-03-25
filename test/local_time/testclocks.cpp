@@ -23,14 +23,14 @@ main()
   boost::shared_ptr<time_zone> ny_tz(new posix_time_zone("EST-05EDT,M4.1.0,M10.5.0"));
 
   ptime tl = second_clock::local_time();
-  std::cout << to_simple_string(tl) << std::endl;
+  std::cout << tl << std::endl;
   local_date_time ldt1 = local_sec_clock::local_time(az_tz);
   std::cout << ldt1.to_string() << std::endl;
   local_date_time ldt2 = local_sec_clock::local_time(ny_tz);
   std::cout << ldt2.to_string() << std::endl;
   
   tl = microsec_clock::local_time();
-  std::cout << to_simple_string(tl) << std::endl;
+  std::cout << tl << std::endl;
   local_date_time ldt3 = local_microsec_clock::local_time(az_tz);
   std::cout << ldt3.to_string() << std::endl;
   local_date_time ldt4 = local_microsec_clock::local_time(ny_tz);

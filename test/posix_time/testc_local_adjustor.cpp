@@ -33,11 +33,11 @@ main()
       ptime t1(date(2002,Jan,1), hours(7)+millisec(5)); 
       std::cout << "UTC <--> TZ Setting of Machine -- No DST" << std::endl;
       ptime t2 = local_adj::utc_to_local(t1);
-      std::cout << to_simple_string(t2) << " LOCAL is " 
-                << to_simple_string(t1) << " UTC time "
+      std::cout << t2 << " LOCAL is " 
+                << t1 << " UTC time "
                 << std::endl;
       td1 = t2 - t1;
-      std::cout << "A difference of: " << to_simple_string(td1)
+      std::cout << "A difference of: " << td1
                 << std::endl;
       }
   catch (std::runtime_error & re)
@@ -51,11 +51,11 @@ main()
       ptime t3(date(2002,May,1), hours(5)+millisec(5)); 
       std::cout << "UTC <--> TZ Setting of Machine -- In DST" << std::endl;
       ptime t4 = local_adj::utc_to_local(t3);
-      std::cout << to_simple_string(t4) << " LOCAL is " 
-                << to_simple_string(t3) << " UTC time "
+      std::cout << t4 << " LOCAL is " 
+                << t3 << " UTC time "
                 << std::endl;
       td2 = t4 - t3;
-      std::cout << "A difference of: " << to_simple_string(td2)
+      std::cout << "A difference of: " << td2
                 << std::endl;
       }
   catch (std::runtime_error & re)
@@ -69,11 +69,11 @@ main()
       ptime t5(date(2040,May,1), hours(5)+millisec(5));
       std::cout << "UTC <--> TZ Setting of Machine -- In DST" << std::endl;
       ptime t6 = local_adj::utc_to_local(t5);
-      std::cout << to_simple_string(t6) << " LOCAL is " 
-                << to_simple_string(t5) << " UTC time "
+      std::cout << t6 << " LOCAL is " 
+                << t5 << " UTC time "
                 << std::endl;
       td3 = t6 - t5;
-      std::cout << "a difference of: " << to_simple_string(td3)
+      std::cout << "a difference of: " << td3
                 << std::endl;
       }
   catch (std::runtime_error & re)

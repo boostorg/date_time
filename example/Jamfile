@@ -1,7 +1,4 @@
-project libs/date_time/example 
-    : requirements
-      <library>../build//boost_date_time/<link>static
-    ;
+project libs/date_time/example ;
 
 exe dates_as_strings   : gregorian/dates_as_strings.cpp ;
 exe days_alive         : gregorian/days_alive.cpp ;
@@ -18,6 +15,7 @@ exe print_month    : gregorian/print_month.cpp ;
 exe period_calc    : gregorian/period_calc.cpp ;
 
 exe days_since_year_start : gregorian/days_since_year_start.cpp ;
+
 
 exe local_utc_conversion : posix_time/local_utc_conversion.cpp
                 : <define>BOOST_DATE_TIME_POSIX_TIME_STD_CONFIG  
