@@ -33,7 +33,7 @@
 #undef BOOST_DATE_TIME_OPTIONAL_GREGORIAN_TYPES
 #endif
 
-#if (defined(BOOST_NO_INCLASS_MEMBER_INITIALIZATION) || BOOST_WORKAROUND( __BORLANDC__,  BOOST_TESTED_AT(0x581) ) )
+#if (defined(BOOST_NO_INCLASS_MEMBER_INITIALIZATION) || BOOST_WORKAROUND( BOOST_BORLANDC,  BOOST_TESTED_AT(0x581) ) )
 #define BOOST_DATE_TIME_NO_MEMBER_INIT
 #endif
 
@@ -47,13 +47,13 @@
 
 
 /* Workaround for Borland iterator error. Error was "Cannot convert 'istream *' to 'wistream *' in function istream_iterator<>::istream_iterator() */
-#if defined(__BORLANDC__) && defined(BOOST_BCB_WITH_RW_LIB)
+#if defined(BOOST_BORLANDC) && defined(BOOST_BCB_WITH_RW_LIB)
 #define BOOST_DATE_TIME_NO_WISTREAM_ITERATOR
 #endif
 
 
 // Borland v5.64 does not have the following in std namespace; v5.5.1 does
-#if defined(__BORLANDC__) && defined(BOOST_BCB_WITH_STLPORT)
+#if defined(BOOST_BORLANDC) && defined(BOOST_BCB_WITH_STLPORT)
 #include <locale>
 namespace std {
   using stlport::tolower;
@@ -70,7 +70,7 @@ namespace std {
 #if (((defined(__GNUC__) && (__GNUC__ < 3)) || \
       (defined(_MSC_VER) && (_MSC_VER < 1300)) ) && \
       !defined(_STLP_OWN_IOSTREAMS) ) || \
-      BOOST_WORKAROUND( __BORLANDC__, BOOST_TESTED_AT(0x581) )
+      BOOST_WORKAROUND( BOOST_BORLANDC, BOOST_TESTED_AT(0x581) )
 #define BOOST_DATE_TIME_INCLUDE_LIMITED_HEADERS
 #endif
 
@@ -145,7 +145,7 @@ namespace std {
 #endif  // auto-linking disabled
 
 #if defined(BOOST_HAS_THREADS) 
-#  if defined(_MSC_VER) || defined(__MWERKS__) || defined(__MINGW32__) ||  defined(__BORLANDC__)
+#  if defined(_MSC_VER) || defined(__MWERKS__) || defined(__MINGW32__) ||  defined(BOOST_BORLANDC)
      //no reentrant posix functions (eg: localtime_r)
 #  elif (!defined(__hpux) || (defined(__hpux) && defined(_REENTRANT)))
 #   define BOOST_DATE_TIME_HAS_REENTRANT_STD_FUNCTIONS
