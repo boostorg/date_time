@@ -61,7 +61,7 @@ namespace posix_time {
     BOOST_CXX14_CONSTEXPR 
     ptime() :
       date_time::base_time<time_type,time_system_type>(gregorian::date(not_a_date_time),
-						       time_duration_type(not_a_date_time))
+                                                       time_duration_type(not_a_date_time))
     {}
 #endif // DATE_TIME_NO_DEFAULT_CONSTRUCTOR
 

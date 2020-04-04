@@ -54,9 +54,9 @@ namespace posix_time {
     typedef time_res_traits::tick_type tick_type;
     typedef time_res_traits::impl_type impl_type;
     BOOST_CXX14_CONSTEXPR time_duration(hour_type hour,
-					min_type min,
-					sec_type sec,
-					fractional_seconds_type fs=0) :
+                                        min_type min,
+                                        sec_type sec,
+                                        fractional_seconds_type fs=0) :
       date_time::time_duration<time_duration, time_res_traits>(hour,min,sec,fs)
     {}
    BOOST_CXX14_CONSTEXPR time_duration() :
