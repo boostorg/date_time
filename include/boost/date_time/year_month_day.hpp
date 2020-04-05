@@ -19,9 +19,9 @@ namespace date_time {
   struct BOOST_SYMBOL_VISIBLE year_month_day_base {
     BOOST_CXX14_CONSTEXPR
     year_month_day_base(YearType  year,
-			MonthType month,
-			DayType   day);
-    
+                        MonthType month,
+                        DayType   day);
+
     YearType year;
     MonthType month;
     DayType day;
@@ -29,8 +29,8 @@ namespace date_time {
     typedef MonthType month_type;
     typedef DayType   day_type;
   };
-  
-  
+
+
   //! A basic constructor
   template<typename YearType, typename MonthType, typename DayType>
   inline BOOST_CXX14_CONSTEXPR
@@ -41,7 +41,7 @@ namespace date_time {
     month(m),
     day(d)
   {}
-  
+
 } }//namespace date_time
 
 

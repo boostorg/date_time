@@ -9,7 +9,7 @@
  * $Date$
  */
 
-
+#include <string>
 
 namespace boost {
 namespace date_time {

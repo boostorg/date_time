@@ -13,6 +13,7 @@
 #include <boost/operators.hpp>
 #include <boost/date_time/special_defs.hpp>
 #include <boost/date_time/compiler_config.hpp>
+#include <boost/date_time/int_adapter.hpp>
 
 namespace boost {
 namespace date_time {

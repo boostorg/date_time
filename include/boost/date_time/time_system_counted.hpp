@@ -2,7 +2,7 @@
 #define DATE_TIME_TIME_SYSTEM_COUNTED_HPP
 
 /* Copyright (c) 2002,2003 CrystalClear Software, Inc.
- * Use, modification and distribution is subject to the 
+ * Use, modification and distribution is subject to the
  * Boost Software License, Version 1.0. (See accompanying
  * file LICENSE_1_0.txt or http://www.boost.org/LICENSE_1_0.txt)
  * Author: Jeff Garland, Bart Garst
@@ -10,8 +10,9 @@
  */
 
 
-
-#include "boost/date_time/time_defs.hpp"
+#include <boost/date_time/compiler_config.hpp>
+#include <boost/date_time/time_defs.hpp>
+#include <boost/date_time/special_defs.hpp>
 #include <string>
 
 
@@ -30,16 +31,16 @@ namespace date_time {
     typedef typename date_type::ymd_type ymd_type;
     typedef typename config::time_duration_type time_duration_type;
     typedef typename config::resolution_traits   resolution_traits;
-    
+
     BOOST_CXX14_CONSTEXPR
-    counted_time_rep(const date_type& d, const time_duration_type& time_of_day) 
+    counted_time_rep(const date_type& d, const time_duration_type& time_of_day)
       : time_count_(1)
     {
       if(d.is_infinity() || d.is_not_a_date() || time_of_day.is_special()) {
         time_count_ = time_of_day.get_rep() + d.day_count();
         //std::cout << time_count_ << std::endl;
       }
-      else {    
+      else {
         time_count_ = (d.day_number() * frac_sec_per_day()) + time_of_day.ticks();
       }
     }
@@ -68,17 +69,17 @@ namespace date_time {
     BOOST_CXX14_CONSTEXPR
     unsigned long day_count() const
     {
-      /* resolution_traits::as_number returns a boost::int64_t & 
-       * frac_sec_per_day is also a boost::int64_t so, naturally, 
-       * the division operation returns a boost::int64_t. 
-       * The static_cast to an unsigned long is ok (results in no data loss) 
-       * because frac_sec_per_day is either the number of 
-       * microseconds per day, or the number of nanoseconds per day. 
-       * Worst case scenario: resolution_traits::as_number returns the 
-       * maximum value an int64_t can hold and frac_sec_per_day 
-       * is microseconds per day (lowest possible value). 
-       * The division operation will then return a value of 106751991 - 
-       * easily fitting in an unsigned long. 
+      /* resolution_traits::as_number returns a boost::int64_t &
+       * frac_sec_per_day is also a boost::int64_t so, naturally,
+       * the division operation returns a boost::int64_t.
+       * The static_cast to an unsigned long is ok (results in no data loss)
+       * because frac_sec_per_day is either the number of
+       * microseconds per day, or the number of nanoseconds per day.
+       * Worst case scenario: resolution_traits::as_number returns the
+       * maximum value an int64_t can hold and frac_sec_per_day
+       * is microseconds per day (lowest possible value).
+       * The division operation will then return a value of 106751991 -
+       * easily fitting in an unsigned long.
        */
       return static_cast<unsigned long>(resolution_traits::as_number(time_count_) / frac_sec_per_day());
     }
@@ -137,8 +138,8 @@ namespace date_time {
 
     static BOOST_CXX14_CONSTEXPR
     time_rep_type get_time_rep(const date_type& day,
-			       const time_duration_type& tod,
-			       date_time::dst_flags dst=not_dst)
+                               const time_duration_type& tod,
+                               date_time::dst_flags dst=not_dst)
     {
       unused_var(dst);
       return time_rep_type(day, tod);
@@ -151,10 +152,10 @@ namespace date_time {
         return time_rep_type(date_type(not_a_date_time),
                              time_duration_type(not_a_date_time));
       case pos_infin:
-        return time_rep_type(date_type(pos_infin), 
+        return time_rep_type(date_type(pos_infin),
                              time_duration_type(pos_infin));
       case neg_infin:
-        return time_rep_type(date_type(neg_infin), 
+        return time_rep_type(date_type(neg_infin),
                              time_duration_type(neg_infin));
       case max_date_time: {
         time_duration_type td = time_duration_type(24,0,0,0) - time_duration_type(0,0,0,1);
@@ -166,7 +167,7 @@ namespace date_time {
       default:
         return time_rep_type(date_type(not_a_date_time),
                              time_duration_type(not_a_date_time));
-        
+
       }
 
     }
@@ -183,7 +184,7 @@ namespace date_time {
         return time_duration_type(val.get_rep().as_special());
       }
       else{
-        return time_duration_type(0,0,0,val.tod()); 
+        return time_duration_type(0,0,0,val.tod());
       }
     }
     static std::string zone_name(const time_rep_type&)
@@ -201,7 +202,7 @@ namespace date_time {
     }
     static BOOST_CXX14_CONSTEXPR
     time_rep_type add_days(const time_rep_type& base,
-			   const date_duration_type& dd)
+                           const date_duration_type& dd)
     {
       if(base.is_special() || dd.is_special()) {
         return(time_rep_type(base.get_rep() + dd.get_rep()));
@@ -212,7 +213,7 @@ namespace date_time {
     }
     static BOOST_CXX14_CONSTEXPR
     time_rep_type subtract_days(const time_rep_type& base,
-				const date_duration_type& dd)
+                                const date_duration_type& dd)
     {
       if(base.is_special() || dd.is_special()) {
         return(time_rep_type(base.get_rep() - dd.get_rep()));
@@ -223,7 +224,7 @@ namespace date_time {
     }
     static BOOST_CXX14_CONSTEXPR
     time_rep_type subtract_time_duration(const time_rep_type& base,
-					 const time_duration_type& td)
+                                         const time_duration_type& td)
     {
       if(base.is_special() || td.is_special()) {
         return(time_rep_type(base.get_rep() - td.get_rep()));
@@ -234,7 +235,7 @@ namespace date_time {
     }
     static BOOST_CXX14_CONSTEXPR
     time_rep_type add_time_duration(const time_rep_type& base,
-				    time_duration_type td)
+                                    time_duration_type td)
     {
       if(base.is_special() || td.is_special()) {
         return(time_rep_type(base.get_rep() + td.get_rep()));
@@ -245,7 +246,7 @@ namespace date_time {
     }
     static BOOST_CXX14_CONSTEXPR
     time_duration_type subtract_times(const time_rep_type& lhs,
-				      const time_rep_type& rhs)
+                                      const time_rep_type& rhs)
     {
       if(lhs.is_special() || rhs.is_special()) {
         return(time_duration_type(
@@ -253,10 +254,10 @@ namespace date_time {
       }
       else {
         fractional_seconds_type fs = lhs.time_count() - rhs.time_count();
-        return time_duration_type(0,0,0,fs); 
+        return time_duration_type(0,0,0,fs);
       }
     }
-    
+
   };
 
 
