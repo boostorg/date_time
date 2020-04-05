@@ -133,6 +133,15 @@ ptime t(time_from_string(ts))</screen></entry>
 	    <entry><screen>std::string ts("20020131T235959");
 ptime t(from_iso_string(ts))</screen></entry>
 	  </row>
+
+	  <row>
+	    <entry valign="top" morerows="1"><screen>ptime from_iso_extended_string(std::string)</screen></entry>
+	    <entry>From delimited iso form string.</entry>
+	  </row>
+          <row>
+	    <entry><screen>std::string ts("2020-01-31T23:59:59.123");
+ptime t(from_iso_extended_string(ts))</screen></entry>
+	  </row>
 	</tbody>
       </tgroup>
     </informaltable>
