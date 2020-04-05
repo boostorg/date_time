@@ -48,11 +48,44 @@ namespace gregorian {
     BOOST_CXX14_CONSTEXPR value_type as_number() const {return value_;}
     BOOST_CXX14_CONSTEXPR weekday_enum as_enum() const {return static_cast<weekday_enum>(value_);}
 
-    const char* as_short_string() const;
-    const char* as_long_string()  const;
+    //! Return a 3 digit english string of the day of week (eg: Sun)
+    const char* as_short_string() const
+    {
+      static const char* const short_weekday_names[]
+        = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
+
+      return short_weekday_names[value_];
+    }
+
+    //! Return a point to a long english string representing day of week
+    const char* as_long_string() const
+    {
+      static const char* const long_weekday_names[]
+        = {"Sunday","Monday","Tuesday","Wednesday", "Thursday", "Friday", "Saturday"};
+
+      return long_weekday_names[value_];
+    }
+
+
 #ifndef BOOST_NO_STD_WSTRING
-    const wchar_t* as_short_wstring() const;
-    const wchar_t* as_long_wstring()  const;
+
+    //! Return a 3 digit english wchar_t string of the day of week (eg: Sun)
+    const wchar_t* as_short_wstring() const
+    {
+      static const wchar_t* const w_short_weekday_names[]={L"Sun", L"Mon", L"Tue",
+                                                           L"Wed", L"Thu", L"Fri", L"Sat"};
+      return w_short_weekday_names[value_];
+    }
+
+    //! Return a point to a long english wchar_t string representing day of week
+    const wchar_t* as_long_wstring()  const
+    {
+      static const wchar_t* const w_long_weekday_names[]= {L"Sunday",L"Monday",L"Tuesday",
+                                                           L"Wednesday", L"Thursday",
+                                                           L"Friday", L"Saturday"};
+      return w_long_weekday_names[value_];
+    }
+
 #endif // BOOST_NO_STD_WSTRING
 
 

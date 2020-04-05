@@ -61,12 +61,20 @@ namespace posix_time {
     BOOST_CXX14_CONSTEXPR 
     ptime() :
       date_time::base_time<time_type,time_system_type>(gregorian::date(not_a_date_time),
-						       time_duration_type(not_a_date_time))
+                                                       time_duration_type(not_a_date_time))
     {}
 #endif // DATE_TIME_NO_DEFAULT_CONSTRUCTOR
 
+    friend BOOST_CXX14_CONSTEXPR
+    bool operator==(const ptime& lhs, const ptime& rhs);
+
   };
 
+  inline BOOST_CXX14_CONSTEXPR
+  bool operator==(const ptime& lhs, const ptime& rhs)
+  {
+    return ptime::time_system_type::is_equal(lhs.time_,rhs.time_);
+  }
 
 
 } }//namespace posix_time

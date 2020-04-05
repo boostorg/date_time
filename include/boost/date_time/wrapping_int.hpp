@@ -33,7 +33,7 @@ class wrapping_int {
 public:
   typedef int_type_ int_type;
   //typedef overflow_type_ overflow_type;
-  static BOOST_CONSTEXPR_OR_CONST int_type wrap_value() {return wrap_val;}
+  static BOOST_CONSTEXPR int_type wrap_value() {return wrap_val;}
   //!Add, return true if wrapped
   BOOST_CXX14_CONSTEXPR wrapping_int(int_type v) : value_(v) {}
   //! Explicit converion method
@@ -96,8 +96,8 @@ template<typename int_type_, int_type_ wrap_min, int_type_ wrap_max>
 class wrapping_int2 {
 public:
   typedef int_type_ int_type;
-  static BOOST_CONSTEXPR_OR_CONST int_type wrap_value() {return wrap_max;}
-  static BOOST_CONSTEXPR_OR_CONST int_type min_value()  {return wrap_min;}
+  static BOOST_CONSTEXPR int_type wrap_value() {return wrap_max;}
+  static BOOST_CONSTEXPR int_type min_value()  {return wrap_min;}
   /*! If initializing value is out of range of [wrap_min, wrap_max],
    * value will be initialized to closest of min or max */
   BOOST_CXX14_CONSTEXPR wrapping_int2(int_type v) : value_(v) {
