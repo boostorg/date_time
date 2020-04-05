@@ -58,7 +58,7 @@ or
 
 	<row>
 	  <entry valign="top" morerows="1"><screen>static date_int_type day_number(ymd_type)</screen></entry>
-	  <entry> Convert a ymd_type into a day number. The day number is an absolute number of days since the epoch start.</entry>
+	  <entry> Convert a ymd_type into a day number. The day number mapping is implementation defined, however the library implements the 1400-01-01 epoch as follows <screen> date(gregorian_calendar::epoch()).day_number() == 2232400</screen></entry>
 	</row>
 	<row>
 	  <entry></entry>
