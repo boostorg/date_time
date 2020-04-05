@@ -12,6 +12,73 @@
 
   <!-- if each new change tgroup has a "Bug Fix" as the first "Type", the columns will line up nicely -->
 
+  <bridgehead renderas="sect3">Changes from Boost 1.72 to 1.73 </bridgehead>
+  <informaltable frame="all">
+    <tgroup cols="2">
+      <thead>
+        <row>
+          <entry>Type</entry>
+          <entry>Description</entry>
+        </row>
+      </thead>
+      <tbody>
+
+        <row>
+          <entry>Enhancement</entry>
+          <entry>
+            Make date_time all inline. Users no longer need to link the library for any library functions.
+            Note that an empty stub library is maintained for backward compatibility. Resolves: 
+            (<ulink url="https://github.com/boostorg/date_time/issues/134">github issue #134</ulink>) and
+            (<ulink url="https://github.com/boostorg/date_time/issues/85">github issue #85</ulink>).
+
+Remove the link library to resolve linking/visibility concerns
+          </entry>
+        </row>
+
+        <row>
+          <entry>Enhancement</entry>
+          <entry>
+            Support for constexpr has been added when in c++14 mode and above. For example:
+              <code>
+              constexpr microseconds ms(1000);
+              static_assert(ms.total_microseconds() == 1000, "constexpr total_microseconds");
+              </code>
+            (<ulink url="https://github.com/boostorg/date_time/issues/123">github issue #123</ulink>).
+          </entry>
+        </row>
+
+        <row>
+          <entry>Enhancement</entry>
+          <entry>
+            C++20 ambiguous comparison operator warning with clang 10 
+            (<ulink url="https://github.com/boostorg/date_time/issues/132">github issue #132</ulink>).
+          </entry>
+        </row>
+
+        <row>
+          <entry>Cleanup</entry>
+          <entry>
+            Deprecated support for legacy io and USE_DATE_TIME_PRE_1_33_FACET_IO macro 
+            (<ulink url="https://github.com/boostorg/date_time/issues/61">github issue #61</ulink>).
+          </entry>
+        </row>
+
+        <row>
+          <entry>Bug Fix</entry>
+          <entry>
+            Documentation clarifications for gettimeofday, day_number, and from_iso_extended_string.
+            <ulink url="https://github.com/boostorg/date_time/issues/127">github issue #127</ulink>  
+            <ulink url="https://github.com/boostorg/date_time/issues/125">github issue #125</ulink>, and
+            <ulink url="https://github.com/boostorg/date_time/issues/116">github issue #116</ulink>
+          </entry>
+        </row>
+
+
+      </tbody>
+    </tgroup>
+  </informaltable>
+
+
   <bridgehead renderas="sect3">Changes from Boost 1.41 to 1.44 (date_time 1.08 to 1.09)</bridgehead>
   <informaltable frame="all">
     <tgroup cols="2">
