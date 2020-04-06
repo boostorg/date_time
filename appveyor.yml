@@ -44,8 +44,8 @@ environment:
     # on Windows it is important to exercise all the possibilities, especially shared vs static, however most
     # libraries that care about this exercise it in their Jamfiles...
     # B2_ADDRESS_MODEL: address-model=64,32
-    # B2_LINK: link=shared,static
     # B2_THREADING: threading=multi,single
+    B2_LINK: link=shared,static
     B2_VARIANT: variant=release
 
   matrix:
