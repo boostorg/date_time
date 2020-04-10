@@ -44,8 +44,8 @@ environment:
     # on Windows it is important to exercise all the possibilities, especially shared vs static, however most
     # libraries that care about this exercise it in their Jamfiles...
     # B2_ADDRESS_MODEL: address-model=64,32
-    # B2_LINK: link=shared,static
     # B2_THREADING: threading=multi,single
+    B2_LINK: link=shared,static
     B2_VARIANT: variant=release
 
   matrix:
@@ -62,6 +62,7 @@ environment:
       B2_CXXFLAGS: cxxflags=-permissive-
       B2_CXXSTD: latest # 2a
       B2_TOOLSET: msvc-14.1
+      BOOST_DATE_TIME_TEST_WITHOUT_SELF_CONTAINED_HEADER_TESTS: 1
 
     - FLAVOR: Visual Studio 2017 C++17
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
@@ -69,27 +70,32 @@ environment:
       B2_CXXSTD: 17
       B2_TOOLSET: msvc-14.1
       B2_VARIANT: variant=debug
+      BOOST_DATE_TIME_TEST_WITHOUT_SELF_CONTAINED_HEADER_TESTS: 1
 
     - FLAVOR: Visual Studio 2017 C++14 (Default)
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
       B2_ADDRESS_MODEL: address-model=64,32
       B2_TOOLSET: msvc-14.1
+      BOOST_DATE_TIME_TEST_WITHOUT_SELF_CONTAINED_HEADER_TESTS: 1
 
     - FLAVOR: clang-cl
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
       B2_ADDRESS_MODEL: address-model=64
       B2_CXXSTD: 11
       B2_TOOLSET: clang-win
+      BOOST_DATE_TIME_TEST_WITHOUT_SELF_CONTAINED_HEADER_TESTS: 1
 
     - FLAVOR: Visual Studio 2015 C++14 (Default)
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
       B2_ADDRESS_MODEL: address-model=64,32
       B2_TOOLSET: msvc-14.0
       B2_VARIANT: variant=debug
+      BOOST_DATE_TIME_TEST_WITHOUT_SELF_CONTAINED_HEADER_TESTS: 1
 
     - FLAVOR: Visual Studio 2010, 2012, 2013
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
       B2_TOOLSET: msvc-10.0,msvc-11.0,msvc-12.0
+      BOOST_DATE_TIME_TEST_WITHOUT_SELF_CONTAINED_HEADER_TESTS: 1
 
     - FLAVOR: cygwin (32-bit)
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
@@ -101,6 +107,7 @@ environment:
       B2_THREADING: threadapi=pthread
       B2_TOOLSET: gcc
       B2_VARIANT: variant=debug
+      BOOST_DATE_TIME_TEST_WITHOUT_SELF_CONTAINED_HEADER_TESTS: 1
 
     - FLAVOR: cygwin (64-bit)
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
@@ -111,6 +118,7 @@ environment:
       B2_DEFINES: define=_POSIX_C_SOURCE=200112L define=__USE_ISOC99
       B2_THREADING: threadapi=pthread
       B2_TOOLSET: gcc
+      BOOST_DATE_TIME_TEST_WITHOUT_SELF_CONTAINED_HEADER_TESTS: 1
 
     - FLAVOR: mingw32
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
@@ -119,6 +127,7 @@ environment:
       B2_CXXSTD: 03,11
       SCRIPT: ci\appveyor\mingw.bat
       B2_VARIANT: variant=debug
+      BOOST_DATE_TIME_TEST_WITHOUT_SELF_CONTAINED_HEADER_TESTS: 1
 
     - FLAVOR: mingw64
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
@@ -127,6 +136,7 @@ environment:
       B2_CXXSTD: 11,17
       B2_DEFINES: define=__USE_ISOC99
       SCRIPT: ci\appveyor\mingw.bat
+      BOOST_DATE_TIME_TEST_WITHOUT_SELF_CONTAINED_HEADER_TESTS: 1
 
 install:
   - set SELF=%APPVEYOR_PROJECT_NAME:-=_%

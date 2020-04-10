@@ -11,14 +11,9 @@
 
 #include <boost/date_time/constrained_value.hpp>
 #include <boost/date_time/date_defs.hpp>
-#include "boost/date_time/special_defs.hpp"
 #include <boost/date_time/compiler_config.hpp>
-#include <boost/date_time/find_match.hpp>
 #include <stdexcept>
 #include <string>
-#include <map>
-#include <algorithm>
-#include <cctype>
 
 namespace boost {
 namespace gregorian {
@@ -40,7 +35,7 @@ namespace gregorian {
   using date_time::Dec;
   using date_time::NotAMonth;
   using date_time::NumMonths;
-  
+
   //! Exception thrown if a greg_month is constructed with a value out of range
   struct BOOST_SYMBOL_VISIBLE bad_month : public std::out_of_range
   {
@@ -51,14 +46,14 @@ namespace gregorian {
   //! A constrained range that implements the gregorian_month rules
   typedef CV::constrained_value<greg_month_policies> greg_month_rep;
 
-  
+
   //! Wrapper class to represent months in gregorian based calendar
-  class BOOST_DATE_TIME_DECL greg_month : public greg_month_rep {
+  class BOOST_SYMBOL_VISIBLE greg_month : public greg_month_rep {
   public:
     typedef date_time::months_of_year month_enum;
 
     //! Construct a month from the months_of_year enumeration
-    BOOST_CXX14_CONSTEXPR greg_month(month_enum theMonth) : 
+    BOOST_CXX14_CONSTEXPR greg_month(month_enum theMonth) :
       greg_month_rep(static_cast<greg_month_rep::value_type>(theMonth)) {}
     //! Construct from a short value
     BOOST_CXX14_CONSTEXPR greg_month(value_type theMonth) : greg_month_rep(theMonth) {}
@@ -73,7 +68,7 @@ namespace gregorian {
     as_short_string() const
     {
       static const char* const short_month_names[NumMonths]
-	= {"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec", "NAM"};
+        = {"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec", "NAM"};
       return short_month_names[value_-1];
     }
 
@@ -82,8 +77,8 @@ namespace gregorian {
     as_long_string() const
     {
       static const char* const long_month_names[NumMonths]
-	= {"January","February","March","April","May","June","July","August",
-	   "September","October","November","December","NotAMonth"};
+        = {"January","February","March","April","May","June","July","August",
+           "September","October","November","December","NotAMonth"};
       return long_month_names[value_-1];
     }
 
@@ -94,8 +89,8 @@ namespace gregorian {
     as_short_wstring() const
     {
       static const wchar_t* const w_short_month_names[NumMonths]
-	= {L"Jan",L"Feb",L"Mar",L"Apr",L"May",L"Jun",L"Jul",L"Aug",L"Sep",L"Oct",
-	   L"Nov",L"Dec",L"NAM"};
+        = {L"Jan",L"Feb",L"Mar",L"Apr",L"May",L"Jun",L"Jul",L"Aug",L"Sep",L"Oct",
+           L"Nov",L"Dec",L"NAM"};
       return w_short_month_names[value_-1];
     }
 
@@ -104,8 +99,8 @@ namespace gregorian {
     as_long_wstring() const
     {
       static const wchar_t* const w_long_month_names[NumMonths]
-	= {L"January",L"February",L"March",L"April",L"May",L"June",L"July",L"August",
-	   L"September",L"October",L"November",L"December",L"NotAMonth"};
+        = {L"January",L"February",L"March",L"April",L"May",L"June",L"July",L"August",
+           L"September",L"October",L"November",L"December",L"NotAMonth"};
       return w_long_month_names[value_-1];
     }
 
@@ -133,33 +128,6 @@ namespace gregorian {
 #endif // BOOST_NO_STD_WSTRING
   };
 
-  //! Return special_value from string argument
-  /*! Return special_value from string argument. If argument is
-   * not one of the special value names (defined in names.hpp),
-   * return 'not_special' */
-  inline
-  date_time::special_values
-  special_value_from_string(const std::string& s) {
-    using namespace date_time;
-    static const char* const special_value_names[date_time::NumSpecialValues]
-      = {"not-a-date-time","-infinity","+infinity","min_date_time",
-	 "max_date_time","not_special"};
-
-    short i = date_time::find_match(special_value_names,
-                                    special_value_names,
-                                    date_time::NumSpecialValues,
-                                    s);
-    if(i >= date_time::NumSpecialValues) { // match not found
-      return not_special;
-    }
-    else {
-      return static_cast<special_values>(i);
-    }
-  }
-
-
 } } //namespace gregorian
-
-
 
 #endif

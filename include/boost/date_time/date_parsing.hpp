@@ -9,13 +9,16 @@
  * $Date$
  */
 
+#include <map>
 #include <string>
+#include <sstream>
 #include <iterator>
 #include <algorithm>
 #include <boost/tokenizer.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/date_time/compiler_config.hpp>
 #include <boost/date_time/parse_format_base.hpp>
+#include <boost/date_time/period.hpp>
 
 #if defined(BOOST_DATE_TIME_NO_LOCALE)
 #include <cctype> // ::tolower(int)
@@ -62,54 +65,54 @@ namespace date_time {
       }
       else {
         std::string str = convert_to_lower(s);
-	//c++98 support
+        //c++98 support
 #if defined(BOOST_NO_CXX11_UNIFIED_INITIALIZATION_SYNTAX)
-	static std::map<std::string, unsigned short> month_map;
-	typedef std::map<std::string, unsigned short>::value_type vtype;
-	if( month_map.empty() ) {
-	  month_map.insert( vtype("jan", static_cast<unsigned short>(1)) );
-	  month_map.insert( vtype("january", static_cast<unsigned short>(1)) );
-	  month_map.insert( vtype("feb", static_cast<unsigned short>(2)) );
-	  month_map.insert( vtype("february", static_cast<unsigned short>(2)) );
-	  month_map.insert( vtype("mar", static_cast<unsigned short>(3)) );
-	  month_map.insert( vtype("march", static_cast<unsigned short>(3)) );
-	  month_map.insert( vtype("apr", static_cast<unsigned short>(4)) );
-	  month_map.insert( vtype("april", static_cast<unsigned short>(4)) );
-	  month_map.insert( vtype("may", static_cast<unsigned short>(5)) );
-	  month_map.insert( vtype("jun", static_cast<unsigned short>(6)) );
-	  month_map.insert( vtype("june", static_cast<unsigned short>(6)) );
-	  month_map.insert( vtype("jul", static_cast<unsigned short>(7)) );
-	  month_map.insert( vtype("july", static_cast<unsigned short>(7)) );
-	  month_map.insert( vtype("aug", static_cast<unsigned short>(8)) );
-	  month_map.insert( vtype("august", static_cast<unsigned short>(8)) );
-	  month_map.insert( vtype("sep", static_cast<unsigned short>(9)) );
-	  month_map.insert( vtype("september", static_cast<unsigned short>(9)) );
-	  month_map.insert( vtype("oct", static_cast<unsigned short>(10)) );
-	  month_map.insert( vtype("october", static_cast<unsigned short>(10)) );
-	  month_map.insert( vtype("nov", static_cast<unsigned short>(11)) );
-	  month_map.insert( vtype("november", static_cast<unsigned short>(11)) );
-	  month_map.insert( vtype("dec", static_cast<unsigned short>(12)) );
-	  month_map.insert( vtype("december", static_cast<unsigned short>(12)) );
-	}
+        static std::map<std::string, unsigned short> month_map;
+        typedef std::map<std::string, unsigned short>::value_type vtype;
+        if( month_map.empty() ) {
+          month_map.insert( vtype("jan", static_cast<unsigned short>(1)) );
+          month_map.insert( vtype("january", static_cast<unsigned short>(1)) );
+          month_map.insert( vtype("feb", static_cast<unsigned short>(2)) );
+          month_map.insert( vtype("february", static_cast<unsigned short>(2)) );
+          month_map.insert( vtype("mar", static_cast<unsigned short>(3)) );
+          month_map.insert( vtype("march", static_cast<unsigned short>(3)) );
+          month_map.insert( vtype("apr", static_cast<unsigned short>(4)) );
+          month_map.insert( vtype("april", static_cast<unsigned short>(4)) );
+          month_map.insert( vtype("may", static_cast<unsigned short>(5)) );
+          month_map.insert( vtype("jun", static_cast<unsigned short>(6)) );
+          month_map.insert( vtype("june", static_cast<unsigned short>(6)) );
+          month_map.insert( vtype("jul", static_cast<unsigned short>(7)) );
+          month_map.insert( vtype("july", static_cast<unsigned short>(7)) );
+          month_map.insert( vtype("aug", static_cast<unsigned short>(8)) );
+          month_map.insert( vtype("august", static_cast<unsigned short>(8)) );
+          month_map.insert( vtype("sep", static_cast<unsigned short>(9)) );
+          month_map.insert( vtype("september", static_cast<unsigned short>(9)) );
+          month_map.insert( vtype("oct", static_cast<unsigned short>(10)) );
+          month_map.insert( vtype("october", static_cast<unsigned short>(10)) );
+          month_map.insert( vtype("nov", static_cast<unsigned short>(11)) );
+          month_map.insert( vtype("november", static_cast<unsigned short>(11)) );
+          month_map.insert( vtype("dec", static_cast<unsigned short>(12)) );
+          month_map.insert( vtype("december", static_cast<unsigned short>(12)) );
+        }
 #else  //c+11 and beyond
-	static std::map<std::string, unsigned short> month_map =
-	  { { "jan", 1 },  { "january", 1 },
-	    { "feb", 2 },  { "february", 2 },
-	    { "mar", 3 },  { "march", 3 },
-	    { "apr", 4 },  { "april", 4 },
-	    { "may", 5 },
-	    { "jun", 6 },  { "june", 6 },
-	    { "jul", 7 },  { "july", 7 },
-	    { "aug", 8 },  { "august", 8 },
-	    { "sep", 9 },  { "september", 9 },
-	    { "oct", 10 }, { "october", 10 },
-	    { "nov", 11 }, { "november", 11 },
-	    { "dec", 12 }, { "december", 12 }
-	  };
+        static std::map<std::string, unsigned short> month_map =
+          { { "jan", short(1) },  { "january",   short(1) },
+            { "feb", short(2) },  { "february",  short(2) },
+            { "mar", short(3) },  { "march",     short(3) },
+            { "apr", short(4) },  { "april",     short(4) },
+            { "may", short(5) },
+            { "jun", short(6) },  { "june",      short(6) },
+            { "jul", short(7) },  { "july",      short(7) },
+            { "aug", short(8) },  { "august",    short(8) },
+            { "sep", short(9) },  { "september", short(9) },
+            { "oct", short(10) }, { "october",   short(10)},
+            { "nov", short(11) }, { "november",  short(11)},
+            { "dec", short(12) }, { "december",  short(12)}
+          };
 #endif
-	std::map<std::string, unsigned short>::const_iterator mitr = month_map.find( str );
-	if ( mitr !=  month_map.end() ) {
-	  return mitr->second;
+        std::map<std::string, unsigned short>::const_iterator mitr = month_map.find( str );
+        if ( mitr !=  month_map.end() ) {
+          return mitr->second;
         }
       }
       return 13; // intentionally out of range - name not found

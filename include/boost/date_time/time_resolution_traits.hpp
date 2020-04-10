@@ -133,9 +133,9 @@ namespace date_time {
     }
     //! Any negative argument results in a negative tick_count
     static BOOST_CXX14_CONSTEXPR tick_type to_tick_count(hour_type hours,
-							 min_type  minutes,
-							 sec_type  seconds,
-							 fractional_seconds_type  fs)
+                                                         min_type  minutes,
+                                                         sec_type  seconds,
+                                                         fractional_seconds_type  fs)
     {
       if(hours < 0 || minutes < 0 || seconds < 0 || fs < 0)
       {
