@@ -130,6 +130,9 @@ namespace date_time {
       }
 
       //
+      
+    #if !defined(BOOST_EMBTC)
+    
       BOOST_CXX14_CONSTEXPR friend date_type operator+(const date_type& d, const months_type& m)
       {
         return d + m.get_offset(d);
@@ -149,10 +152,42 @@ namespace date_time {
         return d += m.get_neg_offset(d);
       }
         
+    #else
+    
+      BOOST_CXX14_CONSTEXPR friend date_type operator+(const date_type& d, const months_type& m);
+      BOOST_CXX14_CONSTEXPR friend date_type operator+=(date_type& d, const months_type& m);
+      BOOST_CXX14_CONSTEXPR friend date_type operator-(const date_type& d, const months_type& m);
+      BOOST_CXX14_CONSTEXPR friend date_type operator-=(date_type& d, const months_type& m);
+        
+    #endif
+
     private:
       int_rep _m;
   };
 
+#if defined(BOOST_EMBTC)
+
+      inline BOOST_CXX14_CONSTEXPR date_type operator+(const date_type& d, const months_type& m)
+      {
+        return d + m.get_offset(d);
+      }
+      inline BOOST_CXX14_CONSTEXPR date_type operator+=(date_type& d, const months_type& m)
+      {
+        return d += m.get_offset(d);
+      }
+      inline BOOST_CXX14_CONSTEXPR date_type operator-(const date_type& d, const months_type& m)
+      {
+        // get_neg_offset returns a negative duration, so we add
+        return d + m.get_neg_offset(d);
+      }
+      inline BOOST_CXX14_CONSTEXPR date_type operator-=(date_type& d, const months_type& m)
+      {
+        // get_neg_offset returns a negative duration, so we add
+        return d += m.get_neg_offset(d);
+      }
+        
+#endif
+    
   //! additional duration type that represents a logical year
   /*! A logical year enables things like: "date(2002,Mar,2) + years(2) -> 
    * 2004-Mar-2". If the date is a last day-of-the-month, the result will 
@@ -242,6 +277,9 @@ namespace date_time {
       }
 
       //
+      
+    #if !defined(BOOST_EMBTC)
+    
       BOOST_CXX14_CONSTEXPR friend date_type operator+(const date_type& d, const years_type& y)
       {
         return d + y.get_offset(d);
@@ -261,10 +299,42 @@ namespace date_time {
         return d += y.get_neg_offset(d);
       }
 
+    #else
+    
+      BOOST_CXX14_CONSTEXPR friend date_type operator+(const date_type& d, const years_type& y);
+      BOOST_CXX14_CONSTEXPR friend date_type operator+=(date_type& d, const years_type& y);
+      BOOST_CXX14_CONSTEXPR friend date_type operator-(const date_type& d, const years_type& y);
+      BOOST_CXX14_CONSTEXPR friend date_type operator-=(date_type& d, const years_type& y);
+
+    #endif
+
     private:
       int_rep _y;
   };
 
+#if defined(BOOST_EMBTC)
+
+      inline BOOST_CXX14_CONSTEXPR date_type operator+(const date_type& d, const years_type& y)
+      {
+        return d + y.get_offset(d);
+      }
+      inline BOOST_CXX14_CONSTEXPR date_type operator+=(date_type& d, const years_type& y)
+      {
+        return d += y.get_offset(d);
+      }
+      inline BOOST_CXX14_CONSTEXPR date_type operator-(const date_type& d, const years_type& y)
+      {
+        // get_neg_offset returns a negative duration, so we add
+        return d + y.get_neg_offset(d);
+      }
+      inline BOOST_CXX14_CONSTEXPR date_type operator-=(date_type& d, const years_type& y)
+      {
+        // get_neg_offset returns a negative duration, so we add
+        return d += y.get_neg_offset(d);
+      }
+
+#endif
+    
 }} // namespace boost::date_time
 
 #endif // DATE_DURATION_TYPES_HPP___
