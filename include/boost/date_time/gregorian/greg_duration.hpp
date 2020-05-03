@@ -85,22 +85,9 @@ namespace gregorian {
       return *this;
     }
     
-    #if !defined(BOOST_EMBTC)
-      
-    BOOST_CXX14_CONSTEXPR friend
-    date_duration operator- (date_duration rhs, date_duration const& lhs)
-    {
-      rhs -= lhs;
-      return rhs;
-    }
-
-    #else
-      
     BOOST_CXX14_CONSTEXPR friend
     date_duration operator- (date_duration rhs, date_duration const& lhs);
 
-    #endif
-      
     //! Add a duration -- result is signed
     BOOST_CXX14_CONSTEXPR date_duration& operator+= (const date_duration& rhs)
     {
@@ -108,22 +95,9 @@ namespace gregorian {
       return *this;
     }
     
-    #if !defined(BOOST_EMBTC)
-      
-    BOOST_CXX14_CONSTEXPR friend
-    date_duration operator+ (date_duration rhs, date_duration const& lhs)
-    {
-      rhs += lhs;
-      return rhs;
-    }
-
-    #else
-      
     BOOST_CXX14_CONSTEXPR friend
     date_duration operator+ (date_duration rhs, date_duration const& lhs);
 
-    #endif
-      
     //! unary- Allows for dd = -date_duration(2); -> dd == -2
     BOOST_CXX14_CONSTEXPR date_duration operator- ()const
     {
@@ -137,20 +111,8 @@ namespace gregorian {
       return *this;
     }
     
-    #if !defined(BOOST_EMBTC)
-      
-    BOOST_CXX14_CONSTEXPR friend date_duration operator/ (date_duration rhs, int lhs)
-    {
-      rhs /= lhs;
-      return rhs;
-    }
-
-    #else
-      
     BOOST_CXX14_CONSTEXPR friend date_duration operator/ (date_duration rhs, int lhs);
 
-    #endif
-      
     //! Returns the smallest duration -- used by to calculate 'end'
     static BOOST_CXX14_CONSTEXPR date_duration unit()
     {
@@ -158,30 +120,26 @@ namespace gregorian {
     }
   };      
 
-#if defined(BOOST_EMBTC)
-
-    inline BOOST_CXX14_CONSTEXPR 
-    date_duration operator- (date_duration rhs, date_duration const& lhs)
+  inline BOOST_CXX14_CONSTEXPR 
+  date_duration operator- (date_duration rhs, date_duration const& lhs)
     {
       rhs -= lhs;
       return rhs;
     }
 
-    inline BOOST_CXX14_CONSTEXPR 
-    date_duration operator+ (date_duration rhs, date_duration const& lhs)
+  inline BOOST_CXX14_CONSTEXPR 
+  date_duration operator+ (date_duration rhs, date_duration const& lhs)
     {
       rhs += lhs;
       return rhs;
     }
 
-    inline BOOST_CXX14_CONSTEXPR date_duration operator/ (date_duration rhs, int lhs)
+  inline BOOST_CXX14_CONSTEXPR date_duration operator/ (date_duration rhs, int lhs)
     {
       rhs /= lhs;
       return rhs;
     }
 
-#endif
-    
   //! Shorthand for date_duration
   typedef date_duration days;
 
