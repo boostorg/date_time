@@ -96,18 +96,18 @@ namespace date_time {
         }
 #else  //c+11 and beyond
         static std::map<std::string, unsigned short> month_map =
-          { { "jan", short(1) },  { "january",   short(1) },
-            { "feb", short(2) },  { "february",  short(2) },
-            { "mar", short(3) },  { "march",     short(3) },
-            { "apr", short(4) },  { "april",     short(4) },
-            { "may", short(5) },
-            { "jun", short(6) },  { "june",      short(6) },
-            { "jul", short(7) },  { "july",      short(7) },
-            { "aug", short(8) },  { "august",    short(8) },
-            { "sep", short(9) },  { "september", short(9) },
-            { "oct", short(10) }, { "october",   short(10)},
-            { "nov", short(11) }, { "november",  short(11)},
-            { "dec", short(12) }, { "december",  short(12)}
+          { { "jan", static_cast<unsigned short>(1) },  { "january",   static_cast<unsigned short>(1) },
+            { "feb", static_cast<unsigned short>(2) },  { "february",  static_cast<unsigned short>(2) },
+            { "mar", static_cast<unsigned short>(3) },  { "march",     static_cast<unsigned short>(3) },
+            { "apr", static_cast<unsigned short>(4) },  { "april",     static_cast<unsigned short>(4) },
+            { "may", static_cast<unsigned short>(5) },
+            { "jun", static_cast<unsigned short>(6) },  { "june",      static_cast<unsigned short>(6) },
+            { "jul", static_cast<unsigned short>(7) },  { "july",      static_cast<unsigned short>(7) },
+            { "aug", static_cast<unsigned short>(8) },  { "august",    static_cast<unsigned short>(8) },
+            { "sep", static_cast<unsigned short>(9) },  { "september", static_cast<unsigned short>(9) },
+            { "oct", static_cast<unsigned short>(10) }, { "october",   static_cast<unsigned short>(10)},
+            { "nov", static_cast<unsigned short>(11) }, { "november",  static_cast<unsigned short>(11)},
+            { "dec", static_cast<unsigned short>(12) }, { "december",  static_cast<unsigned short>(12)}
           };
 #endif
         std::map<std::string, unsigned short>::const_iterator mitr = month_map.find( str );
