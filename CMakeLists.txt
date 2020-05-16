@@ -8,7 +8,7 @@ project( BoostDateTime LANGUAGES CXX)
 add_library( boost_date_time
     src/gregorian/greg_month.cpp
 )
-add_library( Boost::chrono ALIAS boost_date_time )
+add_library( Boost::date_time ALIAS boost_date_time )
 
 target_include_directories( boost_date_time PUBLIC include )
 
