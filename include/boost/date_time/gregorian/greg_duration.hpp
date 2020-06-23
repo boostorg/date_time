@@ -39,11 +39,6 @@ namespace gregorian {
     BOOST_CXX14_CONSTEXPR
     date_duration(date_time::special_values sv) : base_type(sv) {}
 
-    //! Copy constructor
-    BOOST_CXX14_CONSTEXPR
-    date_duration(const date_duration& other) : base_type(static_cast< base_type const& >(other))
-    {}
-
     //! Construct from another date_duration
     BOOST_CXX14_CONSTEXPR
     date_duration(const base_type& other) : base_type(other)
