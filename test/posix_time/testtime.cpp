@@ -29,6 +29,28 @@ void special_values_tests()
   }
 #endif // DATE_TIME_NO_DEFAULT_CONSTRUCTOR
 
+#ifdef BOOST_NO_CXX14_CONSTEXPR
+  check("constexpr not configured", true);
+#else  
+  //check constexpr case
+  {
+    constexpr date d1(1970,1,1);
+    constexpr ptime t1(d1);
+    static_assert(t1.date().day() == 1,     "constexpr construction day()");
+    static_assert(t1.date().month() == 1,   "constexpr construction month()");
+    static_assert(t1.date().year() == 1970, "constexpr construction year()");
+    static_assert(t1.time_of_day().hours() == 0,   "constexpr construction hour()");
+    static_assert(t1.time_of_day().minutes() == 0, "constexpr construction minute()");
+    static_assert(t1.time_of_day().seconds() == 0,   "constexpr construction second()");
+    constexpr ptime t2(d1, time_duration(1,2,3));
+    static_assert(t2.time_of_day().hours() == 1,    "constexpr contruct with duration  hour()");
+    static_assert(t2.time_of_day().minutes() == 2,  "constexpr contruct with duration  minute()");
+    static_assert(t2.time_of_day().seconds() == 3,  "constexpr contruct with duration  second()");
+    check("constexpr tests compiled", true);    
+  }
+#endif
+
+  
   { // special values construction tests
     ptime p_sv1(pos_infin);
     std::string s("+infinity");
