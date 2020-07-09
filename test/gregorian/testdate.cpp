@@ -34,6 +34,25 @@ main()
   date def;
   check("Default constructor", def == date(not_a_date_time));
 #endif
+
+#ifdef BOOST_NO_CXX14_CONSTEXPR
+  check("constexpr not configured", true);
+#else  
+  //check constexpr case
+  {
+    constexpr date d1(1900,1,1);
+    static_assert(d1.day() == 1,     "constexpr construction day()");
+    static_assert(d1.month() == 1,   "constexpr construction month()");
+    static_assert(d1.year() == 1900, "constexpr construction year()");
+    constexpr date d2 = date(2000,12,31);
+    constexpr date d3(d2);
+    static_assert(d3.day() == 31,      "constexpr construct and copy day()");
+    static_assert(d3.month() == 12,    "constexpr construct and copy month()");
+    static_assert(d3.year() == 2000,   "constexpr construct and copy year()");
+    check("constexpr tests compiled", true);    
+  }
+#endif
+
   
   date d1(1900,1,1);
   date d2 = date(2000,1,1);
