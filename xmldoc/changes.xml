@@ -12,6 +12,41 @@
 
   <!-- if each new change tgroup has a "Bug Fix" as the first "Type", the columns will line up nicely -->
 
+
+    <bridgehead renderas="sect3">Changes from Boost 1.73 to 1.74 </bridgehead>
+  <informaltable frame="all">
+    <tgroup cols="2">
+      <thead>
+        <row>
+          <entry>Type</entry>
+          <entry>Description</entry>
+        </row>
+      </thead>
+      <tbody>
+
+        <row>
+          <entry>Bug-Fix</entry>
+          <entry>
+	    Fix constrained_value::assign to be constexpr so ptime and date construction are constexpr. See: 
+            <ulink url="https://github.com/boostorg/date_time/pull/161">pull 161</ulink> and
+	    <ulink url="https://github.com/boostorg/date_time/pull/162">pull 161</ulink>.
+          </entry>
+        </row>
+
+        <row>
+          <entry>Bug-Fix</entry>
+          <entry>
+	    Suppress MSVC CRT deprecations on Clang. See:
+	    <ulink url="https://github.com/boostorg/date_time/pull/160">pull 160</ulink>.
+          </entry>
+        </row>
+
+	
+      </tbody>
+    </tgroup>
+  </informaltable>
+
+  
   <bridgehead renderas="sect3">Changes from Boost 1.72 to 1.73 </bridgehead>
   <informaltable frame="all">
     <tgroup cols="2">
