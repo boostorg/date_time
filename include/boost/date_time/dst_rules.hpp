@@ -16,6 +16,7 @@
 #include "boost/date_time/date_generators.hpp"
 #include "boost/date_time/period.hpp"
 #include "boost/date_time/date_defs.hpp"
+#include "boost/date_time/gregorian/gregorian.hpp"
 #include <stdexcept>
 
 namespace boost {
