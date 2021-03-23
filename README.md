@@ -7,6 +7,7 @@ Distributed under the [Boost Software License, Version 1.0](http://www.boost.org
 ### Properties
 
 * C++03
+* Header only
 
 ### Build Status
 
