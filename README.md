@@ -18,7 +18,7 @@ Branch          | Travis | Appveyor | Coverity Scan | codecov.io | Deps | Docs |
 
 ### Directories
 
-Note that the built library is only for backward compatibility.  date_time is now header only.
+Note that the built library is only for build backward compatibility and contains no symbols.  date_time is now header only.
 
 | Name      | Purpose                        |
 | --------- | ------------------------------ |
