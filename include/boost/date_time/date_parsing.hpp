@@ -15,7 +15,6 @@
 #include <iterator>
 #include <algorithm>
 #include <boost/tokenizer.hpp>
-#include <boost/lexical_cast.hpp>
 #include <boost/date_time/compiler_config.hpp>
 #include <boost/date_time/parse_format_base.hpp>
 #include <boost/date_time/period.hpp>
@@ -61,7 +60,7 @@ namespace date_time {
     inline unsigned short
     month_str_to_ushort(std::string const& s) {
       if((s.at(0) >= '0') && (s.at(0) <= '9')) {
-        return boost::lexical_cast<unsigned short>(s);
+        return static_cast<unsigned short>(std::stoul(s, nullptr, 10));
       }
       else {
         std::string str = convert_to_lower(s);
@@ -160,7 +159,7 @@ namespace date_time {
         switch(spec_str.at(pos)) {
           case 'y':
           {
-            year = boost::lexical_cast<unsigned short>(*beg);
+            year = static_cast<unsigned short>(std::stoul(*beg, nullptr, 10));
             break;
           }
           case 'm':
@@ -170,7 +169,7 @@ namespace date_time {
           }
           case 'd':
           {
-            day = boost::lexical_cast<unsigned short>(*beg);
+            day = static_cast<unsigned short>(std::stoul(*beg, nullptr, 10));
             break;
           }
           default: break;
@@ -200,7 +199,8 @@ namespace date_time {
                                         std::basic_string<char> > tokenizer_type;
       tokenizer_type tok(s, osf);
       for(typename tokenizer_type::iterator ti=tok.begin(); ti!=tok.end();++ti) {
-        unsigned short i = boost::lexical_cast<unsigned short>(*ti);
+        unsigned short i = static_cast<unsigned short>(std::stoul(*ti, nullptr, 10));
+
         switch(pos) {
         case 0: y = i; break;
         case 1: m = i; break;
