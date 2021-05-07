@@ -15,7 +15,9 @@
 #include <iterator>
 #include <algorithm>
 #include <boost/tokenizer.hpp>
-#include <boost/lexical_cast.hpp>
+#ifdef BOOST_NO_CXX11
+  #include <boost/lexical_cast.hpp>
+#endif
 #include <boost/date_time/compiler_config.hpp>
 #include <boost/date_time/parse_format_base.hpp>
 #include <boost/date_time/period.hpp>
@@ -34,6 +36,8 @@ inline unsigned short string_to_ushort(std::string const& s)
 #ifdef BOOST_NO_CXX11
   return boost::lexical_cast<unsigned short>(s);
 #else
+  // TODO: lexical cast has some side effect on <s>  that makes the std::stoul work here
+  boost::lexical_cast<unsigned short>(s);
   return std::stoul(s);
 #endif
 }
