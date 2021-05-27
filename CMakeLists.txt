@@ -8,6 +8,7 @@ cmake_minimum_required(VERSION 3.5...3.16)
 project(boost_date_time VERSION "${BOOST_SUPERPROJECT_VERSION}" LANGUAGES CXX)
 
 add_library(boost_date_time
+  src/gregorian/greg_month.cpp
 )
 
 add_library(Boost::date_time ALIAS boost_date_time)
