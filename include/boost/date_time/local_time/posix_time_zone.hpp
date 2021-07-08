@@ -191,10 +191,10 @@ namespace local_time{
       // offset
       if(base_utc_offset().is_negative()) {
         // inverting the sign guarantees we get two digits
-        ss << '-' << std::setw(2) << base_utc_offset().invert_sign().hours();
+        ss << '+' << std::setw(2) << base_utc_offset().invert_sign().hours();
       }
       else {
-        ss << '+' << std::setw(2) << base_utc_offset().hours();
+        ss << '-' << std::setw(2) << base_utc_offset().hours();
       }
       if(base_utc_offset().minutes() != 0 || base_utc_offset().seconds() != 0) {
         ss << ':' << std::setw(2) << base_utc_offset().minutes();
@@ -267,7 +267,7 @@ namespace local_time{
         while(sit != obj_end && !std::isalpha(*sit)){
           ss << *sit++;
         }
-        base_utc_offset_ = date_time::str_from_delimited_time_duration<time_duration_type,char_type>(ss.str());
+        base_utc_offset_ = date_time::str_from_delimited_time_duration<time_duration_type,char_type>(ss.str()).invert_sign();
         ss.str(empty_string);
 
         // base offset must be within range of -12 hours to +14 hours

@@ -89,7 +89,7 @@ tz_db.load_from_file("./date_time_zonespec.csv");</screen>
           </row>
           <row>
             <entry><screen>time_zone_ptr zone(
-  new posix_time_zone("PST-8PDT,M4.1.0,M10.1.0")
+  new posix_time_zone("PST+8PDT,M4.1.0,M10.1.0")
 );
 std::string id("America/West_Coast");
 tz_db.add_record(id, zone);</screen>
