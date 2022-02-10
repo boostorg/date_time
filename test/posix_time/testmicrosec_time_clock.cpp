@@ -48,7 +48,7 @@ main()
   std::cout << "Check local time of microsec_clock against second_clock" << std::endl;
 
   ptime last = microsec_clock::local_time();
-  int max = 30;
+  int max = 5;
   for (int i=0; i<max; i++)
   {
     // Some systems loop too fast so "last is less" tests fail due to
@@ -63,6 +63,17 @@ main()
 
     ptime t2 = microsec_clock::local_time();
     std::cout << t2 << std::endl;
+
+    // sometimes on very slow systems (github actions) a long time 
+    // can pass between syncing to the next second + 300ms (see previous
+    // function) and asking for t2; therefore if the fractional seconds
+    // of t2 are less than 300ms we skip that test loop assuming it
+    // took too long
+    time_duration t2_tod = t2.time_of_day();
+    if (t2_tod.fractional_seconds() < (t2_tod.ticks_per_second() * 3) / 10) {
+        std::cout << "SKIP :: we had a significant host processing delay" << std::endl;
+        continue;
+    }
 
     check("check equality of hours "
           "between second_clock and microsec_clock timestamps",
@@ -90,7 +101,7 @@ main()
 
 
   std::cout << "Check universal time of microsec_clock against second_clock" << std::endl;
-  max = 10;
+  max = 5;
   last = microsec_clock::universal_time();
   for (int i=0; i<max; i++)
   {
@@ -106,6 +117,17 @@ main()
 
     ptime t2 = microsec_clock::universal_time();
     std::cout << t2 << std::endl;
+
+    // sometimes on very slow systems (github actions) a long time 
+    // can pass between syncing to the next second + 300ms (see previous
+    // function) and asking for t2; therefore if the fractional seconds
+    // of t2 are less than 300ms we skip that test loop assuming it
+    // took too long
+    time_duration t2_tod = t2.time_of_day();
+    if (t2_tod.fractional_seconds() < (t2_tod.ticks_per_second() * 3) / 10) {
+        std::cout << "SKIP :: we had a significant host processing delay" << std::endl;
+        continue;
+    }
 
     check("check equality of hours "
           "between second_clock and microsec_clock timestamps",
