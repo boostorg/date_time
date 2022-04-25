@@ -52,9 +52,8 @@ jobs:
           - { compiler: gcc-9,     cxxstd: '03,11,14,17,2a', os: ubuntu-18.04 }
           - { compiler: gcc-10,    cxxstd: '03,11,14,17,20', os: ubuntu-20.04 }
           - { compiler: gcc-11,    cxxstd: '03,11,14,17,20', os: ubuntu-20.04, self-contained-header-tests: 1 }
-          # disabled: there are too many issues in serialization and not enough time to add suppressions
-          # - { name: GCC w/ sanitizers, sanitize: yes,
-          #     compiler: gcc-11,    cxxstd: '03,11,14,17,20', os: ubuntu-20.04 }
+          - { name: GCC w/ sanitizers, sanitize: yes,
+              compiler: gcc-11,    cxxstd: '03,11,14,17,20', os: ubuntu-20.04 }
           - { name: Collect coverage, coverage: yes,
               compiler: gcc-10,    cxxstd: '03,11',          os: ubuntu-20.04, install: 'g++-10-multilib', address-model: '32,64' }
 
@@ -74,12 +73,10 @@ jobs:
           # libc++
           - { compiler: clang-6.0, cxxstd: '03,11,14',       os: ubuntu-18.04, stdlib: libc++, install: 'clang-6.0 libc++-dev libc++abi-dev' }
           - { compiler: clang-12,  cxxstd: '03,11,14,17,20', os: ubuntu-20.04, stdlib: libc++, install: 'clang-12 libc++-12-dev libc++abi-12-dev', self-contained-header-tests: 1 }
-          # disabled: there are too many issues in serialization and not enough time to add suppressions
-          # - { name: Clang w/ sanitizers, sanitize: yes,
-          #     compiler: clang-12,  cxxstd: '03,11,14,17,20', os: ubuntu-20.04, stdlib: libc++, install: 'clang-12 libc++-12-dev libc++abi-12-dev' }
+          - { name: Clang w/ sanitizers, sanitize: yes,
+              compiler: clang-12,  cxxstd: '03,11,14,17,20', os: ubuntu-20.04, stdlib: libc++, install: 'clang-12 libc++-12-dev libc++abi-12-dev' }
 
           # OSX, clang
-          # sanitize disabled: there are too many issues in serialization and not enough time to add suppressions
           - { compiler: clang,     cxxstd: '03,11,14,17,2a', os: macos-10.15 }
 
           # Coverity Scan
