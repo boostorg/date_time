@@ -191,7 +191,7 @@ tp.last();// --> 2002-Jan-01 09:59:59.999999999</screen>
 ptime t1(d, seconds(10)); //10 sec after midnight
 ptime t2(d, hours(10)); //10 hours after midnight
 time_period tp(t1, t2);
-tp.last(); // --> 2002-Jan-01 10:00:00</screen>
+tp.end(); // --> 2002-Jan-01 10:00:00</screen>
 	    </entry>
           </row>
           
