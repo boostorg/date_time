@@ -95,7 +95,7 @@ namespace gregorian {
       ymd_type ymd = year_month_day();
       return gregorian_calendar::modjulian_day_number(ymd);
     }
-    //!Return the iso 8601 week number 1..53
+    //!Return the ISO 8601 week number 1..53
     BOOST_CXX14_CONSTEXPR int week_number() const
     {
       ymd_type ymd = year_month_day();

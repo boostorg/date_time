@@ -183,7 +183,7 @@ namespace date_time {
 
   }
 
-  //! Parse time duration part of an iso time of form: [-]hhmmss[.fff...] (eg: 120259.123 is 12 hours, 2 min, 59 seconds, 123000 microseconds)
+  //! Parse time duration part of an ISO 8601 time of form: [-]hhmmss[.fff...] (eg: 120259.123 is 12 hours, 2 min, 59 seconds, 123000 microseconds)
   template<class time_duration>
   inline
   time_duration
