@@ -487,10 +487,10 @@ td3.is_special(); // --> false</screen></entry>
 
 	  <row>
 	    <entry valign="top" morerows="1"><screen>std::string to_iso_string(time_duration)</screen></entry>
-            <entry>Convert to form <code>HHMMSS,fffffffff</code>.</entry>
+            <entry>Convert to form <code>HHMMSS.fffffffff</code>.</entry>
 	  </row>
           <row>
-	    <entry><screen>100001,123456789</screen></entry>
+	    <entry><screen>100001.123456789</screen></entry>
 	  </row>
 	</tbody>
       </tgroup>

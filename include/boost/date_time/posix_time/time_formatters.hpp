@@ -157,7 +157,7 @@ namespace posix_time {
     }// else
     return ss.str();
   }
-  //! Time duration in iso format -hhmmss,fffffff Example: 10:09:03,0123456
+  //! Time duration in iso format -hhmmss.fffffff. Example: 10:09:03.0123456
   /*!\ingroup time_format
    */
   inline std::string to_iso_string(time_duration td){
@@ -251,7 +251,7 @@ namespace posix_time {
   inline std::wstring to_simple_wstring(time_duration td) {
     return to_simple_string_type<wchar_t>(td);
   }
-  //! Time duration in iso format -hhmmss,fffffff Example: 10:09:03,0123456
+  //! Time duration in iso format -hhmmss.fffffff. Example: 10:09:03.0123456
   /*!\ingroup time_format
    */
   inline std::wstring to_iso_wstring(time_duration td){

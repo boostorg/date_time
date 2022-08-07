@@ -82,7 +82,7 @@ namespace posix_time {
     return ss.str();
   }
 
-  //! Time duration in iso format -hhmmss,fffffff Example: 10:09:03,0123456
+  //! Time duration in iso format -hhmmss.fffffff. Example: 10:09:03.0123456
   /*!\ingroup time_format
    */
   inline
