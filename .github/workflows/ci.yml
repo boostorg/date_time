@@ -80,7 +80,7 @@ jobs:
 
           # OSX, clang
           # sanitize disabled: there are too many issues in serialization and not enough time to add suppressions
-          - { compiler: clang,     cxxstd: '03,11,14,17,2a', os: macos-10.15 }
+          - { compiler: clang,     cxxstd: '03,11,14,17,2a', os: macos-11 }
 
           # Coverity Scan
           # requires two github secrets in repo to activate; see ci/github/coverity.sh
