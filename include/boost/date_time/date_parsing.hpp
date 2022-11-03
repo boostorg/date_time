@@ -15,7 +15,9 @@
 #include <iterator>
 #include <algorithm>
 #include <boost/tokenizer.hpp>
-#include <boost/lexical_cast.hpp>
+#ifdef BOOST_NO_CXX11
+  #include <boost/lexical_cast.hpp>
+#endif
 #include <boost/date_time/compiler_config.hpp>
 #include <boost/date_time/parse_format_base.hpp>
 #include <boost/date_time/period.hpp>
@@ -29,6 +31,16 @@
 namespace boost {
 namespace date_time {
 
+inline unsigned short string_to_ushort(std::string const& s)
+{
+#ifdef BOOST_NO_CXX11
+  return boost::lexical_cast<unsigned short>(s);
+#else
+  // TODO: lexical cast has some side effect on <s>  that makes the std::stoul work here
+  boost::lexical_cast<unsigned short>(s);
+  return std::stoul(s);
+#endif
+}
   //! A function to replace the std::transform( , , ,tolower) construct
   /*! This function simply takes a string, and changes all the characters
    * in that string to lowercase (according to the default system locale).
@@ -61,7 +73,7 @@ namespace date_time {
     inline unsigned short
     month_str_to_ushort(std::string const& s) {
       if((s.at(0) >= '0') && (s.at(0) <= '9')) {
-        return boost::lexical_cast<unsigned short>(s);
+        return string_to_ushort(s);
       }
       else {
         std::string str = convert_to_lower(s);
@@ -160,7 +172,7 @@ namespace date_time {
         switch(spec_str.at(pos)) {
           case 'y':
           {
-            year = boost::lexical_cast<unsigned short>(*beg);
+            year = string_to_ushort(*beg);
             break;
           }
           case 'm':
@@ -170,7 +182,7 @@ namespace date_time {
           }
           case 'd':
           {
-            day = boost::lexical_cast<unsigned short>(*beg);
+            day = string_to_ushort(*beg);
             break;
           }
           default: break;
@@ -185,6 +197,7 @@ namespace date_time {
     parse_undelimited_date(const std::string& s) {
       int offsets[] = {4,2,2};
       int pos = 0;
+
       //typename date_type::ymd_type ymd((year_type::min)(),1,1);
       unsigned short y = 0, m = 0, d = 0;
 
@@ -200,7 +213,8 @@ namespace date_time {
                                         std::basic_string<char> > tokenizer_type;
       tokenizer_type tok(s, osf);
       for(typename tokenizer_type::iterator ti=tok.begin(); ti!=tok.end();++ti) {
-        unsigned short i = boost::lexical_cast<unsigned short>(*ti);
+        unsigned i = string_to_ushort(*ti);
+
         switch(pos) {
         case 0: y = i; break;
         case 1: m = i; break;
