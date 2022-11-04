@@ -19,7 +19,7 @@
   <anchor id="tz_database_intro" />
   <bridgehead renderas="sect3">Introduction</bridgehead>
   <para>
-    The local_time system depends on the ability to store time zone information. Our Time Zone Database (tz_database) is a means of permanently storing that data. The specifications for many time zones (377 at this time) are provided. These specifications are based on data found in the <ulink url="http://www.twinsun.com/tz/tz-link.htm">zoneinfo datebase</ulink>. The specifications are stored in the file:<screen>libs/date_time/data/date_time_zonespec.csv</screen>. While this file already contains specifications for many time zones, it's real intent is for the user to modify it by adding (or removing) time zones to fit their application. See <link linkend="tz_database_datafile">Data File Details</link> to learn how this is accomplished.
+     The local_time system depends on the ability to store time zone information. Our Time Zone Database (tz_database) is a means of permanently storing that data. The specifications for many time zones (377 at this time) are provided. These specifications are based on data found in the <ulink url="https://web.archive.org/web/20120205224410/http://www.twinsun.com/tz/tz-link.htm">zoneinfo datebase</ulink>. The specifications are stored in the file:<screen>libs/date_time/data/date_time_zonespec.csv</screen>. While this file already contains specifications for many time zones, it's real intent is for the user to modify it by adding (or removing) time zones to fit their application. See <link linkend="tz_database_datafile">Data File Details</link> to learn how this is accomplished.
   </para>
 
   <anchor id="tz_database_header" />

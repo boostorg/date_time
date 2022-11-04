@@ -62,7 +62,7 @@
       <listitem><ulink url="http://www.cl.cam.ac.uk/~mgk25/c-time/">XTime C extension</ulink> proposal</listitem>
       <listitem><ulink url="http://david.tribble.com/text/c0xcalendar.html#author-info">Another C library extension proposal</ulink> by David Tribble</listitem>
       <listitem><ulink url="http://cr.yp.to/libtai.html">libTAI</ulink> is a C based time library</listitem>
-      <listitem><ulink url="http://www.twinsun.com/tz/tz-link.htm">Time Zone Database</ulink> C library for managing timezones/places</listitem>
+      <listitem><ulink url="https://web.archive.org/web/20120205224410/http://www.twinsun.com/tz/tz-link.htm">Time Zone Database</ulink> C library for managing timezones/places</listitem>
       <listitem>International Components for Unicode by IBM (open source)
 	<itemizedlist override="opencircle">
 	  <listitem><ulink url="http://icu.sourceforge.net/userguide/dateCalendar.html">Calendar Class</ulink></listitem>
