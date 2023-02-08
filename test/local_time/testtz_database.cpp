@@ -76,7 +76,7 @@ int main(int /* argc */, char const* argv[]){
   check("az has dst", phx_test->has_dst() == false);
 
   //Now add and retrieve a Posix tz spec from the database
-  time_zone_ptr eastern(new posix_time_zone("EST-05:00:00EDT+01:00:00,M4.1.0/02:00:00,M10.5.0/02:00:00"));
+  time_zone_ptr eastern(new posix_time_zone("EST+05:00:00EDT+01:00:00,M4.1.0/02:00:00,M10.5.0/02:00:00"));
   tz_db.add_record("United States/Eastern", eastern);
   time_zone_ptr eastern_test = tz_db.time_zone_from_region("United States/Eastern");
   check("eastern Valid pointer", eastern_test != time_zone_ptr() );

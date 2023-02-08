@@ -15,7 +15,7 @@ int main()
   using namespace boost::local_time;
   date d1(2001,Jan, 1);
   
-  time_zone_ptr az_tz(new posix_time_zone("MST-07"));
+  time_zone_ptr az_tz(new posix_time_zone("MST+07"));
 
   local_date_time t1 (d1,hours(2), az_tz, false);//2001-Jan-1 02:00:00
 

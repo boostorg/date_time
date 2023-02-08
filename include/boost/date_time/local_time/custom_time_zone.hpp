@@ -106,10 +106,10 @@ namespace local_time {
       // offset
       if(base_utc_offset().is_negative()) {
         // inverting the sign guarantees we get two digits
-        ss << '-' << std::setw(2) << base_utc_offset().invert_sign().hours();
+        ss << '+' << std::setw(2) << base_utc_offset().invert_sign().hours();
       }
       else {
-        ss << '+' << std::setw(2) << base_utc_offset().hours();
+        ss << '-' << std::setw(2) << base_utc_offset().hours();
       }
       if(base_utc_offset().minutes() != 0 || base_utc_offset().seconds() != 0) {
         ss << ':' << std::setw(2) << base_utc_offset().minutes();
