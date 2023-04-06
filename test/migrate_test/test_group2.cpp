@@ -175,7 +175,6 @@ void check(const date &date, int year, int month, int day)
     BOOST_CHECK_EQUAL(day, date.day());
 }
 
-//Year is out of valid range: 1400..9999
 BOOST_AUTO_TEST_CASE(testPropertySetCopyYear) {
     date test(1972, 6, 9);
     // date copy(12, test.month(), test.day());
@@ -187,10 +186,8 @@ BOOST_AUTO_TEST_CASE(testPropertySetCopyYear) {
 //test19
 BOOST_AUTO_TEST_CASE(testPropertySetCopyTextYear) {
     date test(1972, 6, 9);
-    // date copy(12, test.month(), test.day());
 
     check(test, 1972, 6, 9);
-    // check(copy, 12, 6, 9);
 }
 
 //test20

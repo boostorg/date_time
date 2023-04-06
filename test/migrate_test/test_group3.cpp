@@ -28,13 +28,6 @@ BOOST_AUTO_TEST_CASE(testFactoryHours){
     // Therefore, the following line is not applicable:
     // ASSERT_EQ(PeriodType.standard(), test.getPeriodType());
 
-    // The time_duration class does not support years, months, weeks, or days
-    // Therefore, the following lines are not applicable:
-    // ASSERT_EQ(0, test.getYears());
-    // ASSERT_EQ(0, test.getMonths());
-    // ASSERT_EQ(0, test.getWeeks());
-    // ASSERT_EQ(0, test.getDays());
-
     BOOST_CHECK_EQUAL(6, test.hours());
     BOOST_CHECK_EQUAL(0, test.minutes());
     BOOST_CHECK_EQUAL(0, test.seconds());
@@ -105,7 +98,6 @@ date_duration test_date, result_date;
 time_duration test_time, result_time;
 
 //test29
-//如何使用Boost Date-Time库的date_duration和time_duration对象来表示和检查不同时间单位的值。
 BOOST_AUTO_TEST_CASE(testPlusYears) {
      // Test years and months using date_duration
     test_date = date_duration(365);

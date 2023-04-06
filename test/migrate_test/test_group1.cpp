@@ -17,7 +17,9 @@
 using namespace boost::posix_time;
 using namespace boost::gregorian;
 
+// 2230-Mar-22 02:10:04
 const long TEST_TIME1 = 8211723004;
+// 3314-Oct-12 05:00:07
 const long TEST_TIME2 = 42437106007;
 
 //test1
@@ -89,11 +91,12 @@ BOOST_AUTO_TEST_CASE(testPropertySetTextDayOfYear)
     date test_date = test.date();
     date copy_date = test_date;
 
+    // set day of year 
     int target_day_of_year = 12;
     copy_date = date(copy_date.year(), 1, 1) + days(target_day_of_year - 1);
     ptime copy(copy_date, time_duration(0, 0, 0));
 
-    // 为了进行字符串比较，我们需要将 ptime 对象转换为字符串
+    // convert to str
     std::stringstream test_ss, copy_ss;
     test_ss << test;
     copy_ss << copy;
@@ -124,8 +127,12 @@ BOOST_AUTO_TEST_CASE(testPropertySetDayOfYear)
     date copy = test.date() + days(12 - test.date().day_of_year());
     ptime copy_as_ptime(copy, time_duration(0, 0, 0));
 
-    BOOST_CHECK_EQUAL(test, ptime(date(2004, 6, 9), time_duration(0, 0, 0)));
-    BOOST_CHECK_EQUAL(copy_as_ptime, ptime(date(2004, 1, 12), time_duration(0, 0, 0)));
+    std::stringstream test_ss, copy_ss;
+    test_ss << test;
+    copy_ss << copy_as_ptime;
+
+    BOOST_CHECK_EQUAL(test_ss.str(), "2004-Jun-09 00:00:00");
+    BOOST_CHECK_EQUAL(copy_ss.str(), "2004-Jan-12 00:00:00");
 }
 
 
