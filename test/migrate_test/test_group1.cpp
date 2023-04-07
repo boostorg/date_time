@@ -22,7 +22,7 @@ const long TEST_TIME1 = 8211723004;
 // 3314-Oct-12 05:00:07
 const long TEST_TIME2 = 42437106007;
 
-//test1
+// Test 1: Test the property of getting the year from a ptime object
 BOOST_AUTO_TEST_CASE(test_property_get_year)
 {
     ptime test(date(1972, 6, 9), time_duration(10, 20, 30, 40));
@@ -30,7 +30,7 @@ BOOST_AUTO_TEST_CASE(test_property_get_year)
     BOOST_CHECK_EQUAL(1972, test.date().year());
 }
 
-//test2
+// Test 2: Test the comparison of two ptime objects based on their year
 BOOST_AUTO_TEST_CASE(test_counted_time_system_compare_to_year)
 {
     ptime test1 = from_time_t(TEST_TIME1);
@@ -42,7 +42,7 @@ BOOST_AUTO_TEST_CASE(test_counted_time_system_compare_to_year)
 }
 
 
-//test3
+// Test 3: Test the property of equality between different components of a date object
 BOOST_AUTO_TEST_CASE(test_property_equals)
 {
     ptime test1(date(2005, 11, 8), time_duration(10, 20, 30, 40));
@@ -64,7 +64,7 @@ BOOST_AUTO_TEST_CASE(test_property_equals)
 }
 
 
-//test4
+// Test 4: Test the absolute value function of time_duration
 BOOST_AUTO_TEST_CASE(test_abs)
 {
     BOOST_CHECK_EQUAL(246L, time_duration(milliseconds(246L)).abs().total_milliseconds());
@@ -73,7 +73,7 @@ BOOST_AUTO_TEST_CASE(test_abs)
 }
 
 
-//test5
+// Test 5: Test the year property of a date object
 BOOST_AUTO_TEST_CASE(test_year)
 {
     date test_date(2000, 1, 1);
@@ -84,7 +84,7 @@ BOOST_AUTO_TEST_CASE(test_year)
     BOOST_CHECK_EQUAL(2005, another_test_date.year());
 }
 
-//test6
+// Test 6: Test the property of changing the day of year in a date object
 BOOST_AUTO_TEST_CASE(testPropertySetTextDayOfYear)
 {
     ptime test(date(2004, 6, 9), time_duration(0, 0, 0));
@@ -105,7 +105,7 @@ BOOST_AUTO_TEST_CASE(testPropertySetTextDayOfYear)
     BOOST_CHECK_EQUAL("2004-Jan-12 00:00:00", copy_ss.str());
 }
 
-//test7
+// Test 7: Test the property of getting the minimum and maximum
 BOOST_AUTO_TEST_CASE(testPropertyGetMaxMinValuesDayOfYear)
 {
     ptime test(date(2004, 6, 9), time_duration(0, 0, 0));
@@ -120,7 +120,7 @@ BOOST_AUTO_TEST_CASE(testPropertyGetMaxMinValuesDayOfYear)
     BOOST_CHECK_EQUAL(366, test.date().day_of_year().max());
 }
 
-//test8
+// Test 8: Test the property of changing the day of year in a date object
 BOOST_AUTO_TEST_CASE(testPropertySetDayOfYear)
 {
     ptime test(date(2004, 6, 9), time_duration(0, 0, 0));
@@ -136,7 +136,7 @@ BOOST_AUTO_TEST_CASE(testPropertySetDayOfYear)
 }
 
 
-//test9
+// Test 9: Test the comparison of two ptime objects based on their day
 BOOST_AUTO_TEST_CASE(testPropertyCompareToDayOfYear)
 {
     ptime test1 = from_time_t(TEST_TIME1);
@@ -153,7 +153,7 @@ BOOST_AUTO_TEST_CASE(testPropertyCompareToDayOfYear)
 }
 
 
-//test10
+// Test 10: Test the day of year property of a date object
 BOOST_AUTO_TEST_CASE(test_dayOfYear)
 {
     date d1(2004, 6, 9);
