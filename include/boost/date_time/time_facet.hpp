@@ -19,6 +19,7 @@
 #include <sstream>
 #include <string>
 #include <boost/assert.hpp>
+#include <boost/config.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include <boost/range/as_literal.hpp>
@@ -866,7 +867,7 @@ namespace date_time {
                     break;
                   // %s is the same as %S%f so we drop through into %f
                 }
-                /* Falls through. */
+                BOOST_FALLTHROUGH;
               case 'f':
                 {
                   // check for decimal, check special_values if missing
@@ -1140,7 +1141,7 @@ namespace date_time {
                     // %s is the same as %S%f so we drop through into %f if we are
                     // not at the end of the stream
                   }
-                  /* Falls through. */
+                  BOOST_FALLTHROUGH;
                 case 'f':
                   {
                     // check for decimal, check SV if missing
