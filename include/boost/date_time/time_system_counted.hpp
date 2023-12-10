@@ -93,9 +93,8 @@ namespace date_time {
     }
     static BOOST_CXX14_CONSTEXPR int_type frac_sec_per_day()
     {
-      int_type seconds_per_day = 60*60*24;
-      int_type fractional_sec_per_sec(resolution_traits::res_adjust());
-      return seconds_per_day*fractional_sec_per_sec;
+      BOOST_CXX14_CONSTEXPR int_type seconds_per_day = 60*60*24;
+      return seconds_per_day*resolution_traits::res_adjust();
     }
     BOOST_CXX14_CONSTEXPR bool is_pos_infinity()const
     {
