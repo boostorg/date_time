@@ -1,4 +1,12 @@
-name: GitHub Actions CI
+# Copyright 2020-2021 Peter Dimov
+# Copyright 2021 Andrey Semashev
+# Copyright 2021 Alexander Grund
+# Copyright 2022 James E. King III
+#
+# Distributed under the Boost Software License, Version 1.0.
+# (See accompanying file LICENSE_1_0.txt or copy at http://boost.org/LICENSE_1_0.txt)
+---
+name: CI
 
 on:
   pull_request:
@@ -6,542 +14,319 @@ on:
     branches:
       - master
       - develop
-      - githubactions*
+      - bugfix/**
       - feature/**
       - fix/**
       - pr/**
 
+concurrency:
+  group: ${{format('{0}:{1}', github.repository, github.ref)}}
+  cancel-in-progress: true
+
 env:
-    B2_VARIANT: variant=release
+  GIT_FETCH_JOBS: 8
+  NET_RETRY_COUNT: 5
+  B2_CI_VERSION: 1
+  B2_VARIANT: debug,release
+  B2_LINK: shared,static
+  LCOV_BRANCH_COVERAGE: 0
+  CODECOV_NAME: Github Actions
+  SELF_CONTAINED_HEADER_TESTS: 0
 
 jobs:
   posix:
+    defaults:
+      run:
+        shell: bash
+
     strategy:
       fail-fast: false
       matrix:
         include:
-          - name: "B2_TOOLSET=gcc-4.8 B2_CXXSTD=03,11 BOOST_DATE Job 0"
-            buildtype: "boost"
-            packages: "g++-4.8"
-            packages_to_remove: ""
-            os: "ubuntu-16.04"
-            container: "ubuntu:14.04"
-            cxx: "g++-4.8"
-            sources: ""
-            llvm_os: ""
-            llvm_ver: ""
-            b2_toolset: "gcc-4.8"
-            b2_cxxstd: "03,11"
-            boost_date_time_test_without_self_contained_header_tests: "1"
-          - name: "B2_TOOLSET=gcc-4.9 B2_CXXSTD=03,11 BOOST_DATE Job 1"
-            buildtype: "boost"
-            packages: "g++-4.9"
-            packages_to_remove: ""
-            os: "ubuntu-16.04"
-            cxx: "g++-4.9"
-            sources: ""
-            llvm_os: ""
-            llvm_ver: ""
-            b2_toolset: "gcc-4.9"
-            b2_cxxstd: "03,11"
-            boost_date_time_test_without_self_contained_header_tests: "1"
-          - name: "B2_TOOLSET=gcc-5 B2_CXXSTD=03,11 Job 2"
-            buildtype: "boost"
-            packages: "g++-5"
-            packages_to_remove: ""
-            os: "ubuntu-16.04"
-            cxx: "g++-5"
-            sources: ""
-            llvm_os: ""
-            llvm_ver: ""
-            b2_toolset: "gcc-5"
-            b2_cxxstd: "03,11"
-          - name: "B2_TOOLSET=gcc-6 B2_CXXSTD=11,14 BOOST_DATE_T Job 3"
-            buildtype: "boost"
-            packages: "g++-6"
-            packages_to_remove: ""
-            os: "ubuntu-16.04"
-            cxx: "g++-6"
-            sources: ""
-            llvm_os: ""
-            llvm_ver: ""
-            b2_toolset: "gcc-6"
-            b2_cxxstd: "11,14"
-            boost_date_time_test_without_self_contained_header_tests: "1"
-          - name: "B2_TOOLSET=gcc-7 B2_CXXSTD=14,17 BOOST_DATE_T Job 4"
-            buildtype: "boost"
-            packages: "g++-7"
-            packages_to_remove: ""
-            os: "ubuntu-16.04"
-            cxx: "g++-7"
-            sources: ""
-            llvm_os: ""
-            llvm_ver: ""
-            b2_toolset: "gcc-7"
-            b2_cxxstd: "14,17"
-            boost_date_time_test_without_self_contained_header_tests: "1"
-          - name: "B2_TOOLSET=gcc-8 B2_CXXSTD=17,2a BOOST_DATE_T Job 5"
-            buildtype: "boost"
-            packages: "g++-8"
-            packages_to_remove: ""
-            os: "ubuntu-16.04"
-            cxx: "g++-8"
-            sources: ""
-            llvm_os: ""
-            llvm_ver: ""
-            b2_toolset: "gcc-8"
-            b2_cxxstd: "17,2a"
-            boost_date_time_test_without_self_contained_header_tests: "1"
-          - name: "B2_TOOLSET=gcc-9 B2_CXXSTD=17,2a BOOST_DATE_T Job 6"
-            buildtype: "boost"
-            packages: "g++-9"
-            packages_to_remove: ""
-            os: "ubuntu-16.04"
-            cxx: "g++-9"
-            sources: ""
-            llvm_os: ""
-            llvm_ver: ""
-            b2_toolset: "gcc-9"
-            b2_cxxstd: "17,2a"
-            boost_date_time_test_without_self_contained_header_tests: "1"
-          - name: "B2_TOOLSET=clang-3.8 B2_CXXSTD=03,11 BOOST_DA Job 7"
-            buildtype: "boost"
-            packages: "clang-3.8 libstdc++-6-dev"
-            packages_to_remove: ""
-            os: "ubuntu-16.04"
-            container: "ubuntu:14.04"
-            cxx: "clang++-3.8"
-            sources: ""
-            llvm_os: "xenial"
-            llvm_ver: "3.8"
-            b2_toolset: "clang-3.8"
-            b2_cxxstd: "03,11"
-            boost_date_time_test_without_self_contained_header_tests: "1"
-          - name: "B2_TOOLSET=clang-4.0 B2_CXXSTD=11,14 BOOST_DA Job 8"
-            buildtype: "boost"
-            packages: "clang-4.0 libstdc++-6-dev"
-            packages_to_remove: ""
-            os: "ubuntu-16.04"
-            cxx: "clang++-4.0"
-            sources: ""
-            llvm_os: "xenial"
-            llvm_ver: "4.0"
-            b2_toolset: "clang-4.0"
-            b2_cxxstd: "11,14"
-            boost_date_time_test_without_self_contained_header_tests: "1"
-          - name: "B2_TOOLSET=clang-5.0 B2_CXXSTD=11,14 BOOST_DA Job 9"
-            buildtype: "boost"
-            packages: "clang-5.0 libstdc++-7-dev"
-            packages_to_remove: ""
-            os: "ubuntu-16.04"
-            cxx: "clang++-5.0"
-            sources: ""
-            llvm_os: "xenial"
-            llvm_ver: "5.0"
-            b2_toolset: "clang-5.0"
-            b2_cxxstd: "11,14"
-            boost_date_time_test_without_self_contained_header_tests: "1"
-          - name: "B2_TOOLSET=clang-6.0 B2_CXXSTD=14,17 BOOST_DA Job 10"
-            buildtype: "boost"
-            packages: "clang-6.0 libc6-dbg libc++-dev libstdc++-8-dev"
-            packages_to_remove: ""
-            os: "ubuntu-16.04"
-            cxx: "clang++-6.0"
-            sources: ""
-            llvm_os: "xenial"
-            llvm_ver: "6.0"
-            b2_toolset: "clang-6.0"
-            b2_cxxstd: "14,17"
-            boost_date_time_test_without_self_contained_header_tests: "1"
-          - name: "B2_TOOLSET=clang-7 B2_CXXSTD=17,2a BOOST_DATE Job 11"
-            buildtype: "boost"
-            packages: "clang-7 libc6-dbg libc++-dev libstdc++-8-dev"
-            packages_to_remove: ""
-            os: "ubuntu-16.04"
-            cxx: "clang++-7"
-            sources: ""
-            llvm_os: "xenial"
-            llvm_ver: "7"
-            b2_toolset: "clang-7"
-            b2_cxxstd: "17,2a"
-            boost_date_time_test_without_self_contained_header_tests: "1"
-          - name: "B2_TOOLSET=clang-8 B2_CXXSTD=17,2a BOOST_DATE Job 12"
-            buildtype: "boost"
-            packages: "clang-8 libc6-dbg libc++-dev libstdc++-8-dev"
-            packages_to_remove: ""
-            os: "ubuntu-16.04"
-            cxx: "clang++-8"
-            sources: ""
-            llvm_os: "xenial"
-            llvm_ver: "8"
-            b2_toolset: "clang-8"
-            b2_cxxstd: "17,2a"
-            boost_date_time_test_without_self_contained_header_tests: "1"
-          - name: "B2_TOOLSET=clang-6.0 B2_CXXSTD=03,11,14 Job 13"
-            buildtype: "boost"
-            packages: "clang-6.0 libc6-dbg libc++-dev libstdc++-8-dev"
-            packages_to_remove: ""
-            os: "ubuntu-16.04"
-            cxx: "clang++-6.0"
-            sources: ""
-            llvm_os: "xenial"
-            llvm_ver: "6.0"
-            b2_toolset: "clang-6.0"
-            b2_cxxstd: "03,11,14"
-            b2_cxxflags: "-stdlib=libc++"
-          - name: "COMMENT=codecov.io B2_CXXSTD=03,11 B2_TOOLSET Job 15"
-            buildtype: "b5847f804b-0fcaf592f9"
-            packages: "g++-8"
-            packages_to_remove: ""
-            os: "ubuntu-16.04"
-            cxx: "g++-8"
-            sources: ""
-            llvm_os: ""
-            llvm_ver: ""
-            comment: "codecov.io"
-            b2_cxxstd: "03,11"
-            b2_toolset: "gcc-8"
-            b2_defines: "define=BOOST_NO_STRESS_TEST=1"
-            boost_date_time_test_without_self_contained_header_tests: "1"
-          - name: "COMMENT=asan B2_VARIANT=variant=debug B2_TOOL Job 16"
-            buildtype: "boost"
-            packages: "g++-8"
-            packages_to_remove: ""
-            os: "ubuntu-16.04"
-            cxx: "g++-8"
-            sources: ""
-            llvm_os: ""
-            llvm_ver: ""
-            comment: "asan"
-            b2_variant: "variant=debug"
-            b2_toolset: "gcc-8"
-            b2_cxxstd: "03,11,14"
-            b2_cxxflags: "address-sanitizer=norecover"
-            b2_defines: "define=BOOST_NO_STRESS_TEST=1"
-            boost_date_time_test_without_self_contained_header_tests: "1"
-          - name: "COMMENT=tsan B2_VARIANT=variant=debug B2_TOOL Job 17"
-            buildtype: "boost"
-            packages: "g++-8"
-            packages_to_remove: ""
-            os: "ubuntu-16.04"
-            cxx: "g++-8"
-            sources: ""
-            llvm_os: ""
-            llvm_ver: ""
-            comment: "tsan"
-            b2_variant: "variant=debug"
-            b2_toolset: "gcc-8"
-            b2_cxxstd: "03,11,14"
-            b2_cxxflags: "thread-sanitizer=norecover"
-            b2_defines: "define=BOOST_NO_STRESS_TEST=1"
-            boost_date_time_test_without_self_contained_header_tests: "1"
-# 
-#           - name: "COMMENT=ubsan B2_VARIANT=variant=debug B2_TOO Job 18"
-#             buildtype: "boost"
-#             packages: "g++-8"
-#             packages_to_remove: ""
-#             os: "ubuntu-16.04"
-#             cxx: "g++-8"
-#             sources: ""
-#             llvm_os: ""
-#             llvm_ver: ""
-#             comment: "ubsan"
-#             b2_variant: "variant=debug"
-#             b2_toolset: "gcc-8"
-#             b2_cxxstd: "03,11,14"
-#             b2_cxxflags: "undefined-sanitizer=norecover"
-#             b2_defines: "define=BOOST_NO_STRESS_TEST=1"
-#             b2_linkflags: "linkflags=-fuse-ld=gold"
-#             ubsan_options: "print_stacktrace=1"
-#             boost_date_time_test_without_self_contained_header_tests: "1"
-          - name: "COMMENT=valgrind B2_TOOLSET=clang-6.0 B2_CXXS Job 19"
-            buildtype: "b5847f804b-db180b7bd2"
-            packages: "clang-6.0 libc6-dbg libc++-dev libstdc++-8-dev"
-            packages_to_remove: ""
-            os: "ubuntu-16.04"
-            cxx: "clang++-6.0"
-            sources: ""
-            llvm_os: "xenial"
-            llvm_ver: "6.0"
-            comment: "valgrind"
-            b2_toolset: "clang-6.0"
-            b2_cxxstd: "03,11,14"
-            b2_defines: "define=BOOST_NO_STRESS_TEST=1"
-            b2_variant: "variant=debug"
-            b2_testflags: "testing.launcher=valgrind"
-            boost_date_time_test_without_self_contained_header_tests: "1"
-            valgrind_opts: "--error-exitcode=1"
-          - name: "COMMENT=Coverity Scan B2_TOOLSET=clang BOOS Job 20"
-            buildtype: "b5847f804b-cce9827eb5"
-            packages: "binutils-gold gdb libc6-dbg"
-            packages_to_remove: ""
-            os: "ubuntu-16.04"
-            cxx: "g++"
-            sources: ""
-            llvm_os: ""
-            llvm_ver: ""
-            comment: "Coverity Scan"
-            b2_toolset: "clang"
-            boost_date_time_test_without_self_contained_header_tests: "1"
+          # Linux, gcc
+          - { compiler: gcc-4.8,   cxxstd: '03,11',          os: ubuntu-18.04 }
+          - { compiler: gcc-5,     cxxstd: '03,11',          os: ubuntu-18.04 }
+          - { compiler: gcc-6,     cxxstd: '03,11,14,17',    os: ubuntu-18.04 }
+          - { compiler: gcc-7,     cxxstd: '03,11,14,17',    os: ubuntu-18.04 }
+          - { compiler: gcc-8,     cxxstd: '03,11,14,17,2a', os: ubuntu-18.04 }
+          - { compiler: gcc-9,     cxxstd: '03,11,14,17,2a', os: ubuntu-18.04 }
+          - { compiler: gcc-10,    cxxstd: '03,11,14,17,20', os: ubuntu-20.04 }
+          - { compiler: gcc-11,    cxxstd: '03,11,14,17,20', os: ubuntu-20.04, self-contained-header-tests: 1 }
+          # disabled: there are too many issues in serialization and not enough time to add suppressions
+          # - { name: GCC w/ sanitizers, sanitize: yes,
+          #     compiler: gcc-11,    cxxstd: '03,11,14,17,20', os: ubuntu-20.04 }
+          - { name: Collect coverage, coverage: yes,
+              compiler: gcc-10,    cxxstd: '03,11',          os: ubuntu-20.04, install: 'g++-10-multilib', address-model: '32,64' }
 
-    runs-on: ${{ matrix.os }}
-    container: ${{ matrix.container }}
+          # Linux, clang
+          - { compiler: clang-3.9, cxxstd: '03,11,14',       os: ubuntu-18.04 }
+          - { compiler: clang-4.0, cxxstd: '03,11,14',       os: ubuntu-18.04 }
+          - { compiler: clang-5.0, cxxstd: '03,11,14,1z',    os: ubuntu-18.04 }
+          - { compiler: clang-6.0, cxxstd: '03,11,14,17',    os: ubuntu-18.04 }
+          - { compiler: clang-7,   cxxstd: '03,11,14,17',    os: ubuntu-18.04 }
+          # Note: clang-8 does not fully support C++20, so it is not compatible with some libstdc++ versions in this mode
+          - { compiler: clang-8,   cxxstd: '03,11,14,17,2a', os: ubuntu-18.04, install: 'clang-8 g++-7', gcc_toolchain: 7 }
+          - { compiler: clang-9,   cxxstd: '03,11,14,17,2a', os: ubuntu-20.04 }
+          - { compiler: clang-10,  cxxstd: '03,11,14,17,20', os: ubuntu-20.04 }
+          - { compiler: clang-11,  cxxstd: '03,11,14,17,20', os: ubuntu-20.04 }
+          - { compiler: clang-12,  cxxstd: '03,11,14,17,20', os: ubuntu-20.04, self-contained-header-tests: 1 }
+
+          # libc++
+          - { compiler: clang-6.0, cxxstd: '03,11,14',       os: ubuntu-18.04, stdlib: libc++, install: 'clang-6.0 libc++-dev libc++abi-dev' }
+          - { compiler: clang-12,  cxxstd: '03,11,14,17,20', os: ubuntu-20.04, stdlib: libc++, install: 'clang-12 libc++-12-dev libc++abi-12-dev', self-contained-header-tests: 1 }
+          # disabled: there are too many issues in serialization and not enough time to add suppressions
+          # - { name: Clang w/ sanitizers, sanitize: yes,
+          #     compiler: clang-12,  cxxstd: '03,11,14,17,20', os: ubuntu-20.04, stdlib: libc++, install: 'clang-12 libc++-12-dev libc++abi-12-dev' }
+
+          # OSX, clang
+          # sanitize disabled: there are too many issues in serialization and not enough time to add suppressions
+          - { compiler: clang,     cxxstd: '03,11,14,17,2a', os: macos-11 }
+
+          # Coverity Scan
+          # requires two github secrets in repo to activate; see ci/github/coverity.sh
+          # does not run on pull requests, only on pushes into develop and master
+          - { name: Coverity, coverity: yes,
+              compiler: clang-10,  cxxstd: '17',             os: ubuntu-20.04, ccache: no }
+
+          # multiarch (bigendian testing) - does not support coverage yet
+          # date_time has no endian compile-time branches
+          # - { name: Big-endian, multiarch: yes,
+          #     compiler: clang,     cxxstd: '17',             os: ubuntu-20.04, ccache: no, distro: fedora, edition: 34, arch: s390x }
+
+
+    timeout-minutes: 120
+    runs-on: ${{matrix.os}}
+    container: ${{matrix.container}}
+    env: {B2_USE_CCACHE: 1}
 
     steps:
-      - name: Check if running in container
-        if: matrix.container != ''
-        run: echo "GHA_CONTAINER=${{ matrix.container }}" >> $GITHUB_ENV
-      - name: If running in container, upgrade packages
-        if: matrix.container != ''
+      - name: Setup environment
         run: |
-            sudo apt-get -o Acquire::Retries=3 update && DEBIAN_FRONTEND=noninteractive apt-get -y install tzdata && apt-get -o Acquire::Retries=3 install -y sudo software-properties-common wget curl apt-transport-https make apt-file sudo unzip libssl-dev build-essential autotools-dev autoconf automake g++ libc++-helpers python python-pip ruby cpio gcc-multilib g++-multilib pkgconf python3 python3-pip ccache libpython-dev
-            sudo apt-add-repository ppa:git-core/ppa
-            sudo apt-get -o Acquire::Retries=3 update && apt-get -o Acquire::Retries=3 -y install git
-            sudo python -m pip install --upgrade pip==20.3.4
-            sudo /usr/local/bin/pip install cmake
+            if [ -f "/etc/debian_version" ]; then
+                echo "DEBIAN_FRONTEND=noninteractive" >> $GITHUB_ENV
+                export DEBIAN_FRONTEND=noninteractive
+            fi
+            if [ -n "${{matrix.container}}" ] && [ -f "/etc/debian_version" ]; then
+                apt-get -o Acquire::Retries=$NET_RETRY_COUNT update
+                apt-get -o Acquire::Retries=$NET_RETRY_COUNT install -y sudo software-properties-common
+                # Need (newer) git
+                for i in {1..${NET_RETRY_COUNT:-3}}; do sudo -E add-apt-repository -y ppa:git-core/ppa && break || sleep 10; done
+                apt-get -o Acquire::Retries=$NET_RETRY_COUNT update
+                apt-get -o Acquire::Retries=$NET_RETRY_COUNT install -y g++ python libpython-dev git
+            fi
+            # multiple job types are not compatible with ccache, they use "ccache: no" in the matrix
+            if [[ "${{ matrix.ccache }}" == "no" ]]; then
+                echo "B2_USE_CCACHE=0" >> $GITHUB_ENV
+            fi
+            git config --global pack.threads 0
 
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+        with:
+          # For coverage builds fetch the whole history, else only 1 commit using a 'fake ternary'
+          fetch-depth: ${{ matrix.coverage && '0' || '1' }}
 
-      - name: linux
-        shell: bash
+      - name: Cache ccache
+        uses: actions/cache@v3
+        if: env.B2_USE_CCACHE
+        with:
+          path: ~/.ccache
+          key: ${{matrix.os}}-${{matrix.container}}-${{matrix.compiler}}-${{github.sha}}
+          restore-keys: |
+            ${{matrix.os}}-${{matrix.container}}-${{matrix.compiler}}-
+            ${{matrix.os}}-${{matrix.container}}-${{matrix.compiler}}
+
+      - name: Fetch Boost.CI
+        uses: actions/checkout@v3
+        with:
+          repository: boostorg/boost-ci
+          ref: master
+          path: boost-ci-cloned
+
+      - name: Get CI scripts folder
+        run: |
+            # Copy ci folder if not testing Boost.CI
+            [[ "$GITHUB_REPOSITORY" =~ "boost-ci" ]] || cp -r boost-ci-cloned/ci .
+            rm -rf boost-ci-cloned
+
+      - name: Install packages
+        if: startsWith(matrix.os, 'ubuntu')
+        run: |
+            SOURCE_KEYS=(${{join(matrix.source_keys, ' ')}})
+            SOURCES=(${{join(matrix.sources, ' ')}})
+            # Add this by default
+            SOURCES+=(ppa:ubuntu-toolchain-r/test)
+            for key in "${SOURCE_KEYS[@]}"; do
+                for i in {1..$NET_RETRY_COUNT}; do
+                    wget -O - "$key" | sudo apt-key add - && break || sleep 10
+                done
+            done
+            for source in "${SOURCES[@]}"; do
+                for i in {1..$NET_RETRY_COUNT}; do
+                    sudo add-apt-repository $source && break || sleep 10
+                done
+            done
+            sudo apt-get -o Acquire::Retries=$NET_RETRY_COUNT update
+            if [[ -z "${{matrix.install}}" ]]; then
+                pkgs="${{matrix.compiler}}"
+                pkgs="${pkgs/gcc-/g++-}"
+            else
+                pkgs="${{matrix.install}}"
+            fi
+            sudo apt-get -o Acquire::Retries=$NET_RETRY_COUNT install -y $pkgs
+
+      - name: Setup GCC Toolchain
+        if: matrix.gcc_toolchain
+        run: |
+            GCC_TOOLCHAIN_ROOT="$HOME/gcc-toolchain"
+            echo "GCC_TOOLCHAIN_ROOT=$GCC_TOOLCHAIN_ROOT" >> $GITHUB_ENV
+            MULTIARCH_TRIPLET="$(dpkg-architecture -qDEB_HOST_MULTIARCH)"
+            mkdir -p "$GCC_TOOLCHAIN_ROOT"
+            ln -s /usr/include "$GCC_TOOLCHAIN_ROOT/include"
+            ln -s /usr/bin "$GCC_TOOLCHAIN_ROOT/bin"
+            mkdir -p "$GCC_TOOLCHAIN_ROOT/lib/gcc/$MULTIARCH_TRIPLET"
+            ln -s "/usr/lib/gcc/$MULTIARCH_TRIPLET/${{matrix.gcc_toolchain}}" "$GCC_TOOLCHAIN_ROOT/lib/gcc/$MULTIARCH_TRIPLET/${{matrix.gcc_toolchain}}"
+
+      - name: Setup multiarch
+        if: matrix.multiarch
+        run: |
+          sudo apt-get install --no-install-recommends -y binfmt-support qemu-user-static
+          sudo docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+          git clone https://github.com/jeking3/bdde.git
+          echo "$(pwd)/bdde/bin/linux" >> ${GITHUB_PATH}
+          echo "BDDE_DISTRO=${{ matrix.distro }}" >> ${GITHUB_ENV}
+          echo "BDDE_EDITION=${{ matrix.edition }}" >> ${GITHUB_ENV}
+          echo "BDDE_ARCH=${{ matrix.arch }}" >> ${GITHUB_ENV}
+          echo "B2_WRAPPER=bdde" >> ${GITHUB_ENV}
+
+      - name: Setup Boost
         env:
-          CXX: ${{ matrix.cxx }}
-          SOURCES: ${{ matrix.sources }}
-          LLVM_OS: ${{ matrix.llvm_os }}
-          LLVM_VER: ${{ matrix.llvm_ver }}
-          PACKAGES: ${{ matrix.packages }}
-          PACKAGES_TO_REMOVE: ${{ matrix.packages_to_remove }}
-          JOB_BUILDTYPE: ${{ matrix.buildtype }}
-          B2_TOOLSET: ${{ matrix.b2_toolset }}
-          B2_CXXSTD: ${{ matrix.b2_cxxstd }}
-          BOOST_DATE_TIME_TEST_WITHOUT_SELF_CONTAINED_HEADER_TESTS: ${{ matrix.boost_date_time_test_without_self_contained_header_tests }}
-          B2_CXXFLAGS: ${{ matrix.b2_cxxflags }}
-          COMMENT: ${{ matrix.comment }}
-          B2_DEFINES: ${{ matrix.b2_defines }}
-          B2_VARIANT: ${{ matrix.b2_variant }}
-          B2_LINKFLAGS: ${{ matrix.b2_linkflags }}
-          UBSAN_OPTIONS: ${{ matrix.ubsan_options }}
-          B2_TESTFLAGS: ${{ matrix.b2_testflags }}
-          VALGRIND_OPTS: ${{ matrix.valgrind_opts }}
-          TRAVIS_BRANCH: ${{ github.base_ref }}
-          TRAVIS_OS_NAME: "linux"
-        run: |
-          echo '==================================> SETUP'
-          echo '==================================> PACKAGES'
-          set -e
-          if [ -n "$PACKAGES_TO_REMOVE" ]; then sudo apt-get purge -y $PACKAGES_TO_REMOVE; fi
-          echo ">>>>> APT: REPO.."
-          for i in {1..3}; do sudo -E apt-add-repository -y "ppa:ubuntu-toolchain-r/test" && break || sleep 2; done
-          
-          if test -n "${LLVM_OS}" ; then
-              wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -
-              if test -n "${LLVM_VER}" ; then
-                  sudo -E apt-add-repository "deb http://apt.llvm.org/${LLVM_OS}/ llvm-toolchain-${LLVM_OS}-${LLVM_VER} main"
-              else
-                  # Snapshot (i.e. trunk) build of clang
-                  sudo -E apt-add-repository "deb http://apt.llvm.org/${LLVM_OS}/ llvm-toolchain-${LLVM_OS} main"
-              fi
-          fi
-          echo ">>>>> APT: UPDATE.."
-          sudo -E apt-get -o Acquire::Retries=3 update
-          if test -n "${SOURCES}" ; then
-              echo ">>>>> APT: INSTALL SOURCES.."
-              for SOURCE in $SOURCES; do
-                  sudo -E apt-add-repository ppa:$SOURCE
-              done
-          fi
-          echo ">>>>> APT: INSTALL ${PACKAGES}.."
-          sudo -E DEBIAN_FRONTEND=noninteractive apt-get -o Acquire::Retries=3 -y --no-install-suggests --no-install-recommends install ${PACKAGES}
+          B2_ADDRESS_MODEL: ${{matrix.address-model}}
+          B2_COMPILER: ${{matrix.compiler}}
+          B2_CXXSTD: ${{matrix.cxxstd}}
+          B2_SANITIZE: ${{matrix.sanitize}}
+          B2_STDLIB: ${{matrix.stdlib}}
+        run: source ci/github/install.sh
 
-          echo '==================================> INSTALL AND COMPILE'
-          set -e
-          export TRAVIS_BUILD_DIR=$(pwd)
-          export TRAVIS_BRANCH=${TRAVIS_BRANCH:-$(echo $GITHUB_REF | awk 'BEGIN { FS = "/" } ; { print $3 }')}
-          export VCS_COMMIT_ID=$GITHUB_SHA
-          export GIT_COMMIT=$GITHUB_SHA
-          export REPO_NAME=$(basename $GITHUB_REPOSITORY)
-          export USER=$(whoami)
-          export CC=${CC:-gcc}
-          export PATH=~/.local/bin:/usr/local/bin:$PATH
+      - name: Setup coverage collection
+        if: matrix.coverage
+        run: ci/github/codecov.sh "setup"
 
-          if [ "$JOB_BUILDTYPE" == "boost" ]; then
+      - name: Run tests
+        if: '!matrix.coverity'
+        run: ci/build.sh
+        env:
+          BOOST_DATE_TIME_TEST_WITHOUT_SELF_CONTAINED_HEADER_TESTS: ${{ !(matrix.self-contained-header-tests || env.SELF_CONTAINED_HEADER_TESTS) }}
 
-          echo '==================================> INSTALL'
+      - name: Upload coverage
+        if: matrix.coverage
+        run: ci/codecov.sh "upload"
 
-          git clone https://github.com/boostorg/boost-ci.git boost-ci
-          cp -pr boost-ci/ci boost-ci/.codecov.yml .
+      - name: Run coverity
+        if: matrix.coverity && github.event_name == 'push' && (github.ref_name == 'develop' || github.ref_name == 'master')
+        run: ci/github/coverity.sh
+        env:
+          BOOST_DATE_TIME_TEST_WITHOUT_SELF_CONTAINED_HEADER_TESTS: ${{ !(matrix.self-contained-header-tests || env.SELF_CONTAINED_HEADER_TESTS) }}
+          COVERITY_SCAN_NOTIFICATION_EMAIL: ${{ secrets.COVERITY_SCAN_NOTIFICATION_EMAIL }}
+          COVERITY_SCAN_TOKEN: ${{ secrets.COVERITY_SCAN_TOKEN }}
 
-          if [ "$TRAVIS_OS_NAME" == "osx" ]; then
-              unset -f cd
-          fi
-
-          export SELF=`basename $REPO_NAME`
-          export BOOST_CI_TARGET_BRANCH="$TRAVIS_BRANCH"
-          export BOOST_CI_SRC_FOLDER=$(pwd)
-
-          . ./ci/common_install.sh
-
-          echo '==================================> SCRIPT'
-
-          cd $BOOST_ROOT/libs/$SELF
-          ci/travis/build.sh
-
-          elif [ "$JOB_BUILDTYPE" == "b5847f804b-0fcaf592f9" ]; then
-
-          echo '==================================> INSTALL'
-
-          git clone https://github.com/boostorg/boost-ci.git boost-ci
-          cp -pr boost-ci/ci boost-ci/.codecov.yml .
-
-          if [ "$TRAVIS_OS_NAME" == "osx" ]; then
-              unset -f cd
-          fi
-
-          export SELF=`basename $REPO_NAME`
-          export BOOST_CI_TARGET_BRANCH="$TRAVIS_BRANCH"
-          export BOOST_CI_SRC_FOLDER=$(pwd)
-
-          . ./ci/common_install.sh
-
-          echo '==================================> SCRIPT'
-
-          cd $BOOST_ROOT/libs/$SELF
-          ci/travis/codecov.sh
-
-          elif [ "$JOB_BUILDTYPE" == "b5847f804b-db180b7bd2" ]; then
-
-          echo '==================================> INSTALL'
-
-          git clone https://github.com/boostorg/boost-ci.git boost-ci
-          cp -pr boost-ci/ci boost-ci/.codecov.yml .
-
-          if [ "$TRAVIS_OS_NAME" == "osx" ]; then
-              unset -f cd
-          fi
-
-          export SELF=`basename $REPO_NAME`
-          export BOOST_CI_TARGET_BRANCH="$TRAVIS_BRANCH"
-          export BOOST_CI_SRC_FOLDER=$(pwd)
-
-          . ./ci/common_install.sh
-
-          echo '==================================> SCRIPT'
-
-          cd $BOOST_ROOT/libs/$SELF
-          ci/travis/valgrind.sh
-
-          elif [ "$JOB_BUILDTYPE" == "b5847f804b-cce9827eb5" ]; then
-
-          echo '==================================> INSTALL'
-
-          git clone https://github.com/boostorg/boost-ci.git boost-ci
-          cp -pr boost-ci/ci boost-ci/.codecov.yml .
-
-          if [ "$TRAVIS_OS_NAME" == "osx" ]; then
-              unset -f cd
-          fi
-
-          export SELF=`basename $REPO_NAME`
-          export BOOST_CI_TARGET_BRANCH="$TRAVIS_BRANCH"
-          export BOOST_CI_SRC_FOLDER=$(pwd)
-
-          . ./ci/common_install.sh
-
-          echo '==================================> SCRIPT'
-
-          if  [ -n "${COVERITY_SCAN_NOTIFICATION_EMAIL}" -a \( "$TRAVIS_BRANCH" = "develop" -o "$TRAVIS_BRANCH" = "master" \) -a \("$GITHUB_EVENT_NAME" = "push" -o "$GITHUB_EVENT_NAME" = "cron" \) ] ; then
-          cd $BOOST_ROOT/libs/$SELF
-          ci/travis/coverity.sh
-          fi
-
-          fi
-  osx:
+  windows:
+    defaults:
+      run:
+        shell: cmd
     strategy:
       fail-fast: false
       matrix:
         include:
-          - name: "B2_TOOLSET=clang B2_CXXSTD=03,11,17 BOOST_DAT Job 14"
-            buildtype: "boost"
-            packages: ""
-            os: "macos-10.15"
-            cxx: "g++"
-            sources: ""
-            llvm_os: ""
-            llvm_ver: ""
-            xcode_version: 11.7
-            b2_toolset: "clang"
-            b2_cxxstd: "03,11,17"
-            boost_date_time_test_without_self_contained_header_tests: "1"
+          - { toolset: msvc-14.2, cxxstd: '14,17,20',       addrmd: '32,64', os: windows-2019, self-contained-header-tests: 1 }
+          - { name: Collect coverage, coverage: yes,
+              toolset: msvc-14.3, cxxstd: '14,17,20',       addrmd: '32,64', os: windows-2022 }
+          - { toolset: gcc,       cxxstd: '03,11,14,17,2a', addrmd: '64',    os: windows-2019 }
 
-    runs-on: ${{ matrix.os }}
+    runs-on: ${{matrix.os}}
 
     steps:
       - uses: actions/checkout@v2
 
-      - name: Set DEVELOPER_DIR
-        if: matrix.xcode_version != ''
-        run: echo "DEVELOPER_DIR=/Applications/Xcode_${{ matrix.xcode_version }}.app/Contents/Developer" >> $GITHUB_ENV
-      - name: Test DEVELOPER_DIR
-        run: echo $DEVELOPER_DIR
-
-      - name: "osx"
-        shell: bash
-        env:
-          CXX: ${{ matrix.cxx }}
-          SOURCES: ${{ matrix.sources }}
-          LLVM_OS: ${{ matrix.llvm_os }}
-          LLVM_VER: ${{ matrix.llvm_ver }}
-          PACKAGES: ${{ matrix.packages }}
-          JOB_BUILDTYPE: ${{ matrix.buildtype }}
-          B2_TOOLSET: ${{ matrix.b2_toolset }}
-          B2_CXXSTD: ${{ matrix.b2_cxxstd }}
-          BOOST_DATE_TIME_TEST_WITHOUT_SELF_CONTAINED_HEADER_TESTS: ${{ matrix.boost_date_time_test_without_self_contained_header_tests }}
-          B2_CXXFLAGS: ${{ matrix.b2_cxxflags }}
-          COMMENT: ${{ matrix.comment }}
-          B2_DEFINES: ${{ matrix.b2_defines }}
-          B2_VARIANT: ${{ matrix.b2_variant }}
-          B2_LINKFLAGS: ${{ matrix.b2_linkflags }}
-          UBSAN_OPTIONS: ${{ matrix.ubsan_options }}
-          B2_TESTFLAGS: ${{ matrix.b2_testflags }}
-          VALGRIND_OPTS: ${{ matrix.valgrind_opts }}
-          TRAVIS_BRANCH: ${{ github.base_ref }}
-          TRAVIS_OS_NAME: "osx"
+      - name: Fetch Boost.CI
+        uses: actions/checkout@v2
+        with:
+          repository: boostorg/boost-ci
+          ref: master
+          path: boost-ci-cloned
+      - name: Get CI scripts folder
         run: |
-          echo '==================================> SETUP'
-          set -e
-          sudo mv /Library/Developer/CommandLineTools /Library/Developer/CommandLineTools.bck
-          echo '==================================> PACKAGES'
-          echo '==================================> INSTALL AND COMPILE'
-          set -e
-          export TRAVIS_BUILD_DIR=$(pwd)
-          export TRAVIS_BRANCH=${TRAVIS_BRANCH:-$(echo $GITHUB_REF | awk 'BEGIN { FS = "/" } ; { print $3 }')}
-          export VCS_COMMIT_ID=$GITHUB_SHA
-          export GIT_COMMIT=$GITHUB_SHA
-          export REPO_NAME=$(basename $GITHUB_REPOSITORY)
-          export USER=$(whoami)
-          export CC=${CC:-gcc}
-          export PATH=~/.local/bin:/usr/local/bin:$PATH
+            REM Copy ci folder if not testing Boost.CI
+            if "%GITHUB_REPOSITORY%" == "%GITHUB_REPOSITORY:boost-ci=%" xcopy /s /e /q /i /y boost-ci-cloned\ci .\ci
+            rmdir /s /q boost-ci-cloned
 
-          if [ "$JOB_BUILDTYPE" == "boost" ]; then
+      - name: Setup Boost
+        run: ci\github\install.bat
 
-          echo '==================================> INSTALL'
+      - name: Run tests
+        if: '!matrix.coverage'
+        run: ci\build.bat
+        env:
+          B2_TOOLSET: ${{matrix.toolset}}
+          B2_CXXSTD: ${{matrix.cxxstd}}
+          B2_ADDRESS_MODEL: ${{matrix.addrmd}}
+          BOOST_DATE_TIME_TEST_WITHOUT_SELF_CONTAINED_HEADER_TESTS: ${{ !(matrix.self-contained-header-tests || env.SELF_CONTAINED_HEADER_TESTS) }}
 
-          git clone https://github.com/boostorg/boost-ci.git boost-ci
-          cp -pr boost-ci/ci boost-ci/.codecov.yml .
+      - name: Collect coverage
+        shell: powershell
+        if: matrix.coverage
+        run: ci\opencppcoverage.ps1
+        env:
+          B2_TOOLSET: ${{matrix.toolset}}
+          B2_CXXSTD: ${{matrix.cxxstd}}
+          B2_ADDRESS_MODEL: ${{matrix.addrmd}}
+          BOOST_DATE_TIME_TEST_WITHOUT_SELF_CONTAINED_HEADER_TESTS: ${{ !(matrix.self-contained-header-tests || env.SELF_CONTAINED_HEADER_TESTS) }}
 
-          if [ "$TRAVIS_OS_NAME" == "osx" ]; then
-              unset -f cd
-          fi
+      - name: Upload coverage
+        if: matrix.coverage
+        uses: codecov/codecov-action@v2
+        with:
+          files: __out/cobertura.xml
 
-          export SELF=`basename $REPO_NAME`
-          export BOOST_CI_TARGET_BRANCH="$TRAVIS_BRANCH"
-          export BOOST_CI_SRC_FOLDER=$(pwd)
+  CMake:
+    defaults:
+      run:
+        shell: bash
 
-          . ./ci/common_install.sh
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { os: ubuntu-20.04, build_shared: ON,  build_type: Release, generator: 'Unix Makefiles' }
+          - { os: ubuntu-20.04, build_shared: OFF, build_type: Debug, generator: 'Unix Makefiles' }
+          - { os: windows-2019, build_shared: ON,  build_type: Release, generator: 'Visual Studio 16 2019' }
+          - { os: windows-2019, build_shared: OFF, build_type: Debug, generator: 'Visual Studio 16 2019' }
 
-          echo '==================================> SCRIPT'
+    timeout-minutes: 120
+    runs-on: ${{matrix.os}}
 
-          cd $BOOST_ROOT/libs/$SELF
-          ci/travis/build.sh
+    steps:
+      - uses: actions/checkout@v2
 
-          fi
+      - name: Fetch Boost.CI
+        uses: actions/checkout@v2
+        with:
+          repository: boostorg/boost-ci
+          ref: master
+          path: boost-ci-cloned
+
+      - name: Get CI scripts folder
+        run: |
+            # Copy ci folder if not testing Boost.CI
+            [[ "$GITHUB_REPOSITORY" =~ "boost-ci" ]] || cp -r boost-ci-cloned/ci .
+            rm -rf boost-ci-cloned
+
+      - name: Setup Boost
+        env: {B2_DONT_BOOTSTRAP: 1}
+        run: source ci/github/install.sh
+
+      - name: Run CMake
+        run: |
+            cd "$BOOST_ROOT"
+            mkdir __build_cmake_test__ && cd __build_cmake_test__
+            cmake -G "${{matrix.generator}}" -DCMAKE_BUILD_TYPE=${{matrix.build_type}} -DBOOST_INCLUDE_LIBRARIES=$SELF -DBUILD_SHARED_LIBS=${{matrix.build_shared}} -DBUILD_TESTING=ON -DBoost_VERBOSE=ON ..
+            cmake --build . --config ${{matrix.build_type}}
