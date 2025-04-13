@@ -44,39 +44,39 @@ jobs:
       matrix:
         include:
           # Linux, gcc
-          - { compiler: gcc-4.8,   cxxstd: '03,11',          os: ubuntu-18.04 }
-          - { compiler: gcc-5,     cxxstd: '03,11',          os: ubuntu-18.04 }
-          - { compiler: gcc-6,     cxxstd: '03,11,14,17',    os: ubuntu-18.04 }
-          - { compiler: gcc-7,     cxxstd: '03,11,14,17',    os: ubuntu-18.04 }
-          - { compiler: gcc-8,     cxxstd: '03,11,14,17,2a', os: ubuntu-18.04 }
-          - { compiler: gcc-9,     cxxstd: '03,11,14,17,2a', os: ubuntu-18.04 }
-          - { compiler: gcc-10,    cxxstd: '03,11,14,17,20', os: ubuntu-20.04 }
-          - { compiler: gcc-11,    cxxstd: '03,11,14,17,20', os: ubuntu-20.04, self-contained-header-tests: 1 }
+          - { compiler: gcc-4.8,   cxxstd: '03,11',          container: 'ubuntu:18.04', os: ubuntu-latest }
+          - { compiler: gcc-5,     cxxstd: '03,11',          container: 'ubuntu:18.04', os: ubuntu-latest }
+          - { compiler: gcc-6,     cxxstd: '03,11,14,17',    container: 'ubuntu:18.04', os: ubuntu-latest }
+          - { compiler: gcc-7,     cxxstd: '03,11,14,17',    container: 'ubuntu:18.04', os: ubuntu-latest }
+          - { compiler: gcc-8,     cxxstd: '03,11,14,17,2a', container: 'ubuntu:18.04', os: ubuntu-latest }
+          - { compiler: gcc-9,     cxxstd: '03,11,14,17,2a', container: 'ubuntu:18.04', os: ubuntu-latest }
+          - { compiler: gcc-10,    cxxstd: '03,11,14,17,20', container: 'ubuntu:20.04', os: ubuntu-latest }
+          - { compiler: gcc-11,    cxxstd: '03,11,14,17,20', container: 'ubuntu:20.04', os: ubuntu-latest, self-contained-header-tests: 1 }
           # disabled: there are too many issues in serialization and not enough time to add suppressions
           # - { name: GCC w/ sanitizers, sanitize: yes,
-          #     compiler: gcc-11,    cxxstd: '03,11,14,17,20', os: ubuntu-20.04 }
+          #     compiler: gcc-11,    cxxstd: '03,11,14,17,20', container: 'ubuntu:20.04', os: ubuntu-latest }
           - { name: Collect coverage, coverage: yes,
-              compiler: gcc-10,    cxxstd: '03,11',          os: ubuntu-20.04, install: 'g++-10-multilib', address-model: '32,64' }
+              compiler: gcc-10,    cxxstd: '03,11',          container: 'ubuntu:20.04', os: ubuntu-latest, install: 'g++-10-multilib', address-model: '32,64' }
 
           # Linux, clang
-          - { compiler: clang-3.9, cxxstd: '03,11,14',       os: ubuntu-18.04 }
-          - { compiler: clang-4.0, cxxstd: '03,11,14',       os: ubuntu-18.04 }
-          - { compiler: clang-5.0, cxxstd: '03,11,14,1z',    os: ubuntu-18.04 }
-          - { compiler: clang-6.0, cxxstd: '03,11,14,17',    os: ubuntu-18.04 }
-          - { compiler: clang-7,   cxxstd: '03,11,14,17',    os: ubuntu-18.04 }
+          - { compiler: clang-3.9, cxxstd: '03,11,14',       container: 'ubuntu:18.04', os: ubuntu-latest }
+          - { compiler: clang-4.0, cxxstd: '03,11,14',       container: 'ubuntu:18.04', os: ubuntu-latest }
+          - { compiler: clang-5.0, cxxstd: '03,11,14,1z',    container: 'ubuntu:18.04', os: ubuntu-latest }
+          - { compiler: clang-6.0, cxxstd: '03,11,14,17',    container: 'ubuntu:18.04', os: ubuntu-latest }
+          - { compiler: clang-7,   cxxstd: '03,11,14,17',    container: 'ubuntu:18.04', os: ubuntu-latest }
           # Note: clang-8 does not fully support C++20, so it is not compatible with some libstdc++ versions in this mode
-          - { compiler: clang-8,   cxxstd: '03,11,14,17,2a', os: ubuntu-18.04, install: 'clang-8 g++-7', gcc_toolchain: 7 }
-          - { compiler: clang-9,   cxxstd: '03,11,14,17,2a', os: ubuntu-20.04 }
-          - { compiler: clang-10,  cxxstd: '03,11,14,17,20', os: ubuntu-20.04 }
-          - { compiler: clang-11,  cxxstd: '03,11,14,17,20', os: ubuntu-20.04 }
-          - { compiler: clang-12,  cxxstd: '03,11,14,17,20', os: ubuntu-20.04, self-contained-header-tests: 1 }
+          - { compiler: clang-8,   cxxstd: '03,11,14,17,2a', container: 'ubuntu:18.04', os: ubuntu-latest, install: 'clang-8 g++-7', gcc_toolchain: 7 }
+          - { compiler: clang-9,   cxxstd: '03,11,14,17,2a', container: 'ubuntu:20.04', os: ubuntu-latest }
+          - { compiler: clang-10,  cxxstd: '03,11,14,17,20', container: 'ubuntu:20.04', os: ubuntu-latest }
+          - { compiler: clang-11,  cxxstd: '03,11,14,17,20', container: 'ubuntu:20.04', os: ubuntu-latest }
+          - { compiler: clang-12,  cxxstd: '03,11,14,17,20', container: 'ubuntu:20.04', os: ubuntu-latest, self-contained-header-tests: 1 }
 
           # libc++
-          - { compiler: clang-6.0, cxxstd: '03,11,14',       os: ubuntu-18.04, stdlib: libc++, install: 'clang-6.0 libc++-dev libc++abi-dev' }
-          - { compiler: clang-12,  cxxstd: '03,11,14,17,20', os: ubuntu-20.04, stdlib: libc++, install: 'clang-12 libc++-12-dev libc++abi-12-dev', self-contained-header-tests: 1 }
+          - { compiler: clang-6.0, cxxstd: '03,11,14',       container: 'ubuntu:18.04', os: ubuntu-latest, stdlib: libc++, install: 'clang-6.0 libc++-dev libc++abi-dev' }
+          - { compiler: clang-12,  cxxstd: '03,11,14,17,20', container: 'ubuntu:20.04', os: ubuntu-latest, stdlib: libc++, install: 'clang-12 libc++-12-dev libc++abi-12-dev', self-contained-header-tests: 1 }
           # disabled: there are too many issues in serialization and not enough time to add suppressions
           # - { name: Clang w/ sanitizers, sanitize: yes,
-          #     compiler: clang-12,  cxxstd: '03,11,14,17,20', os: ubuntu-20.04, stdlib: libc++, install: 'clang-12 libc++-12-dev libc++abi-12-dev' }
+          #     compiler: clang-12,  cxxstd: '03,11,14,17,20', container: 'ubuntu:20.04', os: ubuntu-latest, stdlib: libc++, install: 'clang-12 libc++-12-dev libc++abi-12-dev' }
 
           # OSX, clang
           # sanitize disabled: there are too many issues in serialization and not enough time to add suppressions
@@ -86,20 +86,37 @@ jobs:
           # requires two github secrets in repo to activate; see ci/github/coverity.sh
           # does not run on pull requests, only on pushes into develop and master
           - { name: Coverity, coverity: yes,
-              compiler: clang-10,  cxxstd: '17',             os: ubuntu-20.04, ccache: no }
+              compiler: clang-10,  cxxstd: '17',             container: 'ubuntu:20.04', os: ubuntu-latest, ccache: no }
 
           # multiarch (bigendian testing) - does not support coverage yet
           # date_time has no endian compile-time branches
           # - { name: Big-endian, multiarch: yes,
-          #     compiler: clang,     cxxstd: '17',             os: ubuntu-20.04, ccache: no, distro: fedora, edition: 34, arch: s390x }
+          #     compiler: clang,     cxxstd: '17',             container: 'ubuntu:20.04', os: ubuntu-latest, ccache: no, distro: fedora, edition: 34, arch: s390x }
 
 
     timeout-minutes: 120
     runs-on: ${{matrix.os}}
-    container: ${{matrix.container}}
+    container:
+      image: ${{matrix.container}}
+      volumes:
+        - /node20217:/node20217:rw,rshared
+        - ${{ startsWith(matrix.container, 'ubuntu:1') && '/node20217:/__e/node20:ro,rshared' || ' ' }}
     env: {B2_USE_CCACHE: 1}
 
     steps:
+      - name: Setup container environment
+        if: matrix.container
+        run: |
+          apt-get update
+          apt-get -y install sudo python3 git g++ curl xz-utils
+
+      - name: Install nodejs20glibc2.17
+        if: ${{ startsWith( matrix.container, 'ubuntu:1' ) }}
+        run: |
+          curl -LO https://archives.boost.io/misc/node/node-v20.9.0-linux-x64-glibc-217.tar.xz
+          tar -xf node-v20.9.0-linux-x64-glibc-217.tar.xz --strip-components 1 -C /node20217
+          ldd /__e/node20/bin/node
+
       - name: Setup environment
         run: |
             if [ -f "/etc/debian_version" ]; then
@@ -296,8 +313,8 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - { os: ubuntu-20.04, build_shared: ON,  build_type: Release, generator: 'Unix Makefiles' }
-          - { os: ubuntu-20.04, build_shared: OFF, build_type: Debug, generator: 'Unix Makefiles' }
+          - { os: ubuntu-latest, build_shared: ON,  build_type: Release, generator: 'Unix Makefiles' }
+          - { os: ubuntu-latest, build_shared: OFF, build_type: Debug, generator: 'Unix Makefiles' }
           - { os: windows-2019, build_shared: ON,  build_type: Release, generator: 'Visual Studio 16 2019' }
           - { os: windows-2019, build_shared: OFF, build_type: Debug, generator: 'Visual Studio 16 2019' }
 
