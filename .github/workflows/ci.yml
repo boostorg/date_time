@@ -44,43 +44,43 @@ jobs:
       matrix:
         include:
           # Linux, gcc
-          - { compiler: gcc-4.8,   cxxstd: '03,11',          container: 'ubuntu:18.04', os: ubuntu-latest }
-          - { compiler: gcc-5,     cxxstd: '03,11',          container: 'ubuntu:18.04', os: ubuntu-latest }
-          - { compiler: gcc-6,     cxxstd: '03,11,14,17',    container: 'ubuntu:18.04', os: ubuntu-latest }
-          - { compiler: gcc-7,     cxxstd: '03,11,14,17',    container: 'ubuntu:18.04', os: ubuntu-latest }
-          - { compiler: gcc-8,     cxxstd: '03,11,14,17,2a', container: 'ubuntu:18.04', os: ubuntu-latest }
-          - { compiler: gcc-9,     cxxstd: '03,11,14,17,2a', container: 'ubuntu:18.04', os: ubuntu-latest }
-          - { compiler: gcc-10,    cxxstd: '03,11,14,17,20', container: 'ubuntu:20.04', os: ubuntu-latest }
-          - { compiler: gcc-11,    cxxstd: '03,11,14,17,20', container: 'ubuntu:20.04', os: ubuntu-latest, self-contained-header-tests: 1 }
+          - { compiler: gcc-4.8,   cxxstd: '11',          container: 'ubuntu:18.04', os: ubuntu-latest }
+          - { compiler: gcc-5,     cxxstd: '11',          container: 'ubuntu:18.04', os: ubuntu-latest }
+          - { compiler: gcc-6,     cxxstd: '11,14,17',    container: 'ubuntu:18.04', os: ubuntu-latest }
+          - { compiler: gcc-7,     cxxstd: '11,14,17',    container: 'ubuntu:18.04', os: ubuntu-latest }
+          - { compiler: gcc-8,     cxxstd: '11,14,17,2a', container: 'ubuntu:18.04', os: ubuntu-latest }
+          - { compiler: gcc-9,     cxxstd: '11,14,17,2a', container: 'ubuntu:18.04', os: ubuntu-latest }
+          - { compiler: gcc-10,    cxxstd: '11,14,17,20', container: 'ubuntu:20.04', os: ubuntu-latest }
+          - { compiler: gcc-11,    cxxstd: '11,14,17,20', container: 'ubuntu:20.04', os: ubuntu-latest, self-contained-header-tests: 1 }
           # disabled: there are too many issues in serialization and not enough time to add suppressions
           # - { name: GCC w/ sanitizers, sanitize: yes,
-          #     compiler: gcc-11,    cxxstd: '03,11,14,17,20', container: 'ubuntu:20.04', os: ubuntu-latest }
+          #     compiler: gcc-11,    cxxstd: '11,14,17,20', container: 'ubuntu:20.04', os: ubuntu-latest }
           - { name: Collect coverage, coverage: yes,
-              compiler: gcc-10,    cxxstd: '03,11',          container: 'ubuntu:20.04', os: ubuntu-latest, install: 'g++-10-multilib', address-model: '32,64' }
+              compiler: gcc-10,    cxxstd: '11',          container: 'ubuntu:20.04', os: ubuntu-latest, install: 'g++-10-multilib', address-model: '32,64' }
 
           # Linux, clang
-          - { compiler: clang-3.9, cxxstd: '03,11,14',       container: 'ubuntu:18.04', os: ubuntu-latest }
-          - { compiler: clang-4.0, cxxstd: '03,11,14',       container: 'ubuntu:18.04', os: ubuntu-latest }
-          - { compiler: clang-5.0, cxxstd: '03,11,14,1z',    container: 'ubuntu:18.04', os: ubuntu-latest }
-          - { compiler: clang-6.0, cxxstd: '03,11,14,17',    container: 'ubuntu:18.04', os: ubuntu-latest }
-          - { compiler: clang-7,   cxxstd: '03,11,14,17',    container: 'ubuntu:18.04', os: ubuntu-latest }
+          - { compiler: clang-3.9, cxxstd: '11,14',       container: 'ubuntu:18.04', os: ubuntu-latest }
+          - { compiler: clang-4.0, cxxstd: '11,14',       container: 'ubuntu:18.04', os: ubuntu-latest }
+          - { compiler: clang-5.0, cxxstd: '11,14,1z',    container: 'ubuntu:18.04', os: ubuntu-latest }
+          - { compiler: clang-6.0, cxxstd: '11,14,17',    container: 'ubuntu:18.04', os: ubuntu-latest }
+          - { compiler: clang-7,   cxxstd: '11,14,17',    container: 'ubuntu:18.04', os: ubuntu-latest }
           # Note: clang-8 does not fully support C++20, so it is not compatible with some libstdc++ versions in this mode
-          - { compiler: clang-8,   cxxstd: '03,11,14,17,2a', container: 'ubuntu:18.04', os: ubuntu-latest, install: 'clang-8 g++-7', gcc_toolchain: 7 }
-          - { compiler: clang-9,   cxxstd: '03,11,14,17,2a', container: 'ubuntu:20.04', os: ubuntu-latest }
-          - { compiler: clang-10,  cxxstd: '03,11,14,17,20', container: 'ubuntu:20.04', os: ubuntu-latest }
-          - { compiler: clang-11,  cxxstd: '03,11,14,17,20', container: 'ubuntu:20.04', os: ubuntu-latest }
-          - { compiler: clang-12,  cxxstd: '03,11,14,17,20', container: 'ubuntu:20.04', os: ubuntu-latest, self-contained-header-tests: 1 }
+          - { compiler: clang-8,   cxxstd: '11,14,17,2a', container: 'ubuntu:18.04', os: ubuntu-latest, install: 'clang-8 g++-7', gcc_toolchain: 7 }
+          - { compiler: clang-9,   cxxstd: '11,14,17,2a', container: 'ubuntu:20.04', os: ubuntu-latest }
+          - { compiler: clang-10,  cxxstd: '11,14,17,20', container: 'ubuntu:20.04', os: ubuntu-latest }
+          - { compiler: clang-11,  cxxstd: '11,14,17,20', container: 'ubuntu:20.04', os: ubuntu-latest }
+          - { compiler: clang-12,  cxxstd: '11,14,17,20', container: 'ubuntu:20.04', os: ubuntu-latest, self-contained-header-tests: 1 }
 
           # libc++
-          - { compiler: clang-6.0, cxxstd: '03,11,14',       container: 'ubuntu:18.04', os: ubuntu-latest, stdlib: libc++, install: 'clang-6.0 libc++-dev libc++abi-dev' }
-          - { compiler: clang-12,  cxxstd: '03,11,14,17,20', container: 'ubuntu:20.04', os: ubuntu-latest, stdlib: libc++, install: 'clang-12 libc++-12-dev libc++abi-12-dev', self-contained-header-tests: 1 }
+          - { compiler: clang-6.0, cxxstd: '11,14',       container: 'ubuntu:18.04', os: ubuntu-latest, stdlib: libc++, install: 'clang-6.0 libc++-dev libc++abi-dev' }
+          - { compiler: clang-12,  cxxstd: '11,14,17,20', container: 'ubuntu:20.04', os: ubuntu-latest, stdlib: libc++, install: 'clang-12 libc++-12-dev libc++abi-12-dev', self-contained-header-tests: 1 }
           # disabled: there are too many issues in serialization and not enough time to add suppressions
           # - { name: Clang w/ sanitizers, sanitize: yes,
-          #     compiler: clang-12,  cxxstd: '03,11,14,17,20', container: 'ubuntu:20.04', os: ubuntu-latest, stdlib: libc++, install: 'clang-12 libc++-12-dev libc++abi-12-dev' }
+          #     compiler: clang-12,  cxxstd: '11,14,17,20', container: 'ubuntu:20.04', os: ubuntu-latest, stdlib: libc++, install: 'clang-12 libc++-12-dev libc++abi-12-dev' }
 
           # OSX, clang
           # sanitize disabled: there are too many issues in serialization and not enough time to add suppressions
-          - { compiler: clang,     cxxstd: '03,11,14,17,2a', os: macos-11 }
+          - { compiler: clang,     cxxstd: '11,14,17,2a', os: macos-11 }
 
           # Coverity Scan
           # requires two github secrets in repo to activate; see ci/github/coverity.sh
@@ -249,7 +249,7 @@ jobs:
           - { toolset: msvc-14.2, cxxstd: '14,17,20',       addrmd: '32,64', os: windows-2019, self-contained-header-tests: 1 }
           - { name: Collect coverage, coverage: yes,
               toolset: msvc-14.3, cxxstd: '14,17,20',       addrmd: '32,64', os: windows-2022 }
-          - { toolset: gcc,       cxxstd: '03,11,14,17,2a', addrmd: '64',    os: windows-2019 }
+          - { toolset: gcc,       cxxstd: '11,14,17,2a', addrmd: '64',    os: windows-2019 }
 
     runs-on: ${{matrix.os}}
 
