@@ -49,9 +49,9 @@ jobs:
           - { compiler: gcc-6,     cxxstd: '11,14,17',    container: 'ubuntu:18.04', os: ubuntu-latest }
           - { compiler: gcc-7,     cxxstd: '11,14,17',    container: 'ubuntu:18.04', os: ubuntu-latest }
           - { compiler: gcc-8,     cxxstd: '11,14,17,2a', container: 'ubuntu:18.04', os: ubuntu-latest }
-          - { compiler: gcc-9,     cxxstd: '11,14,17,2a', container: 'ubuntu:18.04', os: ubuntu-latest, install: 'g++-9' }
+          - { compiler: gcc-9,     cxxstd: '11,14,17,2a', container: 'ubuntu:20.04', os: ubuntu-latest }
           - { compiler: gcc-10,    cxxstd: '11,14,17,20', container: 'ubuntu:20.04', os: ubuntu-latest }
-          - { compiler: gcc-11,    cxxstd: '11,14,17,20', container: 'ubuntu:20.04', os: ubuntu-latest, install: 'g++-11', self-contained-header-tests: 1 }
+          - { compiler: gcc-11,    cxxstd: '11,14,17,20', container: 'ubuntu:22.04', os: ubuntu-latest, self-contained-header-tests: 1 }
           # disabled: there are too many issues in serialization and not enough time to add suppressions
           # - { name: GCC w/ sanitizers, sanitize: yes,
           #     compiler: gcc-11,    cxxstd: '11,14,17,20', container: 'ubuntu:20.04', os: ubuntu-latest }
