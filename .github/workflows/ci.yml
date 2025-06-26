@@ -108,7 +108,7 @@ jobs:
         if: matrix.container
         run: |
           apt-get update
-          apt-get -y install sudo software-properties-common python3 git g++ curl xz-utils
+          apt-get -y install sudo python3 git g++ curl xz-utils
 
       - name: Install nodejs20glibc2.17
         if: ${{ startsWith( matrix.container, 'ubuntu:1' ) }}
