@@ -273,7 +273,7 @@ az.local_time(); // 3am 2004-Nov-5</screen></entry>
           <!-- 
           <row>
             <entry valign="top" morerows="1"><screen>std::string zone_name()</screen></entry>
-            <entry>Returns full zone name from associated time zone or "Coordinated Universal Time" if time_zone_ptr is NULL.</entry>
+            <entry>Returns full zone name from associated time zone or "UTC" if time_zone_ptr is NULL.</entry>
           </row>
           <row>
             <entry>
