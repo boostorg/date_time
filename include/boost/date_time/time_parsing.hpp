@@ -99,7 +99,7 @@ namespace date_time {
           fs = _atoi64(beg->c_str());
         }
 #else
-        int precision = time_duration::num_fractional_digits();
+        BOOST_CXX14_CONSTEXPR int precision = time_duration::num_fractional_digits();
         if(digits >= precision) {
           // drop excess digits
           fs = boost::lexical_cast<boost::int64_t>(beg->substr(0, precision));
