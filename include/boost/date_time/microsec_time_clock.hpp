@@ -88,7 +88,7 @@ namespace date_time {
       boost::uint32_t sub_sec = tv.tv_usec;
 #elif defined(BOOST_HAS_FTIME)
       boost::winapi::FILETIME_ ft;
-      boost::winapi::GetSystemTimeAsFileTime(&ft);
+      boost::winapi::GetSystemTimePreciseAsFileTime(&ft);
 #if BOOST_WORKAROUND(__MWERKS__, BOOST_TESTED_AT(0x3205))
       // Some runtime library implementations expect local times as the norm for ctime functions.
       {
