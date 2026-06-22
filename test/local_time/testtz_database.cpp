@@ -53,10 +53,10 @@ int main(int /* argc */, char const* argv[]){
   time_zone_ptr nyc_test = tz_db.time_zone_from_region("America/New_York");
   check("nyc Valid pointer", nyc_test != time_zone_ptr() ); 
   check("nyc Abbreviations",nyc_test->std_zone_abbrev() == std::string("EST")); 
-  check("nyc Full Name", nyc_test->std_zone_name() == std::string("Eastern Standard Time")); 
+  check("nyc Full Name", nyc_test->std_zone_name() == std::string("EST")); 
   check("nyc Abbreviations",nyc_test->dst_zone_abbrev() == std::string("EDT")); 
   //std::cout << nyc_test->std_zone_name() << std::endl;
-  check("nyc Full Name", nyc_test->dst_zone_name() == std::string("Eastern Daylight Time")); 
+  check("nyc Full Name", nyc_test->dst_zone_name() == std::string("EDT")); 
   check("nyc GMT Offset", nyc_test->base_utc_offset() == hours(-5));
   check("nyc DST Offset", nyc_test->dst_offset() == hours(1));
   //std::cout << nyc_test->dst_local_start_time(2004) << std::endl;
@@ -67,7 +67,7 @@ int main(int /* argc */, char const* argv[]){
   time_zone_ptr phx_test = tz_db.time_zone_from_region("America/Phoenix");
   check("az Valid pointer", phx_test != time_zone_ptr() ); 
   check("az Abbreviations",phx_test->std_zone_abbrev() == std::string("MST"));  
-  check("az Full Name", phx_test->std_zone_name() == std::string("Mountain Standard Time"));  
+  check("az Full Name", phx_test->std_zone_name() == std::string("MST"));  
   check("az Abbreviations", phx_test->dst_zone_abbrev() == std::string(""));  
   check("az Full Name", phx_test->dst_zone_name() == std::string(""));  
   check("az GMT Offset", phx_test->base_utc_offset() == hours(-7));

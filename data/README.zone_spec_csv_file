@@ -1,3 +1,23 @@
+# Generating
+
+https://github.com/fmidev/smartmet-timezones/tree/master/bin provided
+a method to generate the content, which uses an unlicence, so it was
+copied into this repository for posterity and future use.
+
+    ./create_date_time_zoneinfo.sh > date_time_zonespec.csv
+
+# Compatibility
+
+The current version is IANA 2025b.
+
+Previous versions of the data file (IANA 2016c) had short and long special
+names but only for America/Chicago, America/Denver, America/Los_Angeles,
+America/New_York, America/Phoenix, but time zones like America/Detroit,
+America/Fort_Wayne, America/Indiana/Petersburg, etc... did not; when
+regenerating for IANA 2025b the short and long names became identical
+for those previously mentions time zones.
+
+# File Format
 
 The csv file containing the zone_specs used by the 
 boost::local_time::tz_database is intended to be customized by the 

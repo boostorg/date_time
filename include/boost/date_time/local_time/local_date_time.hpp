@@ -313,7 +313,7 @@ namespace local_time {
       return local_date_time_base(utc_time_type(this->time_) + td, new_tz);
     }
 
-    //! Returns name of associated time zone or "Coordinated Universal Time".
+    //! Returns name of associated time zone or "UTC".
     /*! Optional bool parameter will return time zone as an offset
      * (ie "+07:00" extended ISO 8601 format). Empty string is returned for
      * classes that do not use a time_zone */
@@ -324,7 +324,7 @@ namespace local_time {
           return std::string("Z");
         }
         else {
-          return std::string("Coordinated Universal Time");
+          return std::string("UTC");
         }
       }
       if (is_dst()) {
