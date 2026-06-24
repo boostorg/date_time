@@ -67,13 +67,13 @@ main()
         tz1->dst_local_end_time(2003) == ptime(date(2003,Oct,30),hours(2)));
 
   check("tz1 to posix string", 
-       tz1->to_posix_string() == std::wstring(L"PST-08PDT+01,120/02:00,303/02:00"));
+       tz1->to_posix_string() == std::wstring(L"PST+08PDT+01,120/02:00,303/02:00"));
   check("tz2 to posix string", 
-       tz2->to_posix_string() == std::wstring(L"PST-08PDT+01,M4.1.0/02:00,M10.5.0/02:00"));
+       tz2->to_posix_string() == std::wstring(L"PST+08PDT+01,M4.1.0/02:00,M10.5.0/02:00"));
   check("tz3 to posix string", 
-        tz3->to_posix_string() == std::wstring(L"PST-08PDT+01,M3.5.0/02:00,M10.5.0/02:00"));
+        tz3->to_posix_string() == std::wstring(L"PST+08PDT+01,M3.5.0/02:00,M10.5.0/02:00"));
   check("tz4 to posix string", 
-        tz4->to_posix_string() == std::wstring(L"MST-07"));
+        tz4->to_posix_string() == std::wstring(L"MST+07"));
 
   // test start/end for non-dst zone
   check("has dst in non-dst zone", !tz4->has_dst());

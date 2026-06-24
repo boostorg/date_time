@@ -57,7 +57,7 @@ or
 	  </row>
 	  <row>
             <entry><screen>time_zone_ptr 
-  zone(new posix_time_zone("MST-07"));
+  zone(new posix_time_zone("MST+07"));
 local_date_time 
   beg(ptime(date(2005,Jan,1),hours(0)), zone);
 local_date_time 
@@ -76,7 +76,7 @@ local_time_period ltp(beg, end);</screen>
 	  </row>
 	  <row>
             <entry><screen>time_zone_ptr 
-  zone(new posix_time_zone("MST-07"));
+  zone(new posix_time_zone("MST+07"));
 local_date_time 
   beg(ptime(date(2005,Jan,1),hours(0)), zone);
 // period for the whole day of 2005-Jan-01
@@ -118,7 +118,7 @@ local_time_period ltp(beg, hours(24));</screen>
 	  </row>
 	  <row>
             <entry><screen>time_zone_ptr 
-  zone(new posix_time_zone("MST-07"));
+  zone(new posix_time_zone("MST+07"));
 local_date_time 
   ldt((ptime(date(2005,Jan,1)),hours(0)), zone);
 local_time_period ltp(ldt, hours(2));
@@ -132,7 +132,7 @@ ltp.begin(); // => 2005-Jan-01 00:00:00</screen>
 	  </row>
 	  <row>
             <entry><screen>time_zone_ptr 
-  zone(new posix_time_zone("MST-07"));
+  zone(new posix_time_zone("MST+07"));
 local_date_time 
   ldt((ptime(date(2005,Jan,1),hours(0))), zone);
 local_time_period ltp(ldt, hours(2));
@@ -146,7 +146,7 @@ ltp.last(); // => 2005-Jan-01 01:59:59.999999999</screen>
 	  </row>
 	  <row>
             <entry><screen>time_zone_ptr 
-  zone(new posix_time_zone("MST-07"));
+  zone(new posix_time_zone("MST+07"));
 local_date_time 
   ldt((ptime(date(2005,Jan,1),hours(0))), zone);
 local_time_period ltp(ldt, hours(2));
@@ -160,7 +160,7 @@ ltp.end(); // => 2005-Jan-01 02:00:00</screen>
 	  </row>
 	  <row>
             <entry><screen>time_zone_ptr 
-  zone(new posix_time_zone("MST-07"));
+  zone(new posix_time_zone("MST+07"));
 local_date_time 
   ldt((ptime(date(2005,Jan,1),hours(0))), zone);
 local_time_period ltp(ldt, hours(2));
@@ -174,7 +174,7 @@ ltp.length(); // => 02:00:00</screen>
 	  </row>
 	  <row>
             <entry><screen>time_zone_ptr 
-  zone(new posix_time_zone("MST-07"));
+  zone(new posix_time_zone("MST+07"));
 local_date_time 
   beg((ptime(date(2005,Feb,1),hours(0))), zone);
 local_date_time 
@@ -190,7 +190,7 @@ ltp.is_null(); // => true</screen>
 	  </row>
 	  <row>
             <entry><screen>time_zone_ptr 
-  zone(new posix_time_zone("MST-07"));
+  zone(new posix_time_zone("MST+07"));
 local_date_time 
   beg((ptime(date(2005,Jan,1),hours(0))), zone);
 local_date_time 

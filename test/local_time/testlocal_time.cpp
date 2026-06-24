@@ -49,10 +49,10 @@ main()
   // of these operations is done in the posix_time tests
 
   try {
-    time_zone_ptr az_tz(new posix_time_zone("MST-07"));
-    time_zone_ptr ny_tz(new posix_time_zone("EST-05EDT,M4.1.0,M10.5.0"));
+    time_zone_ptr az_tz(new posix_time_zone("MST+07"));
+    time_zone_ptr ny_tz(new posix_time_zone("EST+05EDT,M4.1.0,M10.5.0"));
     // EST & EST for sydney is correct, according to zoneinfo files
-    time_zone_ptr sydney(new posix_time_zone("EST+10EST,M10.5.0,M3.5.0/03:00"));
+    time_zone_ptr sydney(new posix_time_zone("EST-10EST,M10.5.0,M3.5.0/03:00"));
     time_zone_ptr null_tz;
     date d(2003, 12, 20);
     hours h(12);

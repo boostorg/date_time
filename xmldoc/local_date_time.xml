@@ -56,7 +56,7 @@ functions, and IO operators.
   Parameter:
     time_zone_ptr</screen></entry>
             <entry><screen>time_zone_ptr zone(
-  new posix_time_zone("MST-07")
+  new posix_time_zone("MST+07")
 );
 local_date_time ldt = 
   local_microsec_clock::local_time(
@@ -70,7 +70,7 @@ local_date_time ldt =
   Parameter:
     time_zone_ptr</screen></entry>
             <entry><screen>time_zone_ptr zone(
-  new posix_time_zone("MST-07")
+  new posix_time_zone("MST+07")
 );
 local_date_time ldt = 
   local_sec_clock::local_time(zone);</screen>
@@ -121,7 +121,7 @@ local_date_time ldt =
 ptime pt(date(2004,Nov,5), 
          hours(10));
 time_zone_ptr zone(
-  new posix_time_zone("MST-07"));
+  new posix_time_zone("MST+07"));
 local_date_time az(pt, zone);</screen>
             </entry>
           </row>
@@ -138,7 +138,7 @@ local_date_time az(pt, zone);</screen>
           <row>
             <entry><screen>date d(2004,Nov,5);
 time_duration td(5,0,0,0);
-string z("PST-8PDT,M4.1.0,M10.1.0")
+string z("PST+8PDT,M4.1.0,M10.1.0")
 time_zone_ptr zone(
   new posix_time_zone(z));
 local_date_time nyc(d, td, 
@@ -158,7 +158,7 @@ local_date_time nyc(d, td,
           <row>
             <entry><screen>date d(2004,Nov,5);
 time_duration td(5,0,0,0);
-string z("PST-8PDT,M4.1.0,M10.1.0")
+string z("PST+8PDT,M4.1.0,M10.1.0")
 time_zone_ptr zone(
   new posix_time_zone(z));
 local_date_time nyc(d, td, zone, 
@@ -183,7 +183,7 @@ local_date_time nyc(d, td, zone,
           </row>
           <row>
             <entry><screen>time_zone_ptr zone(
-  new posix_time_zone("MST-07")
+  new posix_time_zone("MST+07")
 );
 local_date_time nadt(not_a_date_time, 
                      zone);
@@ -236,7 +236,7 @@ local_date_time nadt(pos_infin);</screen>
             <entry><screen>ptime pt(date(2004,Nov,5), 
          hours(10));
 time_zone_ptr zone(
-  new posix_time_zone("MST-07"));
+  new posix_time_zone("MST+07"));
 local_date_time az(pt, zone);
 az.utc_time(); // 10am 2004-Nov-5</screen>
             </entry>
@@ -250,7 +250,7 @@ az.utc_time(); // 10am 2004-Nov-5</screen>
             <entry><screen>ptime pt(date(2004,Nov,5), 
          hours(10));
 time_zone_ptr zone(
-  new posix_time_zone("MST-07"));
+  new posix_time_zone("MST+07"));
 local_date_time az(pt, zone);
 az.utc_time(); // 10am 2004-Nov-5
 az.local_time(); // 3am 2004-Nov-5</screen></entry>
@@ -333,7 +333,7 @@ ldt.is_not_a_date_time(); // --> true</screen></entry>
             <entry><screen>local_date_time ldt(pos_infin); 
 local_date_time ldt2(not_a_date_time);
 time_zone_ptr 
-  mst(new posix_time_zone("MST-07"));
+  mst(new posix_time_zone("MST+07"));
 local_date_time 
   ldt3(local_sec_clock::local_time(mst));
 ldt.is_special(); // --> true
@@ -366,7 +366,7 @@ ldt3.is_special(); // --> false</screen></entry>
 	</row>
 	<row>
           <entry><screen>
-time_zone_ptr zone(new posix_time_zone("MST-07");
+time_zone_ptr zone(new posix_time_zone("MST+07");
 local_date_time ldt(date(2005,Jul,4),
                     hours(20), 
                     false);
@@ -439,7 +439,7 @@ operator-, operator-=</screen></entry>
 	<row>
           <entry><screen>
 // 6am, 2005-Jul-05 local time
-std::string z("EST-05EDT,M4.1.0,M10.1.0");
+std::string z("EST+05EDT,M4.1.0,M10.1.0");
 ptime pt(date(2005,Jul,5), 
          hours(10));
 time_zone_ptr zone( new posix_time_zone(z));

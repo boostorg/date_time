@@ -41,7 +41,7 @@ int
 main() 
 {
 
-  time_zone_ptr ny_tz(new posix_time_zone("EST-05EDT,M4.1.0,M10.5.0"));
+  time_zone_ptr ny_tz(new posix_time_zone("EST+05EDT,M4.1.0,M10.5.0"));
 
   //set up a time right on the dst boundary -- iterator will 
   //jump forward an hour at the boundary
