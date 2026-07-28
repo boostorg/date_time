@@ -40,6 +40,7 @@ namespace gregorian {
   class BOOST_SYMBOL_VISIBLE greg_year : public greg_year_rep {
   public:
     BOOST_CXX14_CONSTEXPR greg_year(value_type year) : greg_year_rep(year) {}
+    BOOST_CXX14_CONSTEXPR value_type as_number() const {return value_;}
     BOOST_CXX14_CONSTEXPR operator value_type()  const {return value_;}
   };
 
