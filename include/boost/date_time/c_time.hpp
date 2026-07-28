@@ -63,6 +63,12 @@ namespace date_time {
             result = 0;
         else
             *result = tmp;
+#elif defined(_MSC_VER)
+        std::tm tmp;
+        if(localtime_s(&tmp, t))
+            result = 0;
+        else
+            *result = tmp;
 #else
         result = localtime_r(t, result);
 #endif
@@ -81,6 +87,12 @@ namespace date_time {
           result = 0;
         else
           *result = tmp;
+#elif defined(_MSC_VER)
+        std::tm tmp;
+        if(gmtime_s(&tmp, t))
+            result = 0;
+        else
+            *result = tmp;
 #else
         result = gmtime_r(t, result);
 #endif
@@ -93,9 +105,6 @@ namespace date_time {
 #if defined(__clang__) // Clang has to be checked before MSVC
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif (defined(_MSC_VER) && (_MSC_VER >= 1400))
-#pragma warning(push) // preserve warning settings
-#pragma warning(disable : 4996) // disable depricated localtime/gmtime warning on vc8
 #endif
       //! requires a pointer to a user created std::tm struct
       inline
@@ -117,8 +126,6 @@ namespace date_time {
       }
 #if defined(__clang__) // Clang has to be checked before MSVC
 #pragma clang diagnostic pop
-#elif (defined(_MSC_VER) && (_MSC_VER >= 1400))
-#pragma warning(pop) // restore warnings to previous state
 #endif
 
 #endif // BOOST_DATE_TIME_HAS_REENTRANT_STD_FUNCTIONS
