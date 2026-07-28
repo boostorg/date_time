@@ -122,7 +122,7 @@ namespace date_time {
       time_duration_type td(static_cast< typename time_duration_type::hour_type >(curr_ptr->tm_hour),
                             static_cast< typename time_duration_type::min_type >(curr_ptr->tm_min),
                             static_cast< typename time_duration_type::sec_type >(curr_ptr->tm_sec),
-                            sub_sec * adjust);
+                            static_cast< typename time_duration_type::fractional_seconds_type >(sub_sec) * adjust);
 
       return time_type(d,td);
     }
