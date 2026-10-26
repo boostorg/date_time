@@ -559,8 +559,9 @@ time_duration td2 = td1 - minutes(1);</screen>
           </row>
           
 	  <row>
-	    <entry valign="top" morerows="1"><screen>time_duration operator/(int)</screen></entry>
-	    <entry>Divide the length of a duration by an integer value. Discards any remainder.</entry>
+	    <entry valign="top" morerows="1"><screen>time_duration operator/(Integer)
+time_duration operator/=(Integer)</screen></entry>
+	    <entry>Divide the length of a duration by an integral value representable by <code>tick_type</code>. Discards any remainder. The divisor must be nonzero. The existing <code>int</code> overloads are retained.</entry>
 	  </row>
 	  <row>
 	    <entry><screen>hours(3)/2 == time_duration(1,30,0);
@@ -569,8 +570,9 @@ nanosecond(3)/2 == nanosecond(1);</screen>
           </row>
           
 	  <row>
-	    <entry valign="top" morerows="1"><screen>time_duration operator*(int)</screen></entry>
-	    <entry>Multiply the length of a duration by an integer value.</entry>
+	    <entry valign="top" morerows="1"><screen>time_duration operator*(Integer)
+time_duration operator*=(Integer)</screen></entry>
+	    <entry>Multiply the length of a duration by an integral value representable by <code>tick_type</code>. The result must fit the duration representation. The existing <code>int</code> overloads are retained.</entry>
 	  </row>
           <row>
 	    <entry><screen>hours(3)*2 == hours(6);</screen></entry>

@@ -11,7 +11,9 @@
 
 
 #include "boost/config.hpp"
+#include "boost/core/enable_if.hpp"
 #include "boost/limits.hpp" //work around compilers without limits
+#include "boost/type_traits/is_same.hpp"
 #include "boost/date_time/special_defs.hpp"
 #include "boost/date_time/locale_config.hpp"
 #ifndef BOOST_DATE_TIME_NO_LOCALE
@@ -324,6 +326,21 @@ public:
     return int_adapter<int_type>(value_ * rhs);
   }
 
+  // A raw representation value is a scalar, even if its bit pattern is
+  // reserved for a special value in an int_adapter.
+  template<class Integer>
+  BOOST_CXX14_CONSTEXPR
+  typename boost::enable_if_c<boost::is_same<Integer, int_type>::value &&
+    !boost::is_same<Integer, int>::value, int_adapter>::type
+  operator*(Integer rhs) const
+  {
+    if(is_special())
+    {
+      return mult_div_specials(rhs > 0 ? 1 : rhs == 0 ? 0 : -1);
+    }
+    return int_adapter<int_type>(value_ * rhs);
+  }
+
   // should templatize this to be consistant with op +-
   BOOST_CXX14_CONSTEXPR
   int_adapter operator/(const int_adapter& rhs)const
@@ -355,6 +372,19 @@ public:
       return mult_div_specials(rhs);
     }
     // let divide by zero blow itself up like int
+    return int_adapter<int_type>(value_ / rhs); //NOLINT
+  }
+
+  template<class Integer>
+  BOOST_CXX14_CONSTEXPR
+  typename boost::enable_if_c<boost::is_same<Integer, int_type>::value &&
+    !boost::is_same<Integer, int>::value, int_adapter>::type
+  operator/(Integer rhs) const
+  {
+    if(is_special() && rhs != 0)
+    {
+      return mult_div_specials(rhs > 0 ? 1 : -1);
+    }
     return int_adapter<int_type>(value_ / rhs); //NOLINT
   }
 

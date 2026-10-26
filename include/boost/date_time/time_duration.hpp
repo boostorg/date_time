@@ -184,6 +184,14 @@ namespace date_time {
     {
       return duration_type(ticks_ / divisor);
     }
+    //! The scalar must be representable by tick_type.
+    template<class Integer>
+    BOOST_CXX14_CONSTEXPR
+    typename boost::enable_if<boost::is_integral<Integer>, duration_type>::type
+    operator/(Integer divisor) const
+    {
+      return duration_type(ticks_ / static_cast<tick_type>(divisor));
+    }
     BOOST_CXX14_CONSTEXPR duration_type operator-=(const duration_type& d)
     {
       ticks_ = ticks_ - d.ticks_;
@@ -200,14 +208,38 @@ namespace date_time {
       ticks_ = ticks_ / divisor;
       return duration_type(ticks_);
     }
+    template<class Integer>
+    BOOST_CXX14_CONSTEXPR
+    typename boost::enable_if<boost::is_integral<Integer>, duration_type>::type
+    operator/=(Integer divisor)
+    {
+      ticks_ = ticks_ / static_cast<tick_type>(divisor);
+      return duration_type(ticks_);
+    }
     //! Multiplication operations an a duration with an integer
     BOOST_CXX14_CONSTEXPR duration_type operator*(int rhs) const
     {
       return duration_type(ticks_ * rhs);
     }
+    //! The scalar must be representable by tick_type.
+    template<class Integer>
+    BOOST_CXX14_CONSTEXPR
+    typename boost::enable_if<boost::is_integral<Integer>, duration_type>::type
+    operator*(Integer rhs) const
+    {
+      return duration_type(ticks_ * static_cast<tick_type>(rhs));
+    }
     BOOST_CXX14_CONSTEXPR duration_type operator*=(int divisor)
     {
       ticks_ = ticks_ * divisor;
+      return duration_type(ticks_);
+    }
+    template<class Integer>
+    BOOST_CXX14_CONSTEXPR
+    typename boost::enable_if<boost::is_integral<Integer>, duration_type>::type
+    operator*=(Integer rhs)
+    {
+      ticks_ = ticks_ * static_cast<tick_type>(rhs);
       return duration_type(ticks_);
     }
     BOOST_CXX14_CONSTEXPR tick_type ticks() const

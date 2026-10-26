@@ -60,6 +60,10 @@ run posix_time/testc_local_adjustor.cpp ;
 run posix_time/testclock.cpp ;
 run posix_time/testdst_rules.cpp ;
 run posix_time/testduration.cpp ;
+run posix_time/testduration_scalars.cpp ;
+run posix_time/testduration_scalars.cpp
+    : : : <define>BOOST_DATE_TIME_POSIX_TIME_STD_CONFIG
+    : testduration_scalars_std_config ;
 run posix_time/testiterator.cpp ;
 run posix_time/testparse_time.cpp ;
 run posix_time/testtime_period.cpp ;
